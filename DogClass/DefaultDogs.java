@@ -9,7 +9,7 @@ public class DefaultDogs {
    
  //  System.out.print(sourceImage);
    
-   Dog megan = new Dog("Megan", "Sloan's dog", new Picture("C:\\Users\\sloan\\Google Drive\\Grad School\\KSU\\2018 - Fall\\SWE 6623\\SWE 6623 Group Project\\Java code\\Megan.jpg"));
+   Dog megan = new Dog("Megan", "Sloan's dog", new Picture("C:\\Users\\sloan\\Google Drive\\Grad School\\KSU\\2018 - Fall\\SWE 6623\\SWE 6623 Group Project\\Java code\\Megan.jpg")); //need to do something about local directory issues
    
    
    }
