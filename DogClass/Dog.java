@@ -4,7 +4,8 @@ public class Dog {
    private String name = "Dog";
    private String bio = "This is a profile for a dog!";
    private Picture pic = new Picture("Megan.jpg");
-   private double score = 0;
+   private double totalScore = 0;
+   private double averageScore = 0;
    private int numberOfVotes = 0;
    private String owner = "";
   
@@ -24,9 +25,11 @@ public class Dog {
    
    public void vote (int numberOfStars) {
       if (numberOfVotes == 0)
-         this.score = numberOfStars;
+         this.totalScore = numberOfStars;
          
       else
-         this.score = (score * numberOfVotes + numberOfStars) / (numberOfVotes + 1);
+         this.totalScore = totalScore + numberOfStars;
+         
+      this.averageScore = totalScore / numberOfVotes;
    }
 }
