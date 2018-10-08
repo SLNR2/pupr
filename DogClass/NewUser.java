@@ -22,8 +22,8 @@ public class NewUser{
     String instanceIP = "35.196.89.66"; //instance connection from Google Cloud Platform
     String databaseName = "pupr"; //specify the database
 
-   //Root login information
-    String username = "root";
+   //login inf
+    String username = "pupr";
     String password = "pupr123";
 
     if (instanceConnectionName.equals("<insert_connection_name>")) {
