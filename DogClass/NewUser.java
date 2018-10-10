@@ -53,7 +53,7 @@ public class NewUser{
    //[END doc-example]
 
     try (Statement statement = connection.createStatement()) {
-      ResultSet resultSet = statement.executeQuery("SHOW TABLES");
+      ResultSet resultSet = statement.executeQuery("desc dog");
       while (resultSet.next()) {
         System.out.println(resultSet.getString(1));
       }
