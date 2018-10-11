@@ -10,12 +10,18 @@ Finally, the dogId will be left as NULL for now, until a dog has been created. T
 If all is good, the new user will then be uploaded into the database.
 */
 
+/* Jars to include: 
+   mysql-socket-factory-1.0.11.jar
+   mysql-connector-java-8.0.12.jar
+*/
+
+
 import java.sql.*;
 import java.io.IOException;
 
 import java.util.Scanner;
 
-public class NewUser{
+public class connect{
    public static void main(String args[]) throws SQLNonTransientConnectionException, IOException, SQLException{
    
     String instanceConnectionName = "pupr-218714:us-east1:pupr";
@@ -26,34 +32,16 @@ public class NewUser{
     String username = "pupr";
     String password = "pupr123";
 
-    if (instanceConnectionName.equals("<insert_connection_name>")) {
-      System.err.println("Please update the sample to specify the instance connection name.");
-      System.exit(1);
-    }
-
-    if (password.equals("<insert_password>")) {
-      System.err.println("Please update the sample to specify the mysql password.");
-      System.exit(1);
-    }
-
+   
     //[START doc-example]
-   String jdbcUrl = String.format(
-         "jdbc:mysql://google/%s?cloudSqlInstance=%s"
-            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false"
-            + "&user=%s&password=%s",
-        databaseName,
-        instanceConnectionName,
-        username,
-        password
-    
-        );
+ String jdbcUrl =  String.format("jdbc:mysql://35.196.89.66/%s", databaseName);
+
  
- 
-    Connection connection = DriverManager.getConnection(jdbcUrl);
+    Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
    //[END doc-example]
 
     try (Statement statement = connection.createStatement()) {
-      ResultSet resultSet = statement.executeQuery("desc dog");
+      ResultSet resultSet = statement.executeQuery("desc user");
       while (resultSet.next()) {
         System.out.println(resultSet.getString(1));
       }
