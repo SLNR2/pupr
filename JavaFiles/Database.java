@@ -1,8 +1,11 @@
 /*A class to allow connection/disconnection to/from the Google Cloud SQL database via JDBC connection.
+   Instead of having to connect 
 
  Jars to include in CLASSPATH: 
    mysql-socket-factory-1.0.11.jar
    mysql-connector-java-8.0.12.jar
+   
+   YOU MUST INCLUDE THESE OR IT WILL NOT COMPILE!!!
 */
 
 import java.sql.*;
@@ -28,16 +31,21 @@ public class Database{
       con = DriverManager.getConnection(jdbcUrl, username, password);
 
 //Connection statement
-   try (Statement statement = con.createStatement()) {
+  /*Might not need this block of code. We can just call the connection variable and make statements where needed. Inefficient use of memory to have a try/catch block here if we aren't even using it.
+  
+  /* try (Statement statement = con.createStatement()) {
       System.out.println("connection successful"); //delete later, just here for testing
    } catch (SQLException e) {
       e.printStackTrace();
-   }
+   }*/
    return con; //return the connection so that we can submit queries to the DB
   }
   
 //Method to disconnect
-   public static void disconnect() throws SQLNonTransientConnectionException, IOException, SQLException{
+
+/*Might not need this block of code - can just use the .close() method */
+
+/*   public static void disconnect() throws SQLNonTransientConnectionException, IOException, SQLException{
       try {
          con.close(); //close the connection
                   System.out.println("disconnected!"); //delete later, just here for testing
@@ -45,5 +53,5 @@ public class Database{
       }  catch (SQLException e) {
          e.printStackTrace();
          }
-   }
+   } */
 }
