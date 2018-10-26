@@ -34,7 +34,7 @@ public class User {
       Connection con = Database.connect();
       Statement stmt = con.createStatement();      
       
-      String sql = String.format("INSERT INTO user(firstName, lastName, dateOfBirth, username, email, password) VALUES('%s', '%s', '%s', '%s', '%s', '%s'", this.firstName, this.lastName, this.dateOfBirth, this.username, this.email, this.password);
+      String sql = String.format("INSERT INTO user(firstName, lastName, dateOfBirth, username, email, password) VALUES('%s', '%s', '%s', '%s', '%s', '%s')", this.firstName, this.lastName, this.dateOfBirth, this.username, this.email, this.password);
       
 
       //Store values in database

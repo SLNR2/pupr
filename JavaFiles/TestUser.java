@@ -38,7 +38,7 @@ public class TestUser{
   try{ Connection con = Database.connect();
    Statement stmt = con.createStatement();
    
-            //  stmt.executeUpdate("INSERT INTO user(firstName, lastName, dateOfBirth, username, email, password) VALUES('Sloan', 'Lipman', '1234', 'slipman', 'sloan.lipman@gmail.com', 'test123')"); //The hardcoded one works
+            // stmt.executeUpdate("INSERT INTO user (firstName, lastName, dateOfBirth, username, email, password) VALUES('Sloan', 'Lipman', '1234', 'slipman', 'sloan.lipman@gmail.com', 'test123')"); //The hardcoded one works
    ResultSet rs = stmt.executeQuery("SELECT firstName FROM user");
     while(rs.next()) 
          System.out.println(rs.getString(1));
