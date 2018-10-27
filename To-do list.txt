@@ -1,7 +1,6 @@
 To-do:
 
-Finish getting TestUser to work. Currently having issues concatenating Strings into one big SQL statement to insert something into a table
-
+Change VotingQueue to be compatible with Dog instead of int
 
 Update UML class diagram to match up with actual implementation
 
