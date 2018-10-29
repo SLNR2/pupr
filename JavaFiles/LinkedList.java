@@ -25,7 +25,7 @@ public class LinkedList
    }
    
       
-   //method to add a new node as the first node in the list
+//method to add a new node as the first node in the list
    public void addFirstNode(int data)
    {
       //complete this method using the pesudocode discussed in class
@@ -36,10 +36,9 @@ public class LinkedList
       if (tail == null) tail = head; //if list empty, make tail reference head
    }
       
-   //method to add a node at specific position, namely index
+//method to add a node at specific index
    public void addAtIndex(int index, int data)
    {
-      //complete this method using the pesudocode discussed in class
      
       if (index == 0) //add as first node
          addFirstNode(data);
@@ -61,10 +60,9 @@ public class LinkedList
    }
       
    //method to remove the first node from the list
-   public void removeFirstNode()
-   {
+   public void removeFirstNode() {
       //complete this method using the pesudocode discussed in class
-      if (size == 0) System.out.print(""); //empty list
+      if (size == 0) return; //empty list
       else {
          head = head.next; //make head point to the second node
          size--; //decrement size of the list
@@ -72,15 +70,14 @@ public class LinkedList
       }
    }
       
-   //method to remove the last node from the list
-   public void removeLastNode()
-   {
-      //complete this method using the pesudocode discussed in class
-      if (size == 0) System.out.print(""); //empty list
-      else if (size == 1) { //only one node
-         head = tail = null; //remove the only node
+//method to remove the last node from the list
+   public void removeLastNode() {
+      if (size == 0) return;
+      else if (size == 1) { 
+         head = tail = null; 
          size = 0;
       }
+      
       else { //general case
          Node current = head;
          for (int i = 0; i < size - 2; i++) //increment pointer to the next to last node
@@ -96,9 +93,8 @@ public class LinkedList
    //method to remove a node at specific position,namley index
    public void removeAtIndex(int index)
    {
-      //complete this method using the pesudocode discussed in class
       if (index < 0 || index >= size) //invalid index selection
-         System.out.print("(Invalid index selection... No changes made.)\n");
+         return;
       else if (index == 0) removeFirstNode(); //special case
       else if (index == size - 1) removeLastNode(); //special case
          
@@ -114,47 +110,20 @@ public class LinkedList
       }
    }
    
-   //method to create a copy of the list
-   public LinkedList copyList()
-   {  
-      //complete this method using the pesudocode discussed in class
-      //This method returns a pointer to the new list, List2
-      
-      LinkedList List2 = new LinkedList();  //declare the list variable
-      int size2 = 0;
-     
-      //Add code to perform the copying process
-      
-      Node head2 = null;  //head pointer for List2
-      Node tail2 = null; //tail pointer for List2
-      //special case 1: empty list
-         if (head == null) List2.head = null;
-         
-      //special case 2: only  one node
-         else if (size == 1) {
-            List2.head = new Node(head.data); //create new node at the head of List2
-            head2 = List2.head; //set head2 pointer to the new node
-            (List2.head).next = null; //set next node to null
-            tail2 = (List2.head).next; //set tail to new tail
-            size2++;
-         }      
-         
-         else {
-            Node temp = head; //set pointer to original head
-            List2.head = new Node(head.data); //create new node at head of List2
-            head2 = tail2 = List2.head; //set head2 and tail2 pointers to the new node
-            while (temp.next != null) {
-               temp = temp.next; //advance temp
-               tail2.next = new Node(temp.data); //create new node after current tail
-               tail2 = tail2.next; //reassign tail2 pointer
-               List2.tail = tail2; //reassign tail of List2 to the tail2 pointer
-               size2++;   
-            
+      public void removeId(int id) {
+         Node current = head;
+         int index = 0;
+         while (current != null) {
+            if (current.data == id) {
+               this.removeAtIndex(index);
+               return;
             }
-         }
-      return List2;
-   }
-
+         index++;
+         current = current.next;
+               
+         }      
+         return;         
+   }   
 
 
    //method to print out the list
@@ -179,7 +148,7 @@ public class LinkedList
    //class to create nodes of the list as objects
    private class Node
    {
-      private int data;  //data field
+      private int data;  //e field
       private Node next; //link field
        
       public Node(int item) //constructor method

@@ -1,9 +1,9 @@
-public class VotingQueue {
+public class Queue {
    private Node first, last;
    private int size;
   
    //constructor method to create a Queue object with first, last, and size. 
-   public VotingQueue()
+   public Queue()
    {
       first = null;  // pointer for the front of the queue
       last = null;  // pointer for the end of the queue
