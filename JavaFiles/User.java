@@ -11,9 +11,12 @@ public class User {
    private String lastName = "";
    private String username = "";
    private String password = "";
-   private static int numberOfUsers = 0;
+   public Queue votingQueue = new Queue(); //Individual voting queue for each user
+   private static int numberOfUsers = 0; //Update the total number of users each time one is created or deleted... I forget why.
+   private static int nextUser = 0;
    
-   protected static LinkedList userList = new LinkedList(); //provide a list of users in a LinkedList structure
+   protected static LinkedList userList = new LinkedList(); //provide a list of users in a LinkedList structure for user authentication.
+                                                            //To log in, the system will have to trace the list to see if there is a match
 
    
 //Constructor method that will use passed values to create a new account and log it into the database
@@ -24,19 +27,16 @@ public class User {
       this.lastName = lName;
       this.username = uname;
       this.password = pass;
-      this.userId = numberOfUsers + 1;
-      numberOfUsers++;
-      userList.addLastNode(userId);
+      this.userId = nextUser; //assign the next available userid to this user
       
-  
-  
-}     
+      nextUser++; //increment the next available ID
+      numberOfUsers++; //increment # of users
+      userList.addLastNode(userId); //add this user to a list of all of the users
+      
+      Dog dog = new Dog(this.userId);
+     }     
    
-   public void login(){
-      /*Use a select statement for the entered username and password. If the combination returns a row in the table, access the next screen.
-               Otherwise, display an error screen.*/   
-               
-               
+   public void login(){               
       //make part of the login activity
    }
    

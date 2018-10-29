@@ -3,32 +3,28 @@
 import java.util.ArrayList;
 
 public class Dog {
-   protected int ownerId;
+   private int ownerId;
    private String name = "";
    private String bio = "";
    private int totalScore = 0;
    private int numberOfRatings = 0;
    private double averageRating = 0;
-   private int ranking;
+   private int ranking; //Might not need ranking? Can just return its position on leaderboard?
    private Picture pic;
    
-   public LinkedList votedOnBy;
+   public LinkedList votedOnBy = new LinkedList(); //A LL for which users have voted on this particular dog
   
-//Constructor method
-   public Dog(String newName, String newBio, Picture newPic)  {
-      this.name = newName;
-      this.bio = newBio;
-      this.pic = newPic;
-   }
+//Constructor method invoked for when a User creates a profile. This constructor will associate the user with that dog.
+   public Dog(int id) {
+      this.ownerId = id;      
+      this.votedOnBy.addLastNode(ownerId);
+      }
+
+
    
    public void updateDog() {
       //Make this part of the update_dog activity
    } 
-   
-   public void vote(int score)  {} //Put voting algorithm here.
-   //First user will get access to the next dog via the VotingQueue.front() method. When a vote is cast, this method will call VotingQueue.dequeue() to remove the dog. The score will also be updated at this point.
-   //We will need a different method for the app to just show the user the dog before they vote.
-   
 
 //Getter methods
    public int getOwnerId() {return this.ownerId;}
@@ -43,8 +39,15 @@ public class Dog {
 //Setter methods
    public void setName(String newName) {this.name = newName;}
    public void setBio(String newBio) {this.bio = newBio;}
-   public void setPicture(Picture newPic) {this.pic = newPic;}
+   public void setPic(Picture newPic) {this.pic = newPic;}
    
    public void deleteDog(){}   
    
- }
+   
+   //Test method
+   
+   @Override
+   public String toString() {
+      return ("Woof woof " + this.ownerId);
+   }
+}

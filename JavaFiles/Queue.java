@@ -10,8 +10,7 @@ public class Queue {
       size = 0;     // queue size
    }
   
-//Add a dog to the queue
-//Need to add an algorithm to connect to DB, check for dogs that the user has not voted on
+//Add to the queue
    public void enqueue(int data) 
    {
       if (last == null) 
@@ -34,7 +33,7 @@ public class Queue {
     }
    
    
-   //Return the first dog at the front of the queue for the user to see prior to voting. Will need to display the fields in the appropriate spots of the GUI.
+   //Return the first element 
    public int front() {
       if (first != null)
          return this.first.data;
