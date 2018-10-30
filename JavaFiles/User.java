@@ -53,21 +53,26 @@ public class User {
    
    }     
    
-   public static void login(){               
+   public static void login(String username, String password){               
       //make part of the login activity
       
       /*
          Trace userList
             for i --> n (usernames only)
-               for j ---> m (passwords only)
-                  if username = password
+                  if (password = password @ i && username = username @ i)
                      success!
- 
+                  
+                  EXAMPLE   
+                     try to log in with username = 3, password = 4 (written out as [3,4])
+                     [[1, 2], [2, 3], [3, 4]]
+                      compare [3,4] to [1,2] x
+                      compare [3,4] to [2,3] x
+                      compare [3,4] to [3,4] yes!
       */
       
-
    }
    
+
    public void logout(){
       //Click a buttton, move to logout confirmation screen, make any necessary updates to the user's statistics. Maybe clear out the queue or something as a way of doing our own garbage collection.
       
@@ -106,6 +111,7 @@ public class User {
    public String getUsername() {return this.username;}   
    public int getUserId() {return this.userId;}   
    public int getNumberOfUsers() {return numberOfUsers;}
+   private String getPassword() {return this.password;}
    
 //Setter methods for various fields
    public void setFirstName(String newFirstName) {this.firstName = newFirstName;}

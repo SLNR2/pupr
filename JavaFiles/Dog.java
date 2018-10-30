@@ -49,11 +49,9 @@ public class Dog {
    public void setBio(String newBio) {this.bio = newBio;}
    public void setPic(Picture newPic) {this.pic = newPic;}
    
-   public void deleteDog(){}   
+   public void deleteDog(){}  //finish this
    
-   
-   //Test method
-   
+
    @Override
    public String toString() {
       return ("Woof woof. This dog is owned by user number " + this.ownerId);
