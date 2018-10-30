@@ -3,7 +3,8 @@ This program will define the User class.
 
 
 */
-
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class User { 
    private int userId;
@@ -14,15 +15,16 @@ public class User {
    public Queue votingQueue = new Queue(); //Individual voting queue for each user
    private static int numberOfUsers = 0; //Update the total number of users each time one is created or deleted... I forget why.
    private static int nextUser = 0;
+   public Dog dog = new Dog(); //Instantiate a dog that belongs to each user
    
-   protected static LinkedList userList = new LinkedList(); //provide a list of users in a LinkedList structure for user authentication.
+   protected static ArrayList<User> userList = new ArrayList<User>(); //provide a list of users in a LinkedList structure for user authentication.
                                                             //To log in, the system will have to trace the list to see if there is a match
 
    
 //Constructor method that will use passed values to create a new account and log it into the database
-   public User (String fName, String lName, String uname, String pass) {
+   public User(String fName, String lName, String uname, String pass) {
    
-   //Use the values passed into the call   
+ 
       this.firstName = fName;
       this.lastName = lName;
       this.username = uname;
@@ -31,13 +33,39 @@ public class User {
       
       nextUser++; //increment the next available ID
       numberOfUsers++; //increment # of users
-      userList.addLastNode(userId); //add this user to a list of all of the users
+      userList.add(this); //add this user to a list of all of the users
+                            //NEED TO GO BACK AND TEST THAT USING THE this OPERATOR ADDS THE OBJECT CORRECTLY!!!
+                            
+      this.dog.setId(userId);
+     }
+     
+     
+   public void getQueue() {
+      /*
+               Trace dogList
+                  for i --> n (list of dogs)
+                     for j --> m (list of votes)
+                        if ownerid @ i != vote @ j
+                           add dog to queue 
       
-      Dog dog = new Dog(this.userId);
-     }     
+      
+      */
    
-   public void login(){               
+   }     
+   
+   public static void login(){               
       //make part of the login activity
+      
+      /*
+         Trace userList
+            for i --> n (usernames only)
+               for j ---> m (passwords only)
+                  if username = password
+                     success!
+ 
+      */
+      
+
    }
    
    public void logout(){
@@ -53,7 +81,7 @@ public class User {
    
    }
    
-   public void updateAccount(String fname){
+   public void updateAccount(){
      //Need to make overloaded methods for this to update different aspects
      
     //This method might better serve as part of the update_account activity or whatever we call it. Each field can call a setter method.
@@ -61,7 +89,12 @@ public class User {
    }
    
    public void deleteAccount() {
-      userList.removeId(this.userId);
+   
+      /*
+            remove(Object o)
+         Removes the first occurrence of the specified element from this list, if it is present.)
+      
+      */
       numberOfUsers--;
       //Make a call to delete dog
       //Make a call to delete this account from votedOn for all dogs -- might not be necessary. When generating queues, it might just pass over the number... reassess later   
@@ -80,11 +113,11 @@ public class User {
    public void setUsername(String newUsername) {this.username = newUsername;}
    public void setPassword(String newPassword) {this.password = newPassword;}
    
-//toString method - I'm just using it for some testing purposes.   
+
+   //toString method - I'm just using it for some testing purposes.   
    @Override
    public String toString() {
-   String output = "The user's name is " + this.getFirstName() + " " + this.getLastName() + " and has a username of " + this.getUsername() + ". This user's ID number is " + this.getUserId() + ". Currently, there are " + this.getNumberOfUsers() + " users in the system.";
+   String output = this.getUsername() + "/" + this.getUserId();
    return output;
    }
-   
 }

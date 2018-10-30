@@ -1,6 +1,7 @@
 /*This program will define the Dog class.*/
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Dog {
    private int ownerId;
@@ -12,12 +13,19 @@ public class Dog {
    private int ranking; //Might not need ranking? Can just return its position on leaderboard?
    private Picture pic;
    
-   public LinkedList votedOnBy = new LinkedList(); //A LL for which users have voted on this particular dog
+   public static ArrayList<Dog> dogList = new ArrayList<Dog>(); //An ArrayList that holds all of the dogs
+   
+   public ArrayList<Integer> votedOnBy = new ArrayList<Integer>(); //An ArrayList that holds the userIds for users who have voted on a particular dog
   
 //Constructor method invoked for when a User creates a profile. This constructor will associate the user with that dog.
-   public Dog(int id) {
+   public Dog(){
+      dogList.add(this); //NEED TO GO BACK AND TEST THAT USING THE this OPERATOR ADDS THE OBJECT CORRECTLY!!!
+   } 
+   
+//Set ownerId equal to userId in the User class when a new User is instantiated
+   public void setId(int id) {
       this.ownerId = id;      
-      this.votedOnBy.addLastNode(ownerId);
+      this.votedOnBy.add(ownerId); //Users shouldn't be able to vote on their own dogs
       }
 
 
@@ -48,6 +56,6 @@ public class Dog {
    
    @Override
    public String toString() {
-      return ("Woof woof " + this.ownerId);
+      return ("Woof woof. This dog is owned by user number " + this.ownerId);
    }
 }

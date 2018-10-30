@@ -6,25 +6,26 @@ public class DefaultUsers {
    public static void main (String args[]){
    
       
-      User user1 = new User ("Sloan", "Lipman", "slipman", "pupr123");
-            User.userList.printList();
-            System.out.println(user1.toString());
-            user1.votingQueue.enqueue(1);
-           System.out.println("First element in the queue is: " + user1.votingQueue.front());
+      User user0 = new User ("Sloan", "Lipman", "slipman", "pupr123");
+            System.out.println(user0.toString()); //Should say that user0 has an ID of 0 and that there is 1 user
+           System.out.println("First element in the queue is: " + user0.votingQueue.front()); //returns -1 because nothing is in queue
+            System.out.println(user0.dog.toString()); //Sloan's dog's ownerid should match his userid of 0
    
    
-      User user2 = new User ("Jimmy", "Smith", "jsmith", "pupr321");
+      User user1 = new User ("Jimmy", "Smith", "jsmith", "pupr321");
+      
+           System.out.println(User.userList); //Will print an array of the users, using whatever toString() method is defined
+    
             
          //Just running some tests here
-            User.userList.printList();
-             System.out.println(user2.getFirstName());
-           System.out.println(user2.toString());
-            user1.deleteAccount();
-           System.out.println(user2.toString());
+             System.out.println(user1.getFirstName()); //returns Jimmy
+           System.out.println(user1.toString()); //Jimmy Smith's ID is 1, and there are 2 users in the system
+           
+                       user0.deleteAccount();
+           System.out.println(user1.toString()); //Now there is only one user in the system
      
-                    User.userList.printList();
                     
-                   System.out.println(User.dog.toString());
+                   System.out.println(user1.dog.toString()); //Jimmy's dog's ownerId should match his userid of 1
 
 
    }

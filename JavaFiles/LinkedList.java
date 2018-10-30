@@ -12,13 +12,13 @@ public class LinkedList
    }
   
    //method to add a node to the end of list
-   public void addLastNode(int data) 
+   public void addLastNode(Object e) 
    {
       if (tail == null) 
-         head = tail = new Node(data); //empty list
+         head = tail = new Node(e); //empty list
       else 
       {
-         tail.next = new Node(data); //link new node as last node
+         tail.next = new Node(e); //link new node as last node
          tail = tail.next; //make tail pointer points to new last node
       }
       size++; //increase list size by one
@@ -26,10 +26,10 @@ public class LinkedList
    
       
 //method to add a new node as the first node in the list
-   public void addFirstNode(int data)
+   public void addFirstNode(Object e)
    {
       //complete this method using the pesudocode discussed in class
-      Node newNode = new Node(data); //create new node
+      Node newNode = new Node(e); //create new node
       newNode.next = head; //link new node as the first node
       head = newNode; //make head reference the first node
       size++; //increment the list size
@@ -37,13 +37,13 @@ public class LinkedList
    }
       
 //method to add a node at specific index
-   public void addAtIndex(int index, int data)
+   public void addAtIndex(int index, Object e)
    {
      
       if (index == 0) //add as first node
-         addFirstNode(data);
+         addFirstNode(e);
       else if (index >= size) //add as last node
-         addLastNode(data); 
+         addLastNode(e); 
          
       else { //in general case, move pointer to the appropriate node
          Node current = head; //current starts at the head of the list
@@ -52,7 +52,7 @@ public class LinkedList
             current = current.next;
             temp = temp.next;
          }
-         current.next = new Node(data); //insert new node after current
+         current.next = new Node(e); //insert new node after current
          (current.next).next = temp; //link temp after new node
          size++; //increment size of list
       }
@@ -110,22 +110,41 @@ public class LinkedList
       }
    }
    
-      public void removeId(int id) {
+
+         
+   
+   
+    public void removeId(int id) {
          Node current = head;
          int index = 0;
-         while (current != null) {
-            if (current.data == id) {
-               this.removeAtIndex(index);
-               return;
+           if (current.e instanceof Integer) { 
+            while (current != null) {
+               if ((Integer)current.e == id) {
+                  this.removeAtIndex(index);
+                  return;
+               }
+            index++;
+            current = current.next;
+                  
             }
-         index++;
-         current = current.next;
-               
          }      
          return;         
-   }   
+   } 
 
-
+//Method to transform the LinkedList into an array so that we can easily search it
+   public Object[] toArray() {
+      
+      Object[] objArray = new Object[size]; //Declare an array of objects
+      Node current = head; //pointer
+      int position = 0; //array index
+      while (current != null) { //go until the end 
+         current = current.next;
+         objArray[position] = current.e; //update the array
+         position++; //increment index
+      }
+      return objArray;
+      
+   }
    //method to print out the list
    public void printList() 
    {
@@ -138,7 +157,7 @@ public class LinkedList
          System.out.print("    ");
          while (temp != null)
          {
-            System.out.print(temp.data + "    ");
+            System.out.print(temp.e + "    ");
             temp = temp.next;
          }
          System.out.println();
@@ -148,12 +167,12 @@ public class LinkedList
    //class to create nodes of the list as objects
    private class Node
    {
-      private int data;  //e field
+      private Object e;  //e field
       private Node next; //link field
        
-      public Node(int item) //constructor method
+      public Node(Object item) //constructor method
       {
-         data = item;
+         e = item;
          next = null;
       }
    }
