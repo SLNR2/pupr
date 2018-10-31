@@ -3,6 +3,8 @@ This program will define the User class.
 
 
 */
+//This is a test
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
