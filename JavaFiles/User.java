@@ -19,6 +19,9 @@ public class User {
    
    protected static ArrayList<User> userList = new ArrayList<User>(); //provide a list of users in a LinkedList structure for user authentication.
                                                             //To log in, the system will have to trace the list to see if there is a match
+                                                            
+   public ArrayList<Integer> votedOn = new ArrayList<Integer>(); //An ArrayList that holds the id for which dogs a user has voted on
+
 
    
 //Constructor method that will use passed values to create a new account and log it into the database
@@ -36,15 +39,16 @@ public class User {
       userList.add(this); //add this user to a list of all of the users
                             //NEED TO GO BACK AND TEST THAT USING THE this OPERATOR ADDS THE OBJECT CORRECTLY!!!
                             
+      this.votedOn.add(this.userId); //adds user's own id to the votedOn list so that a user cannot vote on his or her own dog                  
       this.dog.setId(userId);
      }
      
      
-   public void getQueue() {
+   public void makeQueue() {
       /*
                Trace dogList
-                  for i --> n (list of dogs)
-                     for j --> m (list of votes)
+                  for i --> n (list of dogs)   //n can be size of dogList ArrayList
+                     for j --> m (list of votes) // size of this.votedOn
                         if ownerid @ i != vote @ j
                            add dog to queue 
       

@@ -15,7 +15,6 @@ public class Dog {
    
    public static ArrayList<Dog> dogList = new ArrayList<Dog>(); //An ArrayList that holds all of the dogs
    
-   public ArrayList<Integer> votedOnBy = new ArrayList<Integer>(); //An ArrayList that holds the userIds for users who have voted on a particular dog
   
 //Constructor method invoked for when a User creates a profile. This constructor will associate the user with that dog.
    public Dog(){
