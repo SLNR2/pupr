@@ -11,13 +11,13 @@ public class Queue {
    }
   
 //Add to the queue
-   public void enqueue(int data) 
+   public void enqueue(Object o) 
    {
       if (last == null) 
-         first = last = new Node(data); //empty queue
+         first = last = new Node(o); //empty queue
       else 
       {
-         last.next = new Node(data); //link new node as last node
+         last.next = new Node(o); //link new node as last node
          last = last.next; //make last pointer points to new last node
       }
       size++; //increase list size by one
@@ -36,7 +36,7 @@ public class Queue {
    //Return the first element 
    public int front() {
       if (first != null)
-         return this.first.data;
+         return this.first.o;
       else return -1; //if no elements in the queue
       }   
 
@@ -44,12 +44,12 @@ public class Queue {
    //class to create nodes of the queue as objects
    private class Node
    {
-      private int data;  //data field
+      private Object o;  //o field
       private Node next; //link field
        
-      public Node(int item) //constructor method
+      public Node(Object item) //constructor method
       {
-         data = item;
+         o = item;
          next = null;
       }
    }
