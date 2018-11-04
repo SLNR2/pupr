@@ -2,6 +2,8 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Dog {
    private int ownerId;
@@ -24,7 +26,6 @@ public class Dog {
 //Set ownerId equal to userId in the User class when a new User is instantiated
    public void setId(int id) {
       this.ownerId = id;      
-      this.votedOnBy.add(ownerId); //Users shouldn't be able to vote on their own dogs
       }
 
 
