@@ -7,6 +7,8 @@ This program will define the User class.
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class User { 
    private int userId;
@@ -14,7 +16,7 @@ public class User {
    private String lastName = "";
    private String username = "";
    private String password = "";
-   public Queue votingQueue = new Queue(); //Individual voting queue for each user
+   public Queue<Dog> votingQueue = new LinkedList<>(); //Individual voting queue for each user
    private static int numberOfUsers = 0; //Update the total number of users each time one is created or deleted... I forget why.
    private static int nextUser = 0;
    public Dog dog = new Dog(); //Instantiate a dog that belongs to each user
