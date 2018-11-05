@@ -9,6 +9,8 @@ package com.pupr;
         public static void getUsers(){
 
             User user0 = new User ("Sloan", "Lipman", "slipman", "pupr123");
+
+            String userString0 = user0.toString();
             System.out.println(user0.toString()); //Should say that user0 has an ID of 0 and that there is 1 user
             System.out.println("First element in the queue is: " + user0.votingQueue.peek()); //returns -1 because nothing is in queue
             System.out.println(user0.dog.toString()); //Sloan's dog's ownerid should match his userid of 0
