@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DefaultUsers.createUsers();
+        DefaultUsers.createUsers(); //Right now this will keep generating every time you load the page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
         loginScreen();
