@@ -1,5 +1,6 @@
 package com.pupr;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,29 +10,50 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
+    Button signIn;
+    Button signUp;
+    Button forgotPass;
+    EditText userText;
+    EditText passwordText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DefaultUsers.createUsers(); //Right now this will keep generating every time you load the page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
-        loginScreen();
+        signIn = findViewById(R.id.signin_button);
+        signUp = findViewById(R.id.signup_button);
+        forgotPass = findViewById(R.id.forgot_pass_button);
+        userText = findViewById(R.id.login_uname);
+        passwordText = findViewById(R.id.login_pass);
+
+    //Sign in
+        signIn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+                    public void onClick(View v) {
+                signIn();
+            }
+        });
+
+        //Sign up
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUp(); //call method to register
+            }
+        });
+
+    //Forgot password
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {Toast.makeText(getApplicationContext(), "Not implemented for this project", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
-    protected void loginScreen() {
-        //Define the text boxes and the sign in/sign up/forgot password buttons
-        Button signIn = findViewById(R.id.signin_button);
-        Button signUp = findViewById(R.id.signup_button);
-        Button forgotPass = findViewById(R.id.forgot_pass_button);
-        final EditText USER = findViewById(R.id.login_uname);
-        final EditText PASSWORD = findViewById(R.id.login_pass);
-
-        //Sign in
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //For loop iterates over the list of users
+    protected void signIn() {
 
                 boolean flag = false;
                 User currUser = new User(); //Declare a User to be later stored as the current user
@@ -40,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     String user = thisUser.getUsername().toLowerCase(); //pull the username
                     String pass = thisUser.getPassword().toLowerCase(); //pull the password
                     //Compare username and password of the given user to what you have typed in the boxes
-                    if (USER.getText().toString().toLowerCase().equals(user) && PASSWORD.getText().toString().toLowerCase().equals(pass)) {
+                    if (userText.getText().toString().toLowerCase().equals(user) && passwordText.getText().toString().toLowerCase().equals(pass)) {
                         flag = true;
                         currUser = thisUser;
                     }
@@ -51,30 +73,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
                     User.setUser(currUser); //sets active User
                     // setContentView(R.layout.activity_main_page); //navigate to the Main Page
-                    mainPage();
+                    Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                    mainPage.putExtra("value1", currUser.getFirstName());
+                    startActivity(mainPage);
                 } else
                     Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
             }
-        });
 
-
-    //Sign up
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                register(); //call method to register
-            }
-         });
-
-    //Forgot password
-       forgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {Toast.makeText(getApplicationContext(), "Not implemented for this project", Toast.LENGTH_SHORT).show();
-            }
-        });
-}
-
-    protected void register() {
+    protected void signUp() {
         //Define the EditText boxes and the Register button
         setContentView(R.layout.create_account);
         final EditText uname = findViewById(R.id.register_uname);
@@ -112,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
                         String success = newUser.getFirstName() + " is registered!";
                         registered.setText(success); //here for testing purposes
                         setContentView(R.layout.login_screen);
+                        Intent createProfile = new Intent(getBaseContext(), CreateProfile.class);
+                        startActivity(createProfile);
                     }
                     else
                             Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
@@ -121,13 +129,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
-    protected void mainPage() {
-
-        setContentView(R.layout.activity_main_page);
-
-        EditText box = findViewById(R.id.testText);
-
-        box.setText(User.currentUser.toString()); //test method
     }
 }
