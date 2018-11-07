@@ -27,9 +27,11 @@ public class User {
 
     public ArrayList<Integer> votedOn = new ArrayList<Integer>(); //An ArrayList that holds the id for which dogs a user has voted on
 
+    public static User currentUser; // defines current user of the session
 
+    public User() {}; //empty constructor
 
-    //Constructor method that will use passed values to create a new account and log it into the database
+    //Constructor method with specified names and password
     public User(String fName, String lName, String uname, String pass) {
 
 
@@ -48,6 +50,8 @@ public class User {
         this.dog.setId(userId);
     }
 
+    public static void setUser(User user) {currentUser = user;} //update the current user of the session
+                //redundant if currentUser is a public variable
 
     public void makeQueue() {
       /*
@@ -58,25 +62,6 @@ public class User {
                            add dog to queue
 
 
-      */
-
-    }
-
-    public static void login(String username, String password){
-        //make part of the login activity
-
-      /*
-         Trace userList
-            for i --> n (usernames only)
-                  if (password = password @ i && username = username @ i)
-                     success!
-
-                  EXAMPLE
-                     try to log in with username = 3, password = 4 (written out as [3,4])
-                     [[1, 2], [2, 3], [3, 4]]
-                      compare [3,4] to [1,2] x
-                      compare [3,4] to [2,3] x
-                      compare [3,4] to [3,4] yes!
       */
 
     }
@@ -120,7 +105,8 @@ public class User {
     public String getUsername() {return this.username;}
     public int getUserId() {return this.userId;}
     public int getNumberOfUsers() {return numberOfUsers;}
-    private String getPassword() {return this.password;}
+    protected String getPassword() {return this.password;}
+    public void addUser() {userList.add(this);}    //adds a specified user to the userList ArrayList
 
     //Setter methods for various fields
     public void setFirstName(String newFirstName) {this.firstName = newFirstName;}

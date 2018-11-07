@@ -6,18 +6,18 @@ package com.pupr;
      */
 
     public class DefaultUsers {
-        public static void getUsers(){
+        public static void createUsers(){
 
-            User user0 = new User ("Sloan", "Lipman", "slipman", "pupr123");
+            new User ("Sloan", "Lipman", "slipman", "pupr123");
 
-            String userString0 = user0.toString();
+           /* String userString0 = user0.toString();
             System.out.println(user0.toString()); //Should say that user0 has an ID of 0 and that there is 1 user
             System.out.println("First element in the queue is: " + user0.votingQueue.peek()); //returns -1 because nothing is in queue
             System.out.println(user0.dog.toString()); //Sloan's dog's ownerid should match his userid of 0
 
-
-            User user1 = new User ("Jimmy", "Smith", "jsmith", "pupr321");
-
+*/
+            new User ("Jimmy", "Smith", "jsmith", "pupr321");
+/*
             System.out.println(User.userList); //Will print an array of the users, using whatever toString() method is defined
 
 
@@ -30,7 +30,7 @@ package com.pupr;
 
 
             System.out.println(user1.dog.toString()); //Jimmy's dog's ownerId should match his userid of 1
-
+*/
 
         }
     }

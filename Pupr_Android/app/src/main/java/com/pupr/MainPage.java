@@ -4,17 +4,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 
-
 public class MainPage extends AppCompatActivity {
+    EditText box;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+        box = findViewById(R.id.testText);
 
-        User user0 = new User ("Sloan", "Lipman", "slipman", "pupr123");
-        String testUserText = "User " + user0.getFirstName() + " " + user0.getLastName() + " has the username " + user0.getUsername();
-        EditText box = findViewById(R.id.testText);
-        box.setText(testUserText);
+        String welcomeName = getIntent().getStringExtra("value1");
+        welcomeName = "Welcome to Pupr, " + welcomeName;
+
+
+        box.setText(welcomeName); //test method
+
     }
 }
