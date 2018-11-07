@@ -3,12 +3,20 @@ package com.pupr;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.opencsv.CSVReader;
+
+
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         DefaultUsers.createUsers(); //Right now this will keep generating every time you load the page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
@@ -29,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         forgotPass = findViewById(R.id.forgot_pass_button);
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
+        checkUsers();
+
 
     //Sign in
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +65,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Need to update this to do something actually useful.
+    private void checkUsers() {
+        InputStream is = getResources().openRawResource(R.raw.users);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+
+        String line = "";
+        try {
+            while ((line = reader.readLine()) != null) {
+
+                //split by ','
+                String[] tokens = line.split(",");
+                //read the data
+
+                User user = new User();
+                user.setFirstName(tokens[0]);
+                user.setLastName(tokens[1]);
+                user.setUsername(tokens[2]);
+                user.setPassword(tokens[3]);
+                userText.setText(tokens[0]);
+
+                Log.d("MyActivity", "Just created: " + user);
+
+            }
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error reading data file on line " + line, e);
+            e.printStackTrace();
+        }
+    }
 
     protected void signIn() {
 
