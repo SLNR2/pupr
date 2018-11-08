@@ -1,6 +1,8 @@
 package com.pupr;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 
 public class CreateProfile extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1; //Allows for image to be returned
@@ -27,17 +30,41 @@ public class CreateProfile extends AppCompatActivity {
         nameToUpload = findViewById(R.id.new_dog_name);
         bioToUpload = findViewById(R.id.new_dog_bio);
         submitProfile = findViewById(R.id.submitDog);
-
+    //ClickListener to let you upload a picture
         imageToUpload.setOnClickListener(new View.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
-                                                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); //Let user select an image from gallery
-                                                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
+                                                   uploadImage();
+
+
+
                                              }
                                          });
-               // submitProfile.setOnClickListener();
+        submitProfile.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+
+                                //Save image
+                                    Bitmap bmap = ((BitmapDrawable)imageToUpload.getDrawable()).getBitmap();
+                                    new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
+                                //Set image as an attribute for the user
+                                        User.activeUser.setPic(new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").load()); //UNTESTED
+                                //Load the Main Page
+                                    Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                                    mainPage.putExtra("value1", User.activeUser.getFirstName());
+                                    startActivity(mainPage);
+
+                                }
+        });
     }
 
+    //Two methods that are used for uploading images
+    protected void uploadImage() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); //Let user select an image from gallery
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
+
+    }
 
     @Override
         protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -47,6 +74,4 @@ public class CreateProfile extends AppCompatActivity {
                 imageToUpload.setImageURI(selectedImage); //set image and display it
             }
         }
-
-
 }

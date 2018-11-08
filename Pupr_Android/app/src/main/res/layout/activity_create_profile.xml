@@ -7,10 +7,21 @@
     tools:context=".CreateProfile">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:id="@+id/scrollView2"
+        android:layout_width="534dp"
+        android:layout_height="592dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.938">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,9 +37,10 @@
 
         <ImageView
             android:id="@+id/imageToUpload"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_weight="1"
+            android:contentDescription="Upload a picture!"
             tools:srcCompat="@tools:sample/avatars" />
     </LinearLayout>
 
@@ -66,9 +78,17 @@
         android:id="@+id/submitDog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Submit"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="416dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_dog_bio" />
 
 </android.support.constraint.ConstraintLayout>
 

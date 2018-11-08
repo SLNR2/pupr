@@ -6,8 +6,9 @@ This program will define the User class.
 */
 //This is a test
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Queue;
 import java.util.LinkedList;
 
@@ -17,17 +18,42 @@ public class User {
     private String lastName = "";
     private String username = "";
     private String password = "";
-    public Queue<Dog> votingQueue = new LinkedList<>(); //Individual voting queue for each user
+
+
+    private String dogName = "";
+    private String bio = "";
+    private int totalScore = 0;
+    private int numberOfRatings = 0;
+    private double averageRating = 0;
+    private int ranking; //Might not need ranking? Can just return its position on leaderboard?
+    private Bitmap pic;
+
+    public String getDogName() {return this.dogName;}
+    public String getBio() {return this.bio;}
+    public Bitmap getPicture()  {return this.pic;}
+    public int getScore()  {return this.totalScore;}
+    public int getRatings() {return this.numberOfRatings;}
+    public double getAverage() {return this.averageRating;}
+
+
+    //Setter methods
+    public void setDogName(String newDogName) {this.dogName = newDogName;}
+    public void setBio(String newBio) {this.bio = newBio;}
+    public void setPic(Bitmap newPic) {this.pic = newPic;}
+
+
+
+
+    public Queue<User> votingQueue = new LinkedList<>(); //Individual voting queue for each user
     private static int numberOfUsers = 0; //Update the total number of users each time one is created or deleted... I forget why.
     private static int nextUser = 0;
-    public Dog dog = new Dog(); //Instantiate a dog that belongs to each user
 
     protected static ArrayList<User> userList = new ArrayList<User>(); //provide a list of users in a LinkedList structure for user authentication.
     //To log in, the system will have to trace the list to see if there is a match
 
     public ArrayList<Integer> votedOn = new ArrayList<Integer>(); //An ArrayList that holds the id for which dogs a user has voted on
 
-    public static User currentUser; // defines current user of the session
+    public static User activeUser; // defines current user of the session
 
     public User() {}; //empty constructor
 
@@ -44,14 +70,13 @@ public class User {
         nextUser++; //increment the next available ID
         numberOfUsers++; //increment # of users
         userList.add(this); //add this user to a list of all of the users
-        //NEED TO GO BACK AND TEST THAT USING THE this OPERATOR ADDS THE OBJECT CORRECTLY!!!
 
         this.votedOn.add(this.userId); //adds user's own id to the votedOn list so that a user cannot vote on his or her own dog
-        this.dog.setId(userId);
     }
 
-    public static void setUser(User user) {currentUser = user;} //update the current user of the session
-                //redundant if currentUser is a public variable
+    public static void setUser(User user) {
+        activeUser = user;} //update the current user of the session
+                //redundant if activeUser is a public variable
 
     public void makeQueue() {
       /*
