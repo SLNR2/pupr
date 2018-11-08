@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,13 +20,14 @@ import java.io.IOException;
  */
 public class ImageSaver {
 
-    private String directoryName = "images";
+    private String directoryName = "directory";
     private String fileName = "image.png";
     private Context context;
     private boolean external;
 
     public ImageSaver(Context context) {
         this.context = context;
+        Toast.makeText(context.getApplicationContext(), "Image saved", Toast.LENGTH_SHORT).show();
     }
 
     public ImageSaver setFileName(String fileName) {
@@ -65,10 +68,15 @@ public class ImageSaver {
         File directory;
         if(external){
             directory = getAlbumStorageDir(directoryName);
+            if(!directory.exists())
+                directory.mkdir();
         }
         else {
             directory = context.getDir(directoryName, Context.MODE_PRIVATE);
+            if(!directory.exists())
+                directory.mkdir();
         }
+
         if(!directory.exists() && !directory.mkdirs()){
             Log.e("ImageSaver","Error creating directory " + directory);
         }

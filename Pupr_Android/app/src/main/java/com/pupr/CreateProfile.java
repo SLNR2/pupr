@@ -1,6 +1,5 @@
 package com.pupr;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,23 +8,14 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
 
 public class CreateProfile extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1; //Allows for image to be returned
-    private static final String appName = "pupr"; //name of app, used for a directory name
-
-    private static Long tsLong = System.currentTimeMillis() / 1000; //used to generate a unique file name
-    private static String ts = tsLong.toString(); //put the time toString
-
 
     ImageView imageToUpload;
     EditText nameToUpload;
@@ -45,7 +35,8 @@ public class CreateProfile extends AppCompatActivity {
                                              @Override
                                              public void onClick(View v) {
                                                    uploadImage();
-                                                   new ImageSaver(v.getContext());
+
+
 
                                              }
                                          });
@@ -53,10 +44,16 @@ public class CreateProfile extends AppCompatActivity {
 
                                 @Override
                                 public void onClick(View v) {
-                                    //Save image
-                                    //Set image as an attribute for the user
-                                    //Load the Main Page
 
+                                //Save image
+                                    Bitmap bmap = ((BitmapDrawable)imageToUpload.getDrawable()).getBitmap();
+                                    new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
+                                //Set image as an attribute for the user
+                                        User.activeUser.setPic(new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").load()); //UNTESTED
+                                //Load the Main Page
+                                    Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                                    mainPage.putExtra("value1", User.activeUser.getFirstName());
+                                    startActivity(mainPage);
 
                                 }
         });
