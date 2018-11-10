@@ -4,9 +4,8 @@ This program will define the User class.
 
 
 */
-//This is a test
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
 import java.util.Queue;
@@ -26,20 +25,34 @@ public class User {
     private int numberOfRatings = 0;
     private double averageRating = 0;
     private int ranking; //Might not need ranking? Can just return its position on leaderboard?
-    private Bitmap pic;
+    private Drawable pic;
+
+    static User activeUser; // defines current user of the session
+
+
 
     public String getDogName() {return this.dogName;}
     public String getBio() {return this.bio;}
-    public Bitmap getPicture()  {return this.pic;}
+    public Drawable getPicture()  {return this.pic;}
     public int getScore()  {return this.totalScore;}
     public int getRatings() {return this.numberOfRatings;}
     public double getAverage() {return this.averageRating;}
 
 
+    public static void setActiveUser(User user) {
+        activeUser = user;} //update the current user of the session
+    //redundant if activeUser is a public variable, but we can keep this for now
+
+    public void setUser(int i){
+        userList.get(i);
+    }
+
+
+
     //Setter methods
-    public void setDogName(String newDogName) {this.dogName = newDogName;}
-    public void setBio(String newBio) {this.bio = newBio;}
-    public void setPic(Bitmap newPic) {this.pic = newPic;}
+     void setDogName(String newDogName) {this.dogName = newDogName;}
+     void setBio(String newBio) {this.bio = newBio;}
+     void setPic(Drawable newPic) {this.pic = newPic;}
 
 
 
@@ -48,19 +61,17 @@ public class User {
     private static int numberOfUsers = 0; //Update the total number of users each time one is created or deleted... I forget why.
     private static int nextUser = 0;
 
-    protected static ArrayList<User> userList = new ArrayList<User>(); //provide a list of users in a LinkedList structure for user authentication.
+     static ArrayList<User> userList = new ArrayList<User>(); //provide a list of users in an ArrayList structure for user authentication.
     //To log in, the system will have to trace the list to see if there is a match
 
-    public ArrayList<Integer> votedOn = new ArrayList<Integer>(); //An ArrayList that holds the id for which dogs a user has voted on
-
-    public static User activeUser; // defines current user of the session
-
-    public User() {}; //empty constructor
-
-    //Constructor method with specified names and password
-    public User(String fName, String lName, String uname, String pass) {
+     ArrayList<Integer> votedOn = new ArrayList<Integer>(); //An ArrayList that holds the id for which dogs a user has voted on
 
 
+//Constructors
+    User() {} //empty constructor
+
+    //Constructor method with specified names and password -- useful for default objects
+     User(String fName, String lName, String uname, String pass) {
         this.firstName = fName;
         this.lastName = lName;
         this.username = uname;
@@ -74,9 +85,7 @@ public class User {
         this.votedOn.add(this.userId); //adds user's own id to the votedOn list so that a user cannot vote on his or her own dog
     }
 
-    public static void setUser(User user) {
-        activeUser = user;} //update the current user of the session
-                //redundant if activeUser is a public variable
+
 
     public void makeQueue() {
       /*
@@ -90,28 +99,6 @@ public class User {
       */
 
     }
-
-
-    public void logout(){
-        //Click a buttton, move to logout confirmation screen, make any necessary updates to the user's statistics. Maybe clear out the queue or something as a way of doing our own garbage collection.
-
-        //Make part of the logout activity
-    }
-
-    public void viewAccount(){
-        //Make calls to the different getter methods and display the correct information where it needs to go
-
-        //This method might serve better as part of the view_account activity. Have each field become populated by calling the appropriate getter method.
-
-    }
-
-    public void updateAccount(){
-        //Need to make overloaded methods for this to update different aspects
-
-        //This method might better serve as part of the update_account activity or whatever we call it. Each field can call a setter method.
-
-    }
-
     public void deleteAccount() {
 
       /*
@@ -124,26 +111,21 @@ public class User {
         //Make a call to delete this account from votedOn for all dogs -- might not be necessary. When generating queues, it might just pass over the number... reassess later
     }
 
-    //Getter methods for various fields
-    public String getFirstName() {return this.firstName;}
+//Getter methods for various fields
+    String getFirstName() {return this.firstName;}
     public String getLastName()  {return this.lastName;}
-    public String getUsername() {return this.username;}
-    public int getUserId() {return this.userId;}
+    String getUsername() {return this.username;}
+    int getUserId() {return this.userId;}
     public int getNumberOfUsers() {return numberOfUsers;}
-    protected String getPassword() {return this.password;}
-    public void addUser() {userList.add(this);}    //adds a specified user to the userList ArrayList
+    String getPassword() {return this.password;}
+    void addUser() {userList.add(this);}    //adds a specified user to the userList ArrayList
 
     //Setter methods for various fields
-    public void setFirstName(String newFirstName) {this.firstName = newFirstName;}
-    public void setLastName(String newLastName) {this.lastName = newLastName;}
-    public void setUsername(String newUsername) {this.username = newUsername;}
-    public void setPassword(String newPassword) {this.password = newPassword;}
+    void setFirstName(String newFirstName) {this.firstName = newFirstName;}
+    void setLastName(String newLastName) {this.lastName = newLastName;}
+    void setUsername(String newUsername) {this.username = newUsername;}
+    void setPassword(String newPassword) {this.password = newPassword;}
 
 
-    //toString method - I'm just using it for some testing purposes.
-    @Override
-    public String toString() {
-        String output = this.getUsername() + "/" + this.getUserId();
-        return output;
-    }
+    public User getUser() {return this;} //returns the entire user
 }
