@@ -76,24 +76,24 @@
         android:layout_marginBottom="52dp"
         android:text="Edit Profile"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@+id/logOut"
         app:layout_constraintHorizontal_bias="0.325"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToVoting"
         app:layout_constraintVertical_bias="0.504" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/logOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
         android:layout_marginBottom="8dp"
-        android:text="Button"
+        android:text="Log Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToLeaderboard"
-        app:layout_constraintVertical_bias="0.299" />
+        app:layout_constraintVertical_bias="0.333" />
 
 </android.support.constraint.ConstraintLayout>

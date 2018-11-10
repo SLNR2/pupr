@@ -3,6 +3,7 @@ package com.pupr;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -37,15 +38,16 @@ public class EditProfile extends AppCompatActivity {
         nameToUpload.setText(User.activeUser.getDogName());
         bioToUpload.setText(User.activeUser.getBio());
 
-
-        Bitmap currentImage = new ImageSaver(this.getBaseContext()).
+//These lines might be unnecessary
+      /*  Bitmap currentImage = new ImageSaver(this.getBaseContext()).
                 setFileName(User.activeUser.getUserId() + ".png").
                 setDirectoryName("pupr_pictures").
                 load();
+*/
 
-        Bitmap userPic = User.activeUser.getPicture();
+        Drawable userPic = User.activeUser.getPicture();
 
-        imageToUpload.setImageBitmap(userPic);
+        imageToUpload.setImageDrawable(userPic);
 
 
 
@@ -66,10 +68,11 @@ public class EditProfile extends AppCompatActivity {
 
                                 //Save image
                                     Bitmap bmap = ((BitmapDrawable)imageToUpload.getDrawable()).getBitmap();
+                                    Drawable newPic = imageToUpload.getDrawable();
                                     new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
                                 //Set image as an attribute for the user
                                         //User.activeUser.setPic(new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").load()); //UNTESTED
-                                        User.activeUser.setPic(bmap); //trying this a different way than the line above
+                                        User.activeUser.setPic(newPic); //trying this a different way than the line above
                                 //Load the Main Page
                                     Intent mainPage = new Intent(getBaseContext(), MainPage.class);
                                     mainPage.putExtra("value1", User.activeUser.getFirstName());
