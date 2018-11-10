@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity {
     //Declare UI elements
     Button signIn;
     Button signUp;
@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 if (flag) {
                     Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
                     User.setUser(currUser); //sets active User
-                    // setContentView(R.layout.activity_main_page); //navigate to the Main Page
                     Intent mainPage = new Intent(getBaseContext(), MainPage.class);
                     mainPage.putExtra("value1", currUser.getFirstName());
                     startActivity(mainPage);
@@ -142,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
         Button register = findViewById(R.id.register_button);
        final User newUser = new User(); //Just putting this line here to test
 
-        final EditText registered = findViewById(R.id.good_reg); //here for testing purposes
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,11 +165,9 @@ public class MainActivity extends AppCompatActivity {
                         newUser.setPassword(uname.getText().toString());
                         newUser.addUser(); //Adds User to the userList
                         User.activeUser = newUser; //sets the new user to the active user
-                        String success = newUser.getFirstName() + " is registered!";
-                        registered.setText(success); //here for testing purposes
-                        setContentView(R.layout.login_screen);
-                        Intent createProfile = new Intent(getBaseContext(), CreateProfile.class);
-                        startActivity(createProfile);
+
+                        Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
+                        startActivity(editProfile);
                     }
                     else
                             Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
@@ -199,7 +195,7 @@ public void onRequestPermissionsResult(int requestCode,
 
         // permission denied, boo! Disable the
         // functionality that depends on this permission.uujm
-        Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginPage.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
 
         //app cannot function without this permission for now so close it...
         onDestroy();

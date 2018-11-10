@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 
-public class CreateProfile extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1; //Allows for image to be returned
 
     ImageView imageToUpload;
@@ -25,12 +25,31 @@ public class CreateProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_profile);
+        setContentView(R.layout.edit_profile);
         imageToUpload = findViewById(R.id.imageToUpload);
         nameToUpload = findViewById(R.id.new_dog_name);
         bioToUpload = findViewById(R.id.new_dog_bio);
         submitProfile = findViewById(R.id.submitDog);
-    //ClickListener to let you upload a picture
+        //ClickListener to let you upload a picture
+
+        //If user has already uploaded profile information, it should get loaded here
+
+        nameToUpload.setText(User.activeUser.getDogName());
+        bioToUpload.setText(User.activeUser.getBio());
+
+
+        Bitmap currentImage = new ImageSaver(this.getBaseContext()).
+                setFileName(User.activeUser.getUserId() + ".png").
+                setDirectoryName("pupr_pictures").
+                load();
+
+        Bitmap userPic = User.activeUser.getPicture();
+
+        imageToUpload.setImageBitmap(userPic);
+
+
+
+
         imageToUpload.setOnClickListener(new View.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
@@ -49,7 +68,8 @@ public class CreateProfile extends AppCompatActivity {
                                     Bitmap bmap = ((BitmapDrawable)imageToUpload.getDrawable()).getBitmap();
                                     new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
                                 //Set image as an attribute for the user
-                                        User.activeUser.setPic(new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").load()); //UNTESTED
+                                        //User.activeUser.setPic(new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").load()); //UNTESTED
+                                        User.activeUser.setPic(bmap); //trying this a different way than the line above
                                 //Load the Main Page
                                     Intent mainPage = new Intent(getBaseContext(), MainPage.class);
                                     mainPage.putExtra("value1", User.activeUser.getFirstName());
