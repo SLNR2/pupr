@@ -26,6 +26,7 @@ public class LoginPage extends AppCompatActivity {
     Button forgotPass;
     EditText userText;
     EditText passwordText;
+   public static boolean defaultUsersCreated = false;
 
     //Used for granting permissions
     private int requestCode;
@@ -34,7 +35,6 @@ public class LoginPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DefaultUsers.createUsers(); //Right now this will keep generating every time you load the page
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
         signIn = findViewById(R.id.signin_button);
@@ -42,7 +42,9 @@ public class LoginPage extends AppCompatActivity {
         forgotPass = findViewById(R.id.forgot_pass_button);
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
-        createDefaultUsers(); //test method
+
+        if(!defaultUsersCreated) //initial value is false, so the method will get called the very first time. Afterwards, the method disables itself by setting this flag to true.
+            createDefaultUsers(); //calls a method that reads a CSV file to generate default users
 
         //Used for permissions
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
@@ -170,38 +172,36 @@ public class LoginPage extends AppCompatActivity {
         }
     }
 
-
-    //Need to update this to do something actually useful.
+//Method to read CSV raw file and create default users from it
     private void createDefaultUsers() {
         InputStream is = getResources().openRawResource(R.raw.users);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8"))
-        );
-
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
         String line = "";
+
         try {
+
             while ((line = reader.readLine()) != null) {
-
-                //split by ','
-                String[] tokens = line.split(",");
-                //read the data
-
-                User user = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //adds a default user
-
-                Log.d("MyActivity", "Just created: " + user);
-
+                String[] tokens = line.split(",");  //split by ','
+                User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a default user
+                newUser.setDogName(tokens[4]);
+                newUser.setBio((tokens[5]));
+                Log.d("MyActivity", "Just created: " + newUser.getUserId()); //puts userId into the log so we can make sure this method is just called one time
             }
+
         } catch (IOException e) {
             Log.wtf("MyActivity", "Error reading data file on line " + line, e);
             e.printStackTrace();
         }
 
-        defaultDogs();
+        defaultUsersCreated = true; //Set to true so that this won't get called again later
+
+        defaultDogPictures(); //Call method to create the default dogs
+
     }
 
-    private void defaultDogs() {
+    private void defaultDogPictures() {
+    //Names and bios can be implemented using a raw CSV file, but the pictures will have to be done individually
         User.userList.get(0).setPic(getResources().getDrawable(R.drawable.megan));
-        User.userList.get(0).setDogName("Megan");
-        User.userList.get(0).setBio("Megan is a sweet miniature poodle who loves laps, kisses, and stocking up on acorns for the winter!");
+
     }
 }

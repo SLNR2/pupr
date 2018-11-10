@@ -72,8 +72,6 @@ public class User {
 
     //Constructor method with specified names and password -- useful for default objects
      User(String fName, String lName, String uname, String pass) {
-
-
         this.firstName = fName;
         this.lastName = lName;
         this.username = uname;

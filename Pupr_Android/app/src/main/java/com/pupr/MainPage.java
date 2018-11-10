@@ -61,14 +61,14 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 User temp = new User();
-                for (int i = 0; i < User.userList.size(); i++) {
-                    if (User.userList.get(i).getUserId() == User.activeUser.getUserId())
+               /* for (int i = 0; i < User.userList.size(); i++) {
+                   if (User.userList.get(i).getUserId() == User.activeUser.getUserId())
 
                         temp = User.userList.get(i).getUser();
 
-                }
+                }*/
 
-                User.setActiveUser(null);
+                User.setActiveUser(temp);
                 Intent loginPage = new Intent(getBaseContext(), LoginPage.class);
                 startActivity(loginPage);
 

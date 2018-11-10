@@ -37,17 +37,8 @@ public class EditProfile extends AppCompatActivity {
 
         nameToUpload.setText(User.activeUser.getDogName());
         bioToUpload.setText(User.activeUser.getBio());
-
-//These lines might be unnecessary
-      /*  Bitmap currentImage = new ImageSaver(this.getBaseContext()).
-                setFileName(User.activeUser.getUserId() + ".png").
-                setDirectoryName("pupr_pictures").
-                load();
-*/
-
         Drawable userPic = User.activeUser.getPicture();
-
-        imageToUpload.setImageDrawable(userPic);
+        imageToUpload.setImageDrawable(userPic); //loads the dog's picture into the ImageView
 
 
 
@@ -73,6 +64,8 @@ public class EditProfile extends AppCompatActivity {
                                 //Set image as an attribute for the user
                                         //User.activeUser.setPic(new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").load()); //UNTESTED
                                         User.activeUser.setPic(newPic); //trying this a different way than the line above
+                                        User.activeUser.setBio(bioToUpload.getText().toString());
+                                        User.activeUser.setDogName(nameToUpload.getText().toString());
                                 //Load the Main Page
                                     Intent mainPage = new Intent(getBaseContext(), MainPage.class);
                                     mainPage.putExtra("value1", User.activeUser.getFirstName());
