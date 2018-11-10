@@ -3,6 +3,9 @@ package com.pupr;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,8 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-
-
 
 public class LoginPage extends AppCompatActivity {
     //Declare UI elements
@@ -166,26 +167,37 @@ public class LoginPage extends AppCompatActivity {
                     //app cannot function without this permission for now so close it...
                     onDestroy();
                 }
-
             }
-
         }
     }
 
 //Method to read CSV raw file and create default users from it
     private void createDefaultUsers() {
-        InputStream is = getResources().openRawResource(R.raw.users);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-        String line = "";
-
+        InputStream is = getResources().openRawResource(R.raw.users); //read the raw CSV file
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file
+        String line = ""; //used to iterate the CSV file
+        String imagePath; //will be used to locate the drawable file that I put into the project folder
+        View v = new View(getBaseContext()); //need this View for saving the Bitmap
+        int i = 0; //will be used to increment by userId
         try {
 
-            while ((line = reader.readLine()) != null) {
-                String[] tokens = line.split(",");  //split by ','
+        //Start reading the file
+            while ((line = reader.readLine()) != null) { //read until the end
+            //Add users
+                String[] tokens = line.split(",");  //split by ',' since this is a CSV file
                 User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a default user
-                newUser.setDogName(tokens[4]);
-                newUser.setBio((tokens[5]));
+                newUser.setDogName(tokens[4]); //set dog name
+                newUser.setBio((tokens[5])); //set dog bio
                 Log.d("MyActivity", "Just created: " + newUser.getUserId()); //puts userId into the log so we can make sure this method is just called one time
+
+            //Add dogs
+                imagePath = "drawable/img" + i;
+                int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //generate a key for each image corresponding to each user
+                Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
+                User.userList.get(i).setPic(d); //set image as an attribute for each user
+                Bitmap b0 = ((BitmapDrawable) d).getBitmap(); //get Bitmap for drawable
+                new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
+                i++; //increment to next user
             }
 
         } catch (IOException e) {
@@ -194,14 +206,5 @@ public class LoginPage extends AppCompatActivity {
         }
 
         defaultUsersCreated = true; //Set to true so that this won't get called again later
-
-        defaultDogPictures(); //Call method to create the default dogs
-
-    }
-
-    private void defaultDogPictures() {
-    //Names and bios can be implemented using a raw CSV file, but the pictures will have to be done individually
-        User.userList.get(0).setPic(getResources().getDrawable(R.drawable.megan));
-
     }
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 public class EditProfile extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class EditProfile extends AppCompatActivity {
     EditText nameToUpload;
     EditText bioToUpload;
     Button submitProfile;
+    Button cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +33,27 @@ public class EditProfile extends AppCompatActivity {
         nameToUpload = findViewById(R.id.new_dog_name);
         bioToUpload = findViewById(R.id.new_dog_bio);
         submitProfile = findViewById(R.id.submitDog);
-        //ClickListener to let you upload a picture
+        cancel = findViewById(R.id.cancelProfileChanges);
 
-        //If user has already uploaded profile information, it should get loaded here
-
+    //Load current information and picture for the user
         nameToUpload.setText(User.activeUser.getDogName());
         bioToUpload.setText(User.activeUser.getBio());
         Drawable userPic = User.activeUser.getPicture();
         imageToUpload.setImageDrawable(userPic); //loads the dog's picture into the ImageView
 
-
-
-
+    //ClickListener for Cancel button
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(imageToUpload.getDrawable() == null)
+                    Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
+                else {
+                    Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                    startActivity(mainPage);
+                }
+            }
+        });
+        //ClickListener to let you upload a picture
         imageToUpload.setOnClickListener(new View.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
@@ -56,23 +67,29 @@ public class EditProfile extends AppCompatActivity {
 
                                 @Override
                                 public void onClick(View v) {
+                                    if(imageToUpload.getDrawable() == null)
+                                        Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
+                                    else {
 
-                                //Save image
-                                    Bitmap bmap = ((BitmapDrawable)imageToUpload.getDrawable()).getBitmap();
-                                    Drawable newPic = imageToUpload.getDrawable();
-                                    new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
-                                //Set image as an attribute for the user
-                                        //User.activeUser.setPic(new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName(User.activeUser.getUserId() + ".png").load()); //UNTESTED
-                                        User.activeUser.setPic(newPic); //trying this a different way than the line above
-                                        User.activeUser.setBio(bioToUpload.getText().toString());
-                                        User.activeUser.setDogName(nameToUpload.getText().toString());
-                                //Load the Main Page
-                                    Intent mainPage = new Intent(getBaseContext(), MainPage.class);
-                                    mainPage.putExtra("value1", User.activeUser.getFirstName());
-                                    startActivity(mainPage);
+                                        Drawable newPic = imageToUpload.getDrawable(); //set pic on ImageView
+                                        savePicture(newPic, v); //save pic to phone
+
+                                        User.activeUser.setPic(newPic); //Set image as an attribute for the user
+                                        User.activeUser.setBio(bioToUpload.getText().toString()); //set bio
+                                        User.activeUser.setDogName(nameToUpload.getText().toString()); //set name
+
+                                    //Load the Main Page
+                                        Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                                        startActivity(mainPage);
+                                    }
 
                                 }
         });
+    }
+
+    public static void savePicture(Drawable newPic, View v) {
+        Bitmap bmap = ((BitmapDrawable)newPic).getBitmap();
+        new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
     }
 
     //Two methods that are used for uploading images
