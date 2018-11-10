@@ -141,7 +141,6 @@ public class LoginPage extends AppCompatActivity {
         Button register = findViewById(R.id.register_button);
        final User newUser = new User(); //Just putting this line here to test
 
-        final EditText registered = findViewById(R.id.good_reg); //here for testing purposes
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,11 +165,9 @@ public class LoginPage extends AppCompatActivity {
                         newUser.setPassword(uname.getText().toString());
                         newUser.addUser(); //Adds User to the userList
                         User.activeUser = newUser; //sets the new user to the active user
-                        String success = newUser.getFirstName() + " is registered!";
-                        registered.setText(success); //here for testing purposes
-                        setContentView(R.layout.login_screen);
-                        Intent createProfile = new Intent(getBaseContext(), CreateProfile.class);
-                        startActivity(createProfile);
+
+                        Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
+                        startActivity(editProfile);
                     }
                     else
                             Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
