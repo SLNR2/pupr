@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity {
     //Declare UI elements
     Button signIn;
     Button signUp;
@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 if (flag) {
                     Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
                     User.setUser(currUser); //sets active User
-                    // setContentView(R.layout.activity_main_page); //navigate to the Main Page
                     Intent mainPage = new Intent(getBaseContext(), MainPage.class);
                     mainPage.putExtra("value1", currUser.getFirstName());
                     startActivity(mainPage);
@@ -199,7 +198,7 @@ public void onRequestPermissionsResult(int requestCode,
 
         // permission denied, boo! Disable the
         // functionality that depends on this permission.uujm
-        Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginPage.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
 
         //app cannot function without this permission for now so close it...
         onDestroy();

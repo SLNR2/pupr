@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import java.io.File;
 
 
 public class CreateProfile extends AppCompatActivity {
@@ -25,12 +26,28 @@ public class CreateProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_profile);
+        setContentView(R.layout.create_profile);
         imageToUpload = findViewById(R.id.imageToUpload);
         nameToUpload = findViewById(R.id.new_dog_name);
         bioToUpload = findViewById(R.id.new_dog_bio);
         submitProfile = findViewById(R.id.submitDog);
-    //ClickListener to let you upload a picture
+        //ClickListener to let you upload a picture
+
+        //If user has already uploaded profile information, it should get loaded here
+
+        nameToUpload.setText(User.activeUser.getDogName());
+        bioToUpload.setText(User.activeUser.getBio());
+
+
+        Bitmap currentImage = new ImageSaver(this.getBaseContext()).
+                setFileName(User.activeUser.getUserId() + ".png").
+                setDirectoryName("images").
+                load();
+        imageToUpload.setImageBitmap(currentImage);
+
+
+
+
         imageToUpload.setOnClickListener(new View.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
