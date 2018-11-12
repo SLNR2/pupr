@@ -24,6 +24,7 @@ public class EditProfile extends AppCompatActivity {
     EditText bioToUpload;
     Button submitProfile;
     Button cancel;
+    static Bitmap imageCheck; //A variable that stores user's current picture to see if it has been changed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class EditProfile extends AppCompatActivity {
         bioToUpload = findViewById(R.id.new_dog_bio);
         submitProfile = findViewById(R.id.submitDog);
         cancel = findViewById(R.id.cancelProfileChanges);
+       imageCheck = ((BitmapDrawable)User.activeUser.getPicture()).getBitmap();
 
     //Load current information and picture for the user
         nameToUpload.setText(User.activeUser.getDogName());
@@ -88,8 +90,9 @@ public class EditProfile extends AppCompatActivity {
     }
 
     public static void savePicture(Drawable newPic, View v) {
-        Bitmap bmap = ((BitmapDrawable)newPic).getBitmap();
-        new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
+        Bitmap bmap = ((BitmapDrawable) newPic).getBitmap();
+        if (bmap != imageCheck)
+            new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
     }
 
     //Two methods that are used for uploading images
