@@ -26,7 +26,6 @@ public class ImageSaver {
 
     public ImageSaver(Context context) {
         this.context = context;
-        Toast.makeText(context.getApplicationContext(), "Image saved", Toast.LENGTH_SHORT).show();
     }
 
     public ImageSaver setFileName(String fileName) {

@@ -61,10 +61,10 @@ public class User {
     private static int numberOfUsers = 0; //Update the total number of users each time one is created or deleted... I forget why.
     private static int nextUser = 0;
 
-     static ArrayList<User> userList = new ArrayList<User>(); //provide a list of users in an ArrayList structure for user authentication.
+     static ArrayList<User> userList = new ArrayList<>(10); //provide a list of users in an ArrayList structure for user authentication.
     //To log in, the system will have to trace the list to see if there is a match
 
-     ArrayList<Integer> votedOn = new ArrayList<Integer>(); //An ArrayList that holds the id for which dogs a user has voted on
+     private ArrayList<Integer> votedOn = new ArrayList<>(10); //An ArrayList that holds the id for which dogs a user has voted on
 
 
 //Constructors
