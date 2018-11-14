@@ -35,7 +35,7 @@ public class EditProfile extends AppCompatActivity {
         bioToUpload = findViewById(R.id.new_dog_bio);
         submitProfile = findViewById(R.id.submitDog);
         cancel = findViewById(R.id.cancelProfileChanges);
-       imageCheck = ((BitmapDrawable)User.activeUser.getPicture()).getBitmap();
+     //  imageCheck = ((BitmapDrawable)User.activeUser.getPicture()).getBitmap(); //Serves as a flag to see if the User has uploaded a new image
 
     //Load current information and picture for the user
         nameToUpload.setText(User.activeUser.getDogName());
