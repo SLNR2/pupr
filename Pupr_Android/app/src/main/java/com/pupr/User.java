@@ -97,15 +97,18 @@ public class User {
 
         for (int i = 0; i < userList.size(); i++) { //trace the userList
             for (int j = 0; j < activeUser.votedOn.size(); j++) { //trace the list of dogs the user has already voted on
-                if (!userList.get(i).equals(votedOn.get(j))) { //if the user at index i has not been voted on yet
+                if (userList.get(i).equals(votedOn.get(j)))  //if the user at index i has not been voted on yet
+                    break;
+                else {
                     votingQueue.add(userList.get(i)); //add that user to the queue
-                    j++;
-                    Log.d("New element in Queue", "" + userList.get(i));
+
+                    Log.d("New element in Queue", "" + userList.get(i).getDogName());
                     Log.d("Queue size", "" + User.activeUser.votingQueue.size());
                 }
             }
         }
     }
+
 
 //Getter methods for various fields
     String getFirstName() {return this.firstName;}
