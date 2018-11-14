@@ -3,8 +3,7 @@
     package="com.pupr">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +21,7 @@
         </activity>
         <activity android:name=".MainPage" />
         <activity android:name=".EditProfile" />
+        <activity android:name=".VotingPage"></activity>
     </application>
 
 </manifest>

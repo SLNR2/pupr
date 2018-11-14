@@ -188,7 +188,7 @@ public class LoginPage extends AppCompatActivity {
                 User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a default user
                 newUser.setDogName(tokens[4]); //set dog name
                 newUser.setBio((tokens[5])); //set dog bio
-                Log.d("MyActivity", "Just created: " + newUser.getUserId()); //puts userId into the log so we can make sure this method is just called one time
+                Log.d("MyActivity", "Just created: " + newUser.getUserId() + ", " + newUser.getDogName()); //puts userId into the log so we can make sure this method is just called one time
 
             //Add dogs
                 imagePath = "drawable/img" + i;
