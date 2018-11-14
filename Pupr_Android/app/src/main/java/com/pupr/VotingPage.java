@@ -58,7 +58,7 @@ public class VotingPage extends AppCompatActivity {
 
                 //Debugging log
                 for (int i = 0; i < User.activeUser.votedOn.size(); i++)
-                    Log.d("Dogs voted on", "" + User.activeUser.votedOn.get(i).getUserId());
+                    Log.d("Dogs voted on", "" + User.activeUser.votedOn.get(i).getDogName() + ", " + User.userList.get(i).getRatings() + " times");
 
                 User.nextDog.setScore(1); //add one to the score
                 Log.d("Score set to", "" + User.nextDog.getScore());
