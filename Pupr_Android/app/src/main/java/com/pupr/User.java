@@ -29,7 +29,7 @@ public class User {
     private Drawable pic;
 
     static User activeUser; // defines current user of the session
-    static User nextDog; //defines the next Dog for a User to vote on
+    static User currentDog; //defines the next Dog for a User to vote on
 
 
 
@@ -56,7 +56,7 @@ public class User {
     void setBio(String newBio) {this.bio = newBio;}
     void setPic(Drawable newPic) {this.pic = newPic;}
     void incrementRatings() {this.numberOfRatings++;}
-    void setScore(int i) {
+    void addScore(int i) {
         this.totalScore = this.totalScore + i;
         this.averageRating = this.totalScore / this.numberOfRatings;
     }
@@ -96,16 +96,21 @@ public class User {
     void makeQueue() {
 
         for (int i = 0; i < userList.size(); i++) { //trace the userList
-            for (int j = 0; j < activeUser.votedOn.size(); j++) { //trace the list of dogs the user has already voted on
-                if (userList.get(i).equals(votedOn.get(j)))  //if the user at index i has not been voted on yet
-                    break;
-                else {
-                    votingQueue.add(userList.get(i)); //add that user to the queue
+            boolean hit = false;
 
-                    Log.d("New element in Queue", "" + userList.get(i).getDogName());
-                    Log.d("Queue size", "" + User.activeUser.votingQueue.size());
-                }
+            for (int j = 0; j < activeUser.votedOn.size(); j++) { //trace the list of dogs the user has already voted on
+                if (userList.get(i).equals(votedOn.get(j)))  //if the user at index i has been voted on already
+                    hit = true;
             }
+
+            if (!hit) {
+                votingQueue.add(userList.get(i)); //add user @ i to queue if that user has not been voted on yet
+
+                Log.d("New element in Queue", "" + userList.get(i).getDogName());
+                Log.d("Queue size", "" + User.activeUser.votingQueue.size());
+            }
+
+
         }
     }
 

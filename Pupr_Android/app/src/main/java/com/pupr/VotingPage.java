@@ -3,7 +3,6 @@ package com.pupr;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,42 +48,74 @@ public class VotingPage extends AppCompatActivity {
                 startActivity(mainPage);
             }
         });
+
+    //Voting button onClickListeners
         one.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                User.nextDog.incrementRatings();
-                User.activeUser.votedOn.add(User.nextDog);
+               vote(1); //calls vote method with a score of 1
 
-                //Debugging log
-                for (int i = 0; i < User.activeUser.votedOn.size(); i++)
-                    Log.d("Dogs voted on", "" + User.activeUser.votedOn.get(i).getDogName() + ", " + User.userList.get(i).getRatings() + " times");
+            }
+        });
 
-                User.nextDog.setScore(1); //add one to the score
-                Log.d("Score set to", "" + User.nextDog.getScore());
+        two.setOnClickListener(new View.OnClickListener() {
 
-                Log.d("Front of Q before vote:", "" + User.activeUser.votingQueue.element().getDogName());
-                User.activeUser.votingQueue.remove(); //remove dog from queue
-                if(!User.activeUser.votingQueue.isEmpty())
-                    Log.d("Front of Q after vote:", "" + User.activeUser.votingQueue.element().getDogName());
-               serveDog();
+            @Override
+            public void onClick(View v) {
+                vote(2); //calls vote method with a score of 1
+
+            }
+        });
+
+        three.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                vote(3); //calls vote method with a score of 1
+
+            }
+        });
+
+        four.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                vote(5); //calls vote method with a score of 1
+
+            }
+        });
+
+        five.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                vote(5); //calls vote method with a score of 1
 
             }
         });
     }
 
+//General voting method called by each button click; takes an integer input that is specified inside each .setOnClickListener method for each button
+    public void vote (int score) {
 
+        User.currentDog.incrementRatings(); //add score, recalculate values
+        User.activeUser.votedOn.add(User.currentDog); //add this dog to the votedOn list of the current user
+        User.currentDog.addScore(score); //add one to the score
+        User.activeUser.votingQueue.remove(); //remove dog from queue
+        serveDog();
+        }
 
 
 //Serve up next dog from queue
     public void serveDog() {
-        String endOfQueue = "No more dogs left. Please try again later. Redirecting home."; //message to be displayed when the queue is empty
+        String endOfQueue = "No more dogs left. Please try again later."; //message to be displayed when the queue is empty
 
         if (!User.activeUser.votingQueue.isEmpty()) {
-            User.nextDog = User.activeUser.votingQueue.peek(); //Looks at the first element in the votingQueue for the activeUser
-            votingImage.setImageDrawable(User.nextDog.getPicture()); //Loads picture
-            votingName.setText(User.nextDog.getDogName()); //load the dog's name
-            votingBio.setText(User.nextDog.getBio()); //load the bio
+            User.currentDog = User.activeUser.votingQueue.peek(); //Looks at the first element in the votingQueue for the activeUser
+            votingImage.setImageDrawable(User.currentDog.getPicture()); //Loads picture
+            votingName.setText(User.currentDog.getDogName()); //load the dog's name
+            votingBio.setText(User.currentDog.getBio()); //load the bio
         }
 
         else {

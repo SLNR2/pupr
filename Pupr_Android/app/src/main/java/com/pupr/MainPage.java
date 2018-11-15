@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainPage extends AppCompatActivity {
     Button goToVoting;
@@ -30,8 +31,15 @@ public class MainPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-               Intent vote = new Intent(getBaseContext(), VotingPage.class);
-               startActivity(vote);
+            String endOfQueue = "No more dogs left. Please try again later."; //message to be displayed when the queue is empty
+                if(User.activeUser.votingQueue.isEmpty())
+                    Toast.makeText(getApplicationContext(), endOfQueue, Toast.LENGTH_LONG).show(); //display a message if queue is empty
+
+            //Otherwise, enter voting screen
+                else{
+                    Intent vote = new Intent(getBaseContext(), VotingPage.class);
+                    startActivity(vote);
+                }
             }
         });
 
