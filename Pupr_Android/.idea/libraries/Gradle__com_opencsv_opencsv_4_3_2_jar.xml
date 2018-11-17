@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.opencsv:opencsv:4.3.2@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/4.3.2/16e7a3c979797221ce4746cdf8eb0f73a004b34/opencsv-4.3.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/4.3.2/41c06e7274d346306eb829bbcdaf73ba8391b93e/opencsv-4.3.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

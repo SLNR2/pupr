@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Leaderboard extends AppCompatActivity {
     Button home;
@@ -27,31 +28,23 @@ public class Leaderboard extends AppCompatActivity {
         first = findViewById(R.id.firstPlacePic);
         second = findViewById(R.id.secondPlacePic);
         third = findViewById(R.id.thirdPlacePic);
+
     //Set Drawables for pictures
-        first.setImageDrawable(User.leaderboard.get(0).getPicture());
-        second.setImageDrawable(User.leaderboard.get(1).getPicture());
-        third.setImageDrawable(User.leaderboard.get(2).getPicture());
+        ImageView[] images = new ImageView[] {first, second, third}; //store ImageViews in an array for easy access
+        for (int i = 0; i < images.length; i++)
+            images[i].setImageDrawable(User.leaderboard.get(i).getPicture()); //update each image
+
 
     //Set text
-        firstText = findViewById(R.id.firstPlaceText);
-        secondText = findViewById(R.id.secondPlaceText);
-        thirdText = findViewById(R.id.thirdPlaceText);
+        firstText = findViewById(R.id.firstStats);
+        secondText = findViewById(R.id.secondStats);
+        thirdText = findViewById(R.id.thirdStats);
 
-    //Store top 3 dogs in User variables for easy access to their attributes
-        User firstDog = User.leaderboard.get(0);
-        User secondDog = User.leaderboard.get(1);
-        User thirdDog = User.leaderboard.get(2);
-
-    //Messages to display next to the pictures
-        String firstPlace = firstDog.toString(1);
-        String secondPlace = secondDog.toString(2);
-        String thirdPlace = thirdDog.toString(3);
-
-    //Make the text appear
-        firstText.setText(firstPlace);
-        secondText.setText(secondPlace);
-        thirdText.setText(thirdPlace);
-
+        EditText[] stats = new EditText[] {firstText, secondText, thirdText};
+        for (int i = 0; i < stats.length; i++) {
+            String text = User.leaderboard.get(i).toLeaderboard(i+1);
+            stats[i].setText(text);
+        }
     //Home button
         home = findViewById(R.id.leaderboardHome);
         home.setOnClickListener(new View.OnClickListener() {
