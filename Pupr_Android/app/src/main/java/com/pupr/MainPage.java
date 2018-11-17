@@ -18,7 +18,9 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
-        User.activeUser.makeQueue(); //generate the queue every time the User comes to the main page
+
+        if (User.activeUser.votingQueue.isEmpty())
+            User.activeUser.makeQueue();
 
         goToVoting = findViewById(R.id.goToVoting);
         editProfile = findViewById(R.id.editProfile);
@@ -60,8 +62,8 @@ public class MainPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-                //Go to leaderboard page
+                Intent leaderboard = new Intent(getBaseContext(), Leaderboard.class);
+                startActivity(leaderboard);
             }
         });
 

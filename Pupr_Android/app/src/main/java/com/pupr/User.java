@@ -22,7 +22,7 @@ public class User {
 
     private String dogName = "";
     private String bio = "";
-    private int totalScore = 0;
+    private double totalScore = 0;
     private int numberOfRatings = 0;
     private double averageRating = 0;
     private int ranking; //Might not need ranking? Can just return its position on leaderboard?
@@ -36,7 +36,7 @@ public class User {
     public String getDogName() {return this.dogName;}
     public String getBio() {return this.bio;}
     public Drawable getPicture()  {return this.pic;}
-    public int getScore()  {return this.totalScore;}
+    public double getScore()  {return this.totalScore;}
     public int getRatings() {return this.numberOfRatings;}
     public double getAverage() {return this.averageRating;}
 
@@ -56,22 +56,59 @@ public class User {
     void setBio(String newBio) {this.bio = newBio;}
     void setPic(Drawable newPic) {this.pic = newPic;}
     void incrementRatings() {this.numberOfRatings++;}
-    void addScore(int i) {
-        this.totalScore = this.totalScore + i;
+
+    void addScore(int vote) {
+
+
+        this.totalScore = this.totalScore + vote;
         this.averageRating = this.totalScore / this.numberOfRatings;
+
+        //Update leaderboard
+        for (int i = 0; i < leaderboard.size(); i++) {
+            User compare  = leaderboard.get(i);
+            if (this.averageRating > compare.averageRating ||  //if the dog that was just voted on has a higher average rating than the dog @ index i
+                    (this.averageRating == compare.averageRating && this.totalScore > compare.totalScore)) { //OR the dogs have the same average, but the dog that was just voted on has a higher total
+                leaderboard.add(i, this); //move the dog to i
+                leaderboard.remove(leaderboard.lastIndexOf(this)); //remove the original entry of the dog
+            }
+            else if (this.averageRating == compare.averageRating && this.totalScore < compare.totalScore) {
+                leaderboard.add(i+1, this); //move dog to i+1
+                leaderboard.remove(leaderboard.lastIndexOf(this));
+            }
+
+            else if (this.averageRating == compare.averageRating && this.totalScore == compare.totalScore){ //same average rating, same total score
+                if(this.numberOfRatings >= compare.numberOfRatings) { //if dog has the same # of votes OR more votes (we have to make the cutoff somewhere)
+                    leaderboard.add(i, this);
+                    leaderboard.remove(leaderboard.lastIndexOf(this));
+                }
+                else {
+                    leaderboard.add(i+1, this);
+                    leaderboard.remove(leaderboard.lastIndexOf(this));
+                }
+
+            }
+        }
+    //Print leaderboard to log
+        for (int i = 0; i < leaderboard.size(); i++) {
+            User curr = leaderboard.get(i);
+            Log.d("Leaderboard pos #" + i, curr.dogName);
+            Log.d("Average Rating", "" + curr.averageRating);
+            Log.d("Total Score", "" + curr.totalScore);
+            Log.d("# of votes", "" + curr.numberOfRatings);
+
+        }
+
     }
 
-
-
-
-
-    public Queue<User> votingQueue = new LinkedList<>(); //Individual voting queue for each user
+    Queue<User> votingQueue = new LinkedList<>(); //Individual voting queue for each user
     private static int nextUser = 0;
 
-     static ArrayList<User> userList = new ArrayList<>(10); //provide a list of users in an ArrayList structure for user authentication.
+    static ArrayList<User> userList = new ArrayList<>(10); //provide a list of users in an ArrayList structure for user authentication.
     //To log in, the system will have to trace the list to see if there is a match
 
-     protected ArrayList<User> votedOn = new ArrayList<>(10); //An ArrayList that holds the id for which dogs a user has voted on
+    ArrayList<User> votedOn = new ArrayList<>(10); //An ArrayList that holds the id for which dogs a user has voted on
+
+    static ArrayList<User> leaderboard = new ArrayList<>(10); //ArrayList of Users to indicate their ranking in the leaderboard
 
 
 //Constructors
@@ -89,6 +126,7 @@ public class User {
         userList.add(this); //add this user to a list of all of the users
 
         this.votedOn.add(this); //adds user's own id to the votedOn list so that a user cannot vote on his or her own dog
+        leaderboard.add(this); //adds a new User to the end of the leaderboard ArrayList; since a new User has a score of 0, they should be at the end!
     }
 
 
@@ -96,7 +134,7 @@ public class User {
     void makeQueue() {
 
         for (int i = 0; i < userList.size(); i++) { //trace the userList
-            boolean hit = false;
+            boolean hit = false; //hit is true if the user has voted on a particular user already
 
             for (int j = 0; j < activeUser.votedOn.size(); j++) { //trace the list of dogs the user has already voted on
                 if (userList.get(i).equals(votedOn.get(j)))  //if the user at index i has been voted on already
@@ -116,11 +154,20 @@ public class User {
 
 
 //Getter methods for various fields
-    String getFirstName() {return this.firstName;}
-    public String getLastName()  {return this.lastName;}
+    private String getFirstName() {return this.firstName;}
+    private String getLastName()  {return this.lastName;}
     String getUsername() {return this.username;}
     int getUserId() {return this.userId;}
     String getPassword() {return this.password;}
 
     public User getUser() {return this;} //returns the entire user
+
+//toString method that takes an integer argument, used to print out leaderboard information
+    String toString(int i) {
+        return ("Ranking # " + i + "/n" + this.getDogName() + ", owned by" + this.getFirstName() + " " + this.getLastName() + "/n" +
+                "Average Score: " + this.getAverage() + "/n" +
+                "Total Score: " + (int) this.getScore() + "/n" +
+                "Total Votes: " + this.getRatings());
+
+    }
 }
