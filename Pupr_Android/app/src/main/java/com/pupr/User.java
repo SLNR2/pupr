@@ -1,9 +1,4 @@
 package com.pupr;
-/*
-This program will define the User class.
-
-
-*/
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -33,15 +28,15 @@ public class User {
 
 
 
-    public String getDogName() {return this.dogName;}
-    public String getBio() {return this.bio;}
-    public Drawable getPicture()  {return this.pic;}
-    public double getScore()  {return this.totalScore;}
-    public int getRatings() {return this.numberOfRatings;}
-    public double getAverage() {return this.averageRating;}
+    String getDogName() {return this.dogName;}
+    String getBio() {return this.bio;}
+    Drawable getPicture()  {return this.pic;}
+    private double getScore()  {return this.totalScore;}
+    private int getRatings() {return this.numberOfRatings;}
+    private double getAverage() {return this.averageRating;}
 
 
-    public static void setActiveUser(User user) {
+    static void setActiveUser(User user) {
         activeUser = user;} //update the current user of the session
     //redundant if activeUser is a public variable, but we can keep this for now
 
@@ -163,10 +158,10 @@ public class User {
     public User getUser() {return this;} //returns the entire user
 
 //toString method that takes an integer argument, used to print out leaderboard information
-    String toString(int i) {
-        return ("Ranking # " + i + "/n" + this.getDogName() + ", owned by" + this.getFirstName() + " " + this.getLastName() + "/n" +
-                "Average Score: " + this.getAverage() + "/n" +
-                "Total Score: " + (int) this.getScore() + "/n" +
+    String toLeaderboard(int i) {
+        return ("Ranking # " + i + "\nName: " + this.getDogName() + "\nOwner: " + this.getFirstName() + " " + this.getLastName() + "\n" +
+                "Average Score: " + this.getAverage() + "\n" +
+                "Total Score: " + (int) this.getScore() + "\n" +
                 "Total Votes: " + this.getRatings());
 
     }
