@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".MainPage" />
         <activity android:name=".EditProfile" />
-        <activity android:name=".VotingPage"></activity>
+        <activity android:name=".VotingPage" />
+        <activity android:name=".Leaderboard"></activity>
     </application>
 
 </manifest>

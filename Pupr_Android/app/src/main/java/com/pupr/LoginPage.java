@@ -133,7 +133,6 @@ public class LoginPage extends AppCompatActivity {
 
                         User newUser = new User(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), password.getText().toString());
                         User.setActiveUser(newUser); //sets the new user to the active user
-
                         Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
                         startActivity(editProfile);
                     } else

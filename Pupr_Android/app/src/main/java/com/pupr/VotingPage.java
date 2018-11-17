@@ -63,7 +63,7 @@ public class VotingPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                vote(2); //calls vote method with a score of 1
+                vote(2); //calls vote method with a score of 2
 
             }
         });
@@ -72,7 +72,7 @@ public class VotingPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                vote(3); //calls vote method with a score of 1
+                vote(3); //calls vote method with a score of 3
 
             }
         });
@@ -81,7 +81,7 @@ public class VotingPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                vote(5); //calls vote method with a score of 1
+                vote(4); //calls vote method with a score of 4
 
             }
         });
@@ -90,7 +90,7 @@ public class VotingPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                vote(5); //calls vote method with a score of 1
+                vote(5); //calls vote method with a score of 5
 
             }
         });
