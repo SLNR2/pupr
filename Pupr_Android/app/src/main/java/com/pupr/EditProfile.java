@@ -24,7 +24,7 @@ public class EditProfile extends AppCompatActivity {
     EditText bioToUpload;
     Button submitProfile;
     Button cancel;
-    static Bitmap imageCheck; //A variable that stores user's current picture to see if it has been changed
+   static Bitmap imageCheck; //A variable that stores user's current picture to see if it has been changed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class EditProfile extends AppCompatActivity {
         bioToUpload = findViewById(R.id.new_dog_bio);
         submitProfile = findViewById(R.id.submitDog);
         cancel = findViewById(R.id.cancelProfileChanges);
-        imageCheck = ((BitmapDrawable)User.activeUser.getPicture()).getBitmap(); //Serves as a flag to see if the User has uploaded a new image
+       // imageCheck = ((BitmapDrawable)User.activeUser.getPicture()).getBitmap(); //Serves as a flag to see if the User has uploaded a new image
 
     //Load current information and picture for the user
         nameToUpload.setText(User.activeUser.getDogName());
