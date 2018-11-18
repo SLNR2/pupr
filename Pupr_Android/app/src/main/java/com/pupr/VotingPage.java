@@ -44,7 +44,7 @@ public class VotingPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                Intent mainPage = new Intent(getBaseContext(), HomePage.class);
                 startActivity(mainPage);
             }
         });
@@ -121,7 +121,7 @@ public class VotingPage extends AppCompatActivity {
         else {
         //Redirect back to main page
             Toast.makeText(getApplicationContext(), endOfQueue, Toast.LENGTH_LONG).show();
-            Intent mainPage = new Intent (getBaseContext(), MainPage.class);
+            Intent mainPage = new Intent (getBaseContext(), HomePage.class);
             startActivity(mainPage);
 
         }

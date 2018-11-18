@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +25,6 @@ public class EditProfile extends AppCompatActivity {
     EditText bioToUpload;
     Button submitProfile;
     Button cancel;
-   static Bitmap imageCheck; //A variable that stores user's current picture to see if it has been changed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +35,30 @@ public class EditProfile extends AppCompatActivity {
         bioToUpload = findViewById(R.id.new_dog_bio);
         submitProfile = findViewById(R.id.submitDog);
         cancel = findViewById(R.id.cancelProfileChanges);
-       // imageCheck = ((BitmapDrawable)User.activeUser.getPicture()).getBitmap(); //Serves as a flag to see if the User has uploaded a new image
+
+        //Path information for a default picture
+        String imagePath = "drawable/defaultpicture"; //path for default picture, the P part of the pupr logo
+        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the default pic
+        Drawable defaultPicture = getResources().getDrawable(imageKey); //turn image into a drawable
+        final Bitmap defaultBit = ((BitmapDrawable)defaultPicture).getBitmap(); //default image as a bitmap
 
     //Load current information and picture for the user
         nameToUpload.setText(User.activeUser.getDogName());
         bioToUpload.setText(User.activeUser.getBio());
         Drawable userPic = User.activeUser.getPicture();
-        imageToUpload.setImageDrawable(userPic); //loads the dog's picture into the ImageView
+        imageToUpload.setImageDrawable(userPic);
 
-    //ClickListener for Cancel button
+        //ClickListener for Cancel button
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imageToUpload.getDrawable() == null)
+                Bitmap currentBit = ((BitmapDrawable)imageToUpload.getDrawable()).getBitmap(); //current picture as a Bitmap
+                if (currentBit.equals(defaultBit)){
                     Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
+                    Log.d("Image", "equals default, could not cancel");
+                }
                 else {
-                    Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                    Intent mainPage = new Intent(getBaseContext(), HomePage.class);
                     startActivity(mainPage);
                 }
             }
@@ -59,29 +67,47 @@ public class EditProfile extends AppCompatActivity {
         imageToUpload.setOnClickListener(new View.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
-                                                   uploadImage();
-
-
-
+                                                      uploadImage();
                                              }
                                          });
+
         submitProfile.setOnClickListener(new View.OnClickListener() {
 
                                 @Override
                                 public void onClick(View v) {
-                                    if(imageToUpload.getDrawable() == null)
-                                        Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
-                                    else {
+                                    Bitmap currentBit = ((BitmapDrawable)imageToUpload.getDrawable()).getBitmap(); //current picture as a Bitmap
+                                    Bitmap userBit = ((BitmapDrawable)User.activeUser.getPicture()).getBitmap();
 
+                                    if(currentBit.equals(defaultBit)){ //default picture was not changed
+                                        Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
+                                        Log.d("Image", "equals default, could not complete profile submission");
+                                    }
+
+                                    else { //user not using default picture
                                         Drawable newPic = imageToUpload.getDrawable(); //set pic on ImageView
-                                        savePicture(newPic, v); //save pic to phone
+                                        savePicture(userBit, newPic, v); //save pic to phone if a new picture was uploaded
 
                                         User.activeUser.setPic(newPic); //Set image as an attribute for the user
                                         User.activeUser.setBio(bioToUpload.getText().toString()); //set bio
                                         User.activeUser.setDogName(nameToUpload.getText().toString()); //set name
 
-                                    //Load the Main Page
-                                        Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                                //If user has uploaded an image for the first time, add to userList
+                                    boolean alreadyAdded = false;
+                                    for (int i = 0; i < User.userList.size(); i++) {
+                                        if (User.userList.get(i).equals(User.activeUser))
+                                            alreadyAdded = true; //hit found
+                                    }
+
+                                    Log.d("Userlist", "Before adding");
+                                    User.printUserList(); //print out the userList before adding
+
+                                    if (!alreadyAdded) //no hit, add user
+                                        User.userList.add(User.activeUser); //add this user to a list of all of the users
+
+                                    Log.d("Userlist", "After adding");
+                                    User.printUserList();
+                                        //Load the Main Page
+                                        Intent mainPage = new Intent(getBaseContext(), HomePage.class);
                                         startActivity(mainPage);
                                     }
 
@@ -89,10 +115,14 @@ public class EditProfile extends AppCompatActivity {
         });
     }
 
-    public static void savePicture(Drawable newPic, View v) {
-        Bitmap bmap = ((BitmapDrawable) newPic).getBitmap();
-        if (bmap != imageCheck)
+    public static void savePicture(Bitmap oldPic, Drawable newPic, View v) {
+        Bitmap bmap = ((BitmapDrawable)newPic).getBitmap();
+        if (!bmap.equals(oldPic)) {
             new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
+            Log.d("Image", "saved");
+        }
+        else
+            Log.d("Image", "same image, not saved");
     }
 
     //Two methods that are used for uploading images
@@ -110,4 +140,9 @@ public class EditProfile extends AppCompatActivity {
                 imageToUpload.setImageURI(selectedImage); //set image and display it
             }
         }
+//Disable user from hitting back button
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
+    }
 }

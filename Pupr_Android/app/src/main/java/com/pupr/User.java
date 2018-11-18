@@ -1,13 +1,13 @@
 package com.pupr;
 
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class User {
+public class User extends AppCompatActivity {
     private int userId;
     private String firstName = "";
     private String lastName = "";
@@ -20,37 +20,63 @@ public class User {
     private double totalScore = 0;
     private int numberOfRatings = 0;
     private double averageRating = 0;
-    private int ranking; //Might not need ranking? Can just return its position on leaderboard?
     private Drawable pic;
 
     static User activeUser; // defines current user of the session
     static User currentDog; //defines the next Dog for a User to vote on
 
 
+    String getDogName() {
+        return this.dogName;
+    }
 
-    String getDogName() {return this.dogName;}
-    String getBio() {return this.bio;}
-    Drawable getPicture()  {return this.pic;}
-    private double getScore()  {return this.totalScore;}
-    private int getRatings() {return this.numberOfRatings;}
-    private double getAverage() {return this.averageRating;}
+    String getBio() {
+        return this.bio;
+    }
+
+    Drawable getPicture() {
+        return this.pic;
+    }
+
+    private double getScore() {
+        return this.totalScore;
+    }
+
+    private int getRatings() {
+        return this.numberOfRatings;
+    }
+
+    private double getAverage() {
+        return this.averageRating;
+    }
 
 
     static void setActiveUser(User user) {
-        activeUser = user;} //update the current user of the session
+        activeUser = user;
+    } //update the current user of the session
     //redundant if activeUser is a public variable, but we can keep this for now
 
-    public void setUser(int i){
+    public void setUser(int i) {
         userList.get(i);
     }
 
 
-
     //Setter methods
-    void setDogName(String newDogName) {this.dogName = newDogName;}
-    void setBio(String newBio) {this.bio = newBio;}
-    void setPic(Drawable newPic) {this.pic = newPic;}
-    void incrementRatings() {this.numberOfRatings++;}
+    void setDogName(String newDogName) {
+        this.dogName = newDogName;
+    }
+
+    void setBio(String newBio) {
+        this.bio = newBio;
+    }
+
+    void setPic(Drawable newPic) {
+        this.pic = newPic;
+    }
+
+    void incrementRatings() {
+        this.numberOfRatings++;
+    }
 
     void addScore(int vote) {
 
@@ -58,32 +84,28 @@ public class User {
         this.totalScore = this.totalScore + vote;
         this.averageRating = this.totalScore / this.numberOfRatings;
 
-        //Update leaderboard
+    //Update leaderboard
         for (int i = 0; i < leaderboard.size(); i++) {
-            User compare  = leaderboard.get(i);
+            User compare = leaderboard.get(i);
             if (this.averageRating > compare.averageRating ||  //if the dog that was just voted on has a higher average rating than the dog @ index i
                     (this.averageRating == compare.averageRating && this.totalScore > compare.totalScore)) { //OR the dogs have the same average, but the dog that was just voted on has a higher total
                 leaderboard.add(i, this); //move the dog to i
                 leaderboard.remove(leaderboard.lastIndexOf(this)); //remove the original entry of the dog
-            }
-            else if (this.averageRating == compare.averageRating && this.totalScore < compare.totalScore) {
-                leaderboard.add(i+1, this); //move dog to i+1
+            } else if (this.averageRating == compare.averageRating && this.totalScore < compare.totalScore) {
+                leaderboard.add(i + 1, this); //move dog to i+1
                 leaderboard.remove(leaderboard.lastIndexOf(this));
-            }
-
-            else if (this.averageRating == compare.averageRating && this.totalScore == compare.totalScore){ //same average rating, same total score
-                if(this.numberOfRatings >= compare.numberOfRatings) { //if dog has the same # of votes OR more votes (we have to make the cutoff somewhere)
+            } else if (this.averageRating == compare.averageRating && this.totalScore == compare.totalScore) { //same average rating, same total score
+                if (this.numberOfRatings >= compare.numberOfRatings) { //if dog has the same # of votes OR more votes (we have to make the cutoff somewhere)
                     leaderboard.add(i, this);
                     leaderboard.remove(leaderboard.lastIndexOf(this));
-                }
-                else {
-                    leaderboard.add(i+1, this);
+                } else {
+                    leaderboard.add(i + 1, this);
                     leaderboard.remove(leaderboard.lastIndexOf(this));
                 }
 
             }
         }
-    //Print leaderboard to log
+        //Print leaderboard to log
         for (int i = 0; i < leaderboard.size(); i++) {
             User curr = leaderboard.get(i);
             Log.d("Leaderboard pos #" + i, curr.dogName);
@@ -106,24 +128,22 @@ public class User {
     static ArrayList<User> leaderboard = new ArrayList<>(10); //ArrayList of Users to indicate their ranking in the leaderboard
 
 
-//Constructors
-    User() {} //empty constructor
+    //Constructors
+    //Empty constructor
+    User() {
+    }
 
-    //Constructor method with specified names and password -- useful for default objects
-     User(String fName, String lName, String uname, String pass) {
+    //Constructor method with specified names and password -- useful for defaultpicture objects
+    User(String fName, String lName, String uname, String pass) {
         this.firstName = fName;
         this.lastName = lName;
         this.username = uname;
         this.password = pass;
         this.userId = nextUser; //assign the next available userid to this user
-
         nextUser++; //increment the next available ID
-        userList.add(this); //add this user to a list of all of the users
-
         this.votedOn.add(this); //adds user's own id to the votedOn list so that a user cannot vote on his or her own dog
         leaderboard.add(this); //adds a new User to the end of the leaderboard ArrayList; since a new User has a score of 0, they should be at the end!
     }
-
 
 
     void makeQueue() {
@@ -147,7 +167,6 @@ public class User {
         }
     }
 
-
 //Getter methods for various fields
     private String getFirstName() {return this.firstName;}
     private String getLastName()  {return this.lastName;}
@@ -157,12 +176,21 @@ public class User {
 
     public User getUser() {return this;} //returns the entire user
 
-//toString method that takes an integer argument, used to print out leaderboard information
+//String method that takes an integer argument, used to print out leaderboard information
     String toLeaderboard(int i) {
         return ("Ranking # " + i + "\nName: " + this.getDogName() + "\nOwner: " + this.getFirstName() + " " + this.getLastName() + "\n" +
                 "Average Score: " + this.getAverage() + "\n" +
                 "Total Score: " + (int) this.getScore() + "\n" +
                 "Total Votes: " + this.getRatings());
-
     }
+//String method to return userList
+    static void printUserList() {
+         for (int i = 0; i < userList.size(); i++) {
+             Log.d("Index on userList:", "" + i);
+             Log.d("Username:", "" + userList.get(i).getUsername());
+             Log.d("userId", "" + userList.get(i).getUserId());
+        }
+    }
+
+
 }

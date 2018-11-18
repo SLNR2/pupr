@@ -44,8 +44,8 @@ public class LoginPage extends AppCompatActivity {
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
 
-        if(!defaultUsersCreated) //initial value is false, so the method will get called the very first time. Afterwards, the method disables itself by setting this flag to true.
-            createDefaultUsers(); //calls a method that reads a CSV file to generate default users
+      //  if(!defaultUsersCreated) //initial value is false, so the method will get called the very first time. Afterwards, the method disables itself by setting this flag to true.
+         //   createDefaultUsers(); //calls a method that reads a CSV file to generate defaultpicture users
 
         //Used for permissions
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
@@ -96,7 +96,7 @@ public class LoginPage extends AppCompatActivity {
         if (flag) {
             Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
             User.setActiveUser(currUser); //sets active User
-            Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+            Intent mainPage = new Intent(getBaseContext(), HomePage.class);
             startActivity(mainPage);
         } else
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
@@ -132,6 +132,13 @@ public class LoginPage extends AppCompatActivity {
                     if (password.getText().toString().equals(confPass.getText().toString())) {
 
                         User newUser = new User(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), password.getText().toString());
+
+                    //Path information for a default picture
+                        String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
+                        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
+                        Drawable defaultPicture = getResources().getDrawable(imageKey); //turn image into a drawable
+                        newUser.setPic(defaultPicture);
+
                         User.setActiveUser(newUser); //sets the new user to the active user
                         Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
                         startActivity(editProfile);
@@ -170,7 +177,7 @@ public class LoginPage extends AppCompatActivity {
         }
     }
 
-//Method to read CSV raw file and create default users from it
+//Method to read CSV raw file and create defaultpicture users from it
     private void createDefaultUsers() {
         InputStream is = getResources().openRawResource(R.raw.users); //read the raw CSV file
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file
@@ -184,7 +191,7 @@ public class LoginPage extends AppCompatActivity {
             while ((line = reader.readLine()) != null) { //read until the end
             //Add users
                 String[] tokens = line.split(",");  //split by ',' since this is a CSV file
-                User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a default user
+                User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a defaultpicture user
                 newUser.setDogName(tokens[4]); //set dog name
                 newUser.setBio((tokens[5])); //set dog bio
                 Log.d("MyActivity", "Just created: " + newUser.getUserId() + ", " + newUser.getDogName()); //puts userId into the log so we can make sure this method is just called one time

@@ -51,7 +51,7 @@ public class Leaderboard extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                Intent mainPage = new Intent(getBaseContext(), HomePage.class);
                 startActivity(mainPage);
             }
         });
