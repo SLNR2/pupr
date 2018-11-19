@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class User extends AppCompatActivity {
+public class User{
     private int userId;
     private String firstName = "";
     private String lastName = "";
@@ -38,15 +38,15 @@ public class User extends AppCompatActivity {
         return this.pic;
     }
 
-    private double getScore() {
+    double getScore() {
         return this.totalScore;
     }
 
-    private int getRatings() {
+    int getRatings() {
         return this.numberOfRatings;
     }
 
-    private double getAverage() {
+    double getAverage() {
         return this.averageRating;
     }
 
@@ -120,18 +120,17 @@ public class User extends AppCompatActivity {
     Queue<User> votingQueue = new LinkedList<>(); //Individual voting queue for each user
     private static int nextUser = 0;
 
-    static ArrayList<User> userList = new ArrayList<>(10); //provide a list of users in an ArrayList structure for user authentication.
+    static ArrayList<User> userList = new ArrayList<>(); //provide a list of users in an ArrayList structure for user authentication.
     //To log in, the system will have to trace the list to see if there is a match
 
-    ArrayList<User> votedOn = new ArrayList<>(10); //An ArrayList that holds the id for which dogs a user has voted on
+    ArrayList<User> votedOn = new ArrayList<>(); //An ArrayList that holds the id for which dogs a user has voted on
 
-    static ArrayList<User> leaderboard = new ArrayList<>(10); //ArrayList of Users to indicate their ranking in the leaderboard
+    static ArrayList<User> leaderboard = new ArrayList<>(); //ArrayList of Users to indicate their ranking in the leaderboard
 
 
     //Constructors
     //Empty constructor
-    User() {
-    }
+    User() {}
 
     //Constructor method with specified names and password -- useful for defaultpicture objects
     User(String fName, String lName, String uname, String pass) {
@@ -168,8 +167,8 @@ public class User extends AppCompatActivity {
     }
 
 //Getter methods for various fields
-    private String getFirstName() {return this.firstName;}
-    private String getLastName()  {return this.lastName;}
+    public String getFirstName() {return this.firstName;}
+    public String getLastName()  {return this.lastName;}
     String getUsername() {return this.username;}
     int getUserId() {return this.userId;}
     String getPassword() {return this.password;}
@@ -183,7 +182,7 @@ public class User extends AppCompatActivity {
                 "Total Score: " + (int) this.getScore() + "\n" +
                 "Total Votes: " + this.getRatings());
     }
-//String method to return userList
+//String method to return userList -- for debugging purposes
     static void printUserList() {
          for (int i = 0; i < userList.size(); i++) {
              Log.d("Index on userList:", "" + i);
@@ -191,6 +190,11 @@ public class User extends AppCompatActivity {
              Log.d("userId", "" + userList.get(i).getUserId());
         }
     }
+//Print which dogs the active user has voted on -- for debugging purposes
+    static void printVotedOn() {
+        for(int i = 0; i < activeUser.votedOn.size(); i++){
+            Log.d("VotedOn", "" + activeUser.votedOn.get(i).getDogName());
+        }
 
-
+    }
 }

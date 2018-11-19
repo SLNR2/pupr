@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.opencsv.CSVWriter;
 
 
 public class EditProfile extends AppCompatActivity {
@@ -118,7 +119,7 @@ public class EditProfile extends AppCompatActivity {
     public static void savePicture(Bitmap oldPic, Drawable newPic, View v) {
         Bitmap bmap = ((BitmapDrawable)newPic).getBitmap();
         if (!bmap.equals(oldPic)) {
-            new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /Pictures/pupr on the internal storage of the android device
+            new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /pupr on the internal storage of the android device
             Log.d("Image", "saved");
         }
         else

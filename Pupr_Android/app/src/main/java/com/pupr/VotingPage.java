@@ -102,6 +102,7 @@ public class VotingPage extends AppCompatActivity {
         User.currentDog.incrementRatings(); //add score, recalculate values
         User.activeUser.votedOn.add(User.currentDog); //add this dog to the votedOn list of the current user
         User.currentDog.addScore(score); //add one to the score
+        User.printVotedOn(); //debugging method
         User.activeUser.votingQueue.remove(); //remove dog from queue
         serveDog();
         }

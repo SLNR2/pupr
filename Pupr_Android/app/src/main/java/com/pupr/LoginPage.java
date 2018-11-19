@@ -27,9 +27,8 @@ public class LoginPage extends AppCompatActivity {
     Button forgotPass;
     EditText userText;
     EditText passwordText;
-   public static boolean defaultUsersCreated = false;
 
-    //Used for granting permissions
+    //Used for granting permissions -- do not delete
     private int requestCode;
     private int grantResults[];
 
@@ -38,18 +37,33 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
+
+    //Used for permissions
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+        onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
+
+    //Assign buttons
         signIn = findViewById(R.id.signin_button);
         signUp = findViewById(R.id.signup_button);
         forgotPass = findViewById(R.id.forgot_pass_button);
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
 
-      //  if(!defaultUsersCreated) //initial value is false, so the method will get called the very first time. Afterwards, the method disables itself by setting this flag to true.
-         //   createDefaultUsers(); //calls a method that reads a CSV file to generate defaultpicture users
+        if(User.userList.size() == 0) //on first launch, size will be 0, so default users need to be generated
+            createDefaultUsers(); //calls a method that reads a CSV file to generate default users
+        else {
+            //Reload previous profiles
+        }
 
-        //Used for permissions
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
-        onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
+
+
+        //Save users
+        try {
+            UserSaver.saveUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         //Sign in
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +191,7 @@ public class LoginPage extends AppCompatActivity {
         }
     }
 
-//Method to read CSV raw file and create defaultpicture users from it
+//Method to read CSV raw file and create default users from it
     private void createDefaultUsers() {
         InputStream is = getResources().openRawResource(R.raw.users); //read the raw CSV file
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file
@@ -194,6 +208,7 @@ public class LoginPage extends AppCompatActivity {
                 User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a defaultpicture user
                 newUser.setDogName(tokens[4]); //set dog name
                 newUser.setBio((tokens[5])); //set dog bio
+                User.userList.add(newUser);
                 Log.d("MyActivity", "Just created: " + newUser.getUserId() + ", " + newUser.getDogName()); //puts userId into the log so we can make sure this method is just called one time
 
             //Add dogs
@@ -202,7 +217,7 @@ public class LoginPage extends AppCompatActivity {
                 Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
                 User.userList.get(i).setPic(d); //set image as an attribute for each user
                 Bitmap b0 = ((BitmapDrawable) d).getBitmap(); //get Bitmap for drawable
-                new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
+                new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
                 i++; //increment to next user
             }
 
@@ -211,6 +226,5 @@ public class LoginPage extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        defaultUsersCreated = true; //Set to true so that this won't get called again later
     }
 }
