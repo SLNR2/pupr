@@ -27,9 +27,8 @@ public class LoginPage extends AppCompatActivity {
     Button forgotPass;
     EditText userText;
     EditText passwordText;
-   public static boolean defaultUsersCreated = false;
 
-    //Used for granting permissions
+    //Used for granting permissions -- do not delete
     private int requestCode;
     private int grantResults[];
 
@@ -38,18 +37,33 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
+
+    //Used for permissions
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+        onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
+
+    //Assign buttons
         signIn = findViewById(R.id.signin_button);
         signUp = findViewById(R.id.signup_button);
         forgotPass = findViewById(R.id.forgot_pass_button);
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
 
-        if(!defaultUsersCreated) //initial value is false, so the method will get called the very first time. Afterwards, the method disables itself by setting this flag to true.
+        if(User.userList.size() == 0) //on first launch, size will be 0, so default users need to be generated
             createDefaultUsers(); //calls a method that reads a CSV file to generate default users
+        else {
+            //Reload previous profiles
+        }
 
-        //Used for permissions
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
-        onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
+
+
+        //Save users
+        try {
+            UserSaver.saveUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         //Sign in
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +110,7 @@ public class LoginPage extends AppCompatActivity {
         if (flag) {
             Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
             User.setActiveUser(currUser); //sets active User
-            Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+            Intent mainPage = new Intent(getBaseContext(), HomePage.class);
             startActivity(mainPage);
         } else
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
@@ -132,6 +146,13 @@ public class LoginPage extends AppCompatActivity {
                     if (password.getText().toString().equals(confPass.getText().toString())) {
 
                         User newUser = new User(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), password.getText().toString());
+
+                    //Path information for a default picture
+                        String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
+                        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
+                        Drawable defaultPicture = getResources().getDrawable(imageKey); //turn image into a drawable
+                        newUser.setPic(defaultPicture);
+
                         User.setActiveUser(newUser); //sets the new user to the active user
                         Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
                         startActivity(editProfile);
@@ -184,9 +205,10 @@ public class LoginPage extends AppCompatActivity {
             while ((line = reader.readLine()) != null) { //read until the end
             //Add users
                 String[] tokens = line.split(",");  //split by ',' since this is a CSV file
-                User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a default user
+                User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a defaultpicture user
                 newUser.setDogName(tokens[4]); //set dog name
                 newUser.setBio((tokens[5])); //set dog bio
+                User.userList.add(newUser);
                 Log.d("MyActivity", "Just created: " + newUser.getUserId() + ", " + newUser.getDogName()); //puts userId into the log so we can make sure this method is just called one time
 
             //Add dogs
@@ -195,7 +217,7 @@ public class LoginPage extends AppCompatActivity {
                 Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
                 User.userList.get(i).setPic(d); //set image as an attribute for each user
                 Bitmap b0 = ((BitmapDrawable) d).getBitmap(); //get Bitmap for drawable
-                new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("pupr_pictures").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
+                new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
                 i++; //increment to next user
             }
 
@@ -204,6 +226,5 @@ public class LoginPage extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        defaultUsersCreated = true; //Set to true so that this won't get called again later
     }
 }

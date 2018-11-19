@@ -44,7 +44,7 @@ public class VotingPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent mainPage = new Intent(getBaseContext(), MainPage.class);
+                Intent mainPage = new Intent(getBaseContext(), HomePage.class);
                 startActivity(mainPage);
             }
         });
@@ -102,6 +102,7 @@ public class VotingPage extends AppCompatActivity {
         User.currentDog.incrementRatings(); //add score, recalculate values
         User.activeUser.votedOn.add(User.currentDog); //add this dog to the votedOn list of the current user
         User.currentDog.addScore(score); //add one to the score
+        User.printVotedOn(); //debugging method
         User.activeUser.votingQueue.remove(); //remove dog from queue
         serveDog();
         }
@@ -121,7 +122,7 @@ public class VotingPage extends AppCompatActivity {
         else {
         //Redirect back to main page
             Toast.makeText(getApplicationContext(), endOfQueue, Toast.LENGTH_LONG).show();
-            Intent mainPage = new Intent (getBaseContext(), MainPage.class);
+            Intent mainPage = new Intent (getBaseContext(), HomePage.class);
             startActivity(mainPage);
 
         }

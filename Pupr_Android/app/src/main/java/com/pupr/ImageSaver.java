@@ -6,13 +6,13 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
+ Adapted from:
  * Created by Ilya Gazman on 3/6/2016.
  https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android
 
@@ -24,26 +24,26 @@ public class ImageSaver {
     private Context context;
     private boolean external;
 
-    public ImageSaver(Context context) {
+    ImageSaver(Context context) {
         this.context = context;
     }
 
-    public ImageSaver setFileName(String fileName) {
+    ImageSaver setFileName(String fileName) {
         this.fileName = fileName;
         return this;
     }
 
-    public ImageSaver setExternal(boolean external) {
+    ImageSaver setExternal(boolean external) {
         this.external = external;
         return this;
     }
 
-    public ImageSaver setDirectoryName(String directoryName) {
+    ImageSaver setDirectoryName(String directoryName) {
         this.directoryName = directoryName;
         return this;
     }
 
-    public void save(Bitmap bitmapImage) {
+    void save(Bitmap bitmapImage) {
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(createFile());
@@ -84,18 +84,7 @@ public class ImageSaver {
 
     private File getAlbumStorageDir(String albumName) {
         return new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), albumName);
-    }
-
-    public static boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        return Environment.MEDIA_MOUNTED.equals(state);
-    }
-
-    public static boolean isExternalStorageReadable() {
-        String state = Environment.getExternalStorageState();
-        return Environment.MEDIA_MOUNTED.equals(state) ||
-                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
+                "/pupr"), albumName);
     }
 
     public Bitmap load() {
