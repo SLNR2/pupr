@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -49,11 +51,19 @@ public class LoginPage extends AppCompatActivity {
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
 
-        if(User.userList.size() == 0) //on first launch, size will be 0, so default users need to be generated
-            createDefaultUsers(); //calls a method that reads a CSV file to generate default users
-        else {
-            //Reload previous profiles
+        File users = new File(Environment.getExternalStorageDirectory(), "pupr/users.csv");
+        if(!users.exists()) //app has not been run yet
+            createDefaultUsers();
+        else if(User.userList.size() == 0) { //app has been run before but has just been launched
+
+            try {
+                UserSaver.loadUsers();
+                UserSaver.loadVotes();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
 
 
 
