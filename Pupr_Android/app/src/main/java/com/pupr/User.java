@@ -197,4 +197,17 @@ public class User{
         }
 
     }
+
+//Setter methods used for loading app state from csv
+    void setTotalScore(Double totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    void setRatings(int ratings) {
+        this.numberOfRatings = ratings;
+    }
+
+    void setAverage(double average) {
+        this.averageRating = average;
+    }
 }
