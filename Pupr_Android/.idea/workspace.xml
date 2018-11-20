@@ -24,27 +24,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskJars.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskJars.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_opencsv_opencsv_4_3_2_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_beanutils_commons_beanutils_1_9_3_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_collections_commons_collections_3_2_2_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_logging_commons_logging_1_2_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_collections4_4_2_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_lang3_3_8_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_text_1_3_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_leaderboard.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_leaderboard.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/edit_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/edit_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opencsv-4.3.2/build.gradle" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -103,7 +86,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/User.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="430">
@@ -148,12 +131,13 @@
             <state />
           </provider>
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="125" column="48" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
+            <state relative-caret-position="459">
+              <caret line="134" column="67" selection-start-line="134" selection-start-column="67" selection-end-line="134" selection-end-column="67" />
               <folding>
                 <element signature="e#1335#1356#0" expanded="true" />
+                <element signature="e#2991#3013#0" expanded="true" />
                 <element signature="e#4589#4610#0" expanded="true" />
-                <element signature="e#6834#6848#0" expanded="true" />
+                <element signature="e#5533#5547#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,26 +149,27 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="74" column="38" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="38" />
-            </state>
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="792">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VotingPage.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="VotingPage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/VotingPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1782">
-              <caret line="88" column="27" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="27" />
+            <state relative-caret-position="162">
+              <caret line="49" column="11" lean-forward="true" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -204,7 +189,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>first</find>
       <find>lastindexof</find>
       <find>voted</find>
       <find>&quot;pupr/users.csv&quot;</find>
@@ -234,6 +218,7 @@
       <find>setter</find>
       <find>nextUser</find>
       <find>getter</find>
+      <find>button</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2770,8 +2755,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_profile.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_leaderboard.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_leaderboard.xml" />
       </list>
     </option>
   </component>
@@ -3090,7 +3075,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="12" weight="0.32985386" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32985386" />
@@ -3107,8 +3091,8 @@
       <window_info id="Captures" order="3" sideWeight="0.5084746" weight="0.25" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="1" />
-      <window_info content_ui="combo" id="Project" order="7" sideWeight="0.5084746" visible="true" weight="0.14308426" />
-      <window_info active="true" anchor="bottom" id="Build" order="13" sideWeight="0.49841017" visible="true" weight="0.29436326" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.5084746" visible="true" weight="0.14308426" />
+      <window_info anchor="bottom" id="Build" order="13" sideWeight="0.49841017" visible="true" weight="0.29436326" />
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" weight="0.3298887" />
@@ -3306,19 +3290,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="e#456#474#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/jre/jre/lib/rt.jar!/java/util/ArrayList.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -3392,16 +3363,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/VotingPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1782">
-          <caret line="88" column="27" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/ImageSaver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -3412,44 +3373,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_profile.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="74" column="38" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_leaderboard.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="125" column="48" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
-          <folding>
-            <element signature="e#1335#1356#0" expanded="true" />
-            <element signature="e#4589#4610#0" expanded="true" />
-            <element signature="e#6834#6848#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3493,6 +3422,57 @@
             <element signature="e#1408#1409#0" expanded="true" />
             <element signature="e#1441#1442#0" expanded="true" />
             <element signature="e#1694#3729#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_profile.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_leaderboard.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="134" column="67" selection-start-line="134" selection-start-column="67" selection-end-line="134" selection-end-column="67" />
+          <folding>
+            <element signature="e#1335#1356#0" expanded="true" />
+            <element signature="e#2991#3013#0" expanded="true" />
+            <element signature="e#4589#4610#0" expanded="true" />
+            <element signature="e#5533#5547#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/VotingPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="49" column="11" lean-forward="true" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
