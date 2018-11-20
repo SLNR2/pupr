@@ -51,48 +51,29 @@ public class VotingPage extends AppCompatActivity {
 
     //Voting button onClickListeners
         one.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-               vote(1); //calls vote method with a score of 1
-
-            }
+            public void onClick(View v) {vote(1);} //calls vote method with a score of 1
         });
 
         two.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-                vote(2); //calls vote method with a score of 2
-
-            }
+            public void onClick(View v) {vote(2);} //calls vote method with a score of 2
         });
 
         three.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-                vote(3); //calls vote method with a score of 3
+            public void onClick(View v) {vote(3);} //calls vote method with a score of 3
 
-            }
         });
 
         four.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-                vote(4); //calls vote method with a score of 4
-
-            }
+            public void onClick(View v) {vote(4);} //calls vote method with a score of 4
         });
 
         five.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-                vote(5); //calls vote method with a score of 5
-
-            }
+            public void onClick(View v) {vote(5);} //calls vote method with a score of 5
         });
     }
 
@@ -105,8 +86,8 @@ public class VotingPage extends AppCompatActivity {
         User.printVotedOn(); //debugging method
         User.activeUser.votingQueue.remove(); //remove dog from queue
         serveDog();
+        UserSaver.saveUsers("pupr/users.csv"); //Save users
         }
-
 
 //Serve up next dog from queue
     public void serveDog() {
@@ -122,6 +103,7 @@ public class VotingPage extends AppCompatActivity {
         else {
         //Redirect back to main page
             Toast.makeText(getApplicationContext(), endOfQueue, Toast.LENGTH_LONG).show();
+            UserSaver.saveUsers("pupr/users.csv"); //Save users
             Intent mainPage = new Intent (getBaseContext(), HomePage.class);
             startActivity(mainPage);
 

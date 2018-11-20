@@ -3,9 +3,11 @@ package com.pupr;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,15 +19,26 @@ import java.io.IOException;
  https://stackoverflow.com/questions/17674634/saving-and-reading-bitmaps-images-from-internal-memory-in-android
 
  */
-public class ImageSaver {
+class ImageSaver {
 
-    private String directoryName = "directory";
+    private String directoryName = "pupr";
     private String fileName = "image.png";
     private Context context;
     private boolean external;
 
+
+    ImageSaver(){}
+
     ImageSaver(Context context) {
         this.context = context;
+    }
+
+    static Drawable setDefaultPic(Context context) {
+
+        //Path information for a default picture
+        String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
+        int imageKey = context.getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
+        return context.getResources().getDrawable(imageKey); //turn image into a drawable
     }
 
     ImageSaver setFileName(String fileName) {
@@ -61,7 +74,7 @@ public class ImageSaver {
         }
     }
 
-    @NonNull
+    @NonNull //File f = new File(Environment.getExternalStorageDirectory(), path);
     private File createFile() {
         File directory;
         if(external){
@@ -87,10 +100,11 @@ public class ImageSaver {
                 "/pupr"), albumName);
     }
 
-    public Bitmap load() {
+    Bitmap load(String path) {
         FileInputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(createFile());
+            File f = new File(Environment.getExternalStorageDirectory(), path);
+            inputStream = new FileInputStream(f);
             return BitmapFactory.decodeStream(inputStream);
         } catch (Exception e) {
             e.printStackTrace();

@@ -22,6 +22,13 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.home_page);
         logo = findViewById(R.id.logo);
 
+        //Save users
+        try {
+            UserSaver.saveUsers("pupr/users.csv");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     //Parameters for the default picture
         String imagePath = "drawable/defaultpicture"; //path for default picture, the P part of the pupr logo
         int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the default pic
