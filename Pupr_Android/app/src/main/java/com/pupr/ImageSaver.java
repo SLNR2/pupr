@@ -33,13 +33,12 @@ class ImageSaver {
         this.context = context;
     }
 
-    static void setDefaultPic(Context context, User newUser) {
+    static Drawable setDefaultPic(Context context) {
 
         //Path information for a default picture
         String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
         int imageKey = context.getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
-        Drawable defaultPicture = context.getResources().getDrawable(imageKey); //turn image into a drawable
-        newUser.setPic(defaultPicture);
+        return context.getResources().getDrawable(imageKey); //turn image into a drawable
     }
 
     ImageSaver setFileName(String fileName) {

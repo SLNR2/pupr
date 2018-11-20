@@ -156,7 +156,7 @@ public class LoginPage extends AppCompatActivity {
                         Drawable defaultPicture = getResources().getDrawable(imageKey); //turn image into a drawable
                         newUser.setPic(defaultPicture);*/
 
-                        ImageSaver.setDefaultPic(getApplicationContext(), newUser);
+                        newUser.setPic(ImageSaver.setDefaultPic(getApplicationContext()));
 
                         User.setActiveUser(newUser); //sets the new user to the active user
                         Intent editProfile = new Intent(getBaseContext(), EditProfile.class);

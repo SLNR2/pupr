@@ -37,10 +37,8 @@ public class EditProfile extends AppCompatActivity {
         submitProfile = findViewById(R.id.submitDog);
         cancel = findViewById(R.id.cancelProfileChanges);
 
-        //Path information for a default picture
-        String imagePath = "drawable/defaultpicture"; //path for default picture, the P part of the pupr logo
-        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the default pic
-        Drawable defaultPicture = getResources().getDrawable(imageKey); //turn image into a drawable
+        //Path information for a default picture\
+        Drawable defaultPicture = ImageSaver.setDefaultPic(getApplicationContext()); //turn image into a drawable
         final Bitmap defaultBit = ((BitmapDrawable)defaultPicture).getBitmap(); //default image as a bitmap
 
     //Load current information and picture for the user
