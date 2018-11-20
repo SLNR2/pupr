@@ -59,6 +59,7 @@ public class EditProfile extends AppCompatActivity {
                     Log.d("Image", "equals default, could not cancel");
                 }
                 else {
+                    UserSaver.saveUsers("pupr/users.csv"); //Save users
                     Intent mainPage = new Intent(getBaseContext(), HomePage.class);
                     startActivity(mainPage);
                 }
@@ -107,6 +108,9 @@ public class EditProfile extends AppCompatActivity {
 
                                     Log.d("Userlist", "After adding");
                                     User.printUserList();
+                                            UserSaver.saveUsers("pupr/users.csv"); //Save users
+
+
                                         //Load the Main Page
                                         Intent mainPage = new Intent(getBaseContext(), HomePage.class);
                                         startActivity(mainPage);
@@ -119,7 +123,7 @@ public class EditProfile extends AppCompatActivity {
     public static void savePicture(Bitmap oldPic, Drawable newPic, View v) {
         Bitmap bmap = ((BitmapDrawable)newPic).getBitmap();
         if (!bmap.equals(oldPic)) {
-            new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /pupr on the internal storage of the android device
+            new ImageSaver(/*v.getContext()*/).setExternal(true).setDirectoryName("").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /pupr on the internal storage of the android device
             Log.d("Image", "saved");
         }
         else
@@ -143,7 +147,5 @@ public class EditProfile extends AppCompatActivity {
         }
 //Disable user from hitting back button
     @Override
-    public void onBackPressed() {
-        Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
-    }
+    public void onBackPressed() {}
 }

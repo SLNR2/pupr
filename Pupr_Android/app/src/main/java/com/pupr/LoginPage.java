@@ -54,25 +54,11 @@ public class LoginPage extends AppCompatActivity {
         File users = new File(Environment.getExternalStorageDirectory(), "pupr/users.csv");
         if(!users.exists()) //app has not been run yet
             createDefaultUsers();
-        else if(User.userList.size() == 0) { //app has been run before but has just been launched
+        else if(User.userList.size() == 0) //app has been run before but has just been launched
+            UserSaver.loadUsers("pupr/users.csv");
 
-            try {
-                UserSaver.loadUsers();
-                UserSaver.loadVotes();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        UserSaver.saveUsers("pupr/users.csv"); //Save users
 
-
-
-
-        //Save users
-        try {
-            UserSaver.saveUsers();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
         //Sign in
@@ -141,7 +127,8 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                boolean flag = false; //false means that the user does not yet exist
+                boolean uniqueName = true; //false means that the user does not yet exist
+                boolean incomplete = false; //false means that not all fields have been filled out
                 for (int i = 0; i < User.userList.size(); i++) {
                     User thisUser = User.userList.get(i);
                     String user = thisUser.getUsername().toLowerCase(); //pull the username
@@ -149,19 +136,27 @@ public class LoginPage extends AppCompatActivity {
                     if (uname.getText().toString().toLowerCase().equals(user)) {
                         Toast.makeText(getApplicationContext(), "This username is already taken", Toast.LENGTH_LONG).show();
 
-                        flag = true;
+                        uniqueName = false;
                     }
                 }
-                if (!flag) {
+            //if any fields are blank, set incomplete to true
+                if(uname.getText().toString().equals("") || fname.getText().toString().equals("") || lname.getText().toString().equals("") || password.getText().toString().equals("") || confPass.getText().toString().equals("")) {
+                    incomplete = true;
+                    Toast.makeText(getApplicationContext(), "You must fill out all fields to continue", Toast.LENGTH_LONG).show();
+                }
+
+                if (uniqueName && !incomplete) {
                     if (password.getText().toString().equals(confPass.getText().toString())) {
 
                         User newUser = new User(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), password.getText().toString());
 
                     //Path information for a default picture
-                        String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
+                      /*  String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
                         int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
                         Drawable defaultPicture = getResources().getDrawable(imageKey); //turn image into a drawable
-                        newUser.setPic(defaultPicture);
+                        newUser.setPic(defaultPicture);*/
+
+                        ImageSaver.setDefaultPic(getApplicationContext(), newUser);
 
                         User.setActiveUser(newUser); //sets the new user to the active user
                         Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
