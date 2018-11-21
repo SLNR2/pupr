@@ -20,7 +20,7 @@ import java.io.BufferedWriter;
 
 class UserSaver {
 
-
+    private static final String separator = "@@";
     static void saveUsers(String path) {
         File file = new File(Environment.getExternalStorageDirectory(), path);
 
@@ -39,7 +39,7 @@ class UserSaver {
             String totalScore;
             String numberOfRatings;
             String averageRating;
-            String votes = "";
+            StringBuilder votes = new StringBuilder();
             for (int i = 0; i < User.userList.size(); i++) {
                 fname = User.userList.get(i).getFirstName();
                 lname = User.userList.get(i).getLastName();
@@ -52,14 +52,15 @@ class UserSaver {
                 averageRating = "" + User.userList.get(i).getAverage();
 
                 for (int j = 0; j < User.userList.get(i).votedOn.size(); j++) {
-                    votes = votes + User.userList.get(i).votedOn.get(j).getUserId() + ",";
+                    votes.append(User.userList.get(i).votedOn.get(j).getUserId()).append(separator);
                 }
 
 
-                votes = votes.substring(0, votes.length() - 1); //remove last comma
-                bw.write(fname + ',' + lname + "," + username + "," + password + "," + totalScore + "," + numberOfRatings + "," + averageRating + "," + dogName + "," + bio + "," + votes);
+             votes = new StringBuilder(votes.substring(0, votes.length() - 1)); //remove last separator
+                bw.write(fname + separator + lname + separator + username + separator + password + separator + totalScore + separator + numberOfRatings + separator +
+                        averageRating + separator + dogName + separator + bio + separator + votes);
                 bw.newLine();
-                votes = "";
+                votes = new StringBuilder();
             }
             bw.close();
 
@@ -82,7 +83,7 @@ class UserSaver {
             while ((line = reader.readLine()) != null) {
 
                 //Read the file, set the corresponding field to a User attribute
-                String[] tokens = line.split(",");  //split by ',' since this is a CSV file
+                String[] tokens = line.split(separator);  //split by ',' since this is a CSV file
 
                 User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a defaultpicture user
                 User.userList.add(newUser); //add user to userList
@@ -99,10 +100,10 @@ class UserSaver {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    //call method to load votes
+        //call method to load votes
         loadVotes(path);
 
-    //call method to load pictures
+        //call method to load pictures
         for (int i = 0; i < User.userList.size(); i++) {
             loadPictures(i);
             Log.d("UserSaver", "Called loadPictures for " + i);
@@ -130,14 +131,21 @@ class UserSaver {
             while ((line = reader.readLine()) != null) {
 
                 //Read the file, set the corresponding field to a User attribute
-                String[] tokens = line.split(",");  //split by ',' since this is a CSV file
-                for (int i = 10; i < tokens.length; i++) {
-                    Log.d("UserSaver", "Entered for loop, i = " + i + "and dog = " + tokens[7]);
-                   // if (i > 9) { //votes start at index 9, but that is your vote for yourself
-                        int vote = Integer.parseInt(tokens[i]); //returns the userId for the vote
-                        Log.d("UserSaver", "vote = " + vote + " for i = " + i);
-                        User voted = User.userList.get(vote); //finds the User for the userId
-                        User.userList.get(id).votedOn.add(voted);
+                String[] tokens = line.split(separator);
+
+                //debug
+                for (int i = 0; i < tokens.length; i++) {
+                    Log.d("UserSaver", "tokens[" + i + "] = " + tokens[i]);
+                }
+                    for (int i = 10; i < tokens.length; i++) {
+                    if(i == tokens.length - 1)
+                        tokens[i] = tokens[i].substring(0, tokens[i].length() - 1); //remove the last separator
+                    Log.d("UserSaver", "Entered for loop, i = " + i + " and dog = " + tokens[7]);
+                    // if (i > 9) { //votes start at index 9, but that is your vote for yourself
+                    int vote = Integer.parseInt(tokens[i]); //returns the userId for the vote
+                    Log.d("UserSaver", "vote = " + vote + " for i = " + i);
+                    User voted = User.userList.get(vote); //finds the User for the userId
+                    User.userList.get(id).votedOn.add(voted);
                     //}
                 }
                 id++;
