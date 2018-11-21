@@ -30,10 +30,6 @@ public class Leaderboard extends AppCompatActivity {
             Log.d("Leaderboard", printLeaderboardText(i));
         updateLeaderboard();
 
-        Log.d("Leaderboard", "After swap (outside of the method call");
-        for (int i = 0; i < User.leaderboard.size(); i++)
-            Log.d("Leaderboard", printLeaderboardText(i));
-
     //Set pictures
         first = findViewById(R.id.firstPlacePic);
         second = findViewById(R.id.secondPlacePic);
@@ -82,7 +78,7 @@ public class Leaderboard extends AppCompatActivity {
         for (int i = 0; i < User.userList.size(); i++) {
             Log.d("Leaderboard", "i = " + i);
             Log.d("Leaderboard", "Size of userList is " + User.userList.size());
-            for (int j = User.userList.size(); j < i; j--) {
+            for (int j = User.userList.size() - 1; j > i; j--) {
                 Log.d("Leaderboard", "j = " + j);
                 User current = User.leaderboard.get(j);
                 User previous = User.leaderboard.get(j - 1);
@@ -95,17 +91,14 @@ public class Leaderboard extends AppCompatActivity {
                 int currVotes = current.getRatings();
                 int prevVotes = previous.getRatings();
 
-                Log.d("Leaderboard", "current = " + current.getDogName() + " for j = " + j);
-                Log.d("Leaderboard", "previous = " + current.getDogName() + " for (j-1) = " + (j - 1));
-
                 if (currAvg > prevAvg)
-                    Collections.swap(User.leaderboard, j, j + 1);
+                    Collections.swap(User.leaderboard, j, j - 1);
                 else if (currAvg == prevAvg) {
                     if (currTot > prevTot)
-                        Collections.swap(User.leaderboard, j, j + 1);
+                        Collections.swap(User.leaderboard, j, j - 1);
                     else if (currTot == prevTot) {
                         if (currVotes > prevVotes)
-                            Collections.swap(User.leaderboard, j, j + 1);
+                            Collections.swap(User.leaderboard, j, j  -1);
                     }
                 }
                 Log.d("Leaderboard", previous.getDogName() + " now at " + User.leaderboard.indexOf(previous));

@@ -13,8 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".LoginPage">
+        <activity android:name=".LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,16 +22,17 @@
         </activity>
         <activity
             android:name=".HomePage"
-            android:label="Home"/>
+            android:label="Home" />
         <activity
             android:name=".EditProfile"
-            android:label="Tap The Picture To Change"/>
+            android:label="Tap The Picture To Change" />
         <activity
             android:name=".VotingPage"
-            android:label="Vote For Your Favorite Dogs"/>
+            android:label="Vote For Your Favorite Dogs" />
         <activity
             android:name=".Leaderboard"
-            android:label="Leaderboard"/>
+            android:label="Leaderboard" />
+        <activity android:name=".ViewProfile"></activity>
     </application>
 
 </manifest>

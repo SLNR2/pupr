@@ -23,7 +23,7 @@ public class User {
     private Drawable pic;
 
 
-    Queue<User> votingQueue = new LinkedList<>(); //Individual voting queue for each user
+    ArrayList<User> votingQueue = new ArrayList<>(); //Individual voting queue for each user
     private static int nextUser = 0; //incremented each time a user is created to generate a unique userId
     static ArrayList<User> userList = new ArrayList<>(); //provide a list of users in an ArrayList structure for user authentication.
     ArrayList<User> votedOn = new ArrayList<>(); //An ArrayList that holds the id for which dogs a user has voted on
@@ -57,22 +57,8 @@ public class User {
     }
 
     void addScore(int vote) {
-
-
         this.totalScore = this.totalScore + vote;
         this.averageRating = this.totalScore / this.numberOfRatings;
-
-
-        //Print leaderboard to log
-        for (int i = 0; i < leaderboard.size(); i++) {
-            User curr = leaderboard.get(i);
-            Log.d("Leaderboard pos #" + i, curr.dogName);
-            Log.d("Average Rating", "" + curr.averageRating);
-            Log.d("Total Score", "" + curr.totalScore);
-            Log.d("# of votes", "" + curr.numberOfRatings);
-
-        }
-
     }
 
     //Setter methods used for loading app state from csv
