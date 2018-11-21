@@ -2,7 +2,7 @@
     <string name="app_name">Pupr</string>
     <string name="title_activity_welcome_screen">WelcomeScreen</string>
     <string name="title_home">Home</string>
-    <string name = "title_activity_leaderboard">Leaderboard</string>
+    <string name="title_activity_leaderboard">Leaderboard</string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -108,4 +108,7 @@
     <string name="_3">3</string>
     <string name="_2">2</string>
     <string name="_1">1 </string>
+    <string name="back">back</string>
+    <string name="fifth_place" />
+    <string name="fourth_place" />
 </resources>

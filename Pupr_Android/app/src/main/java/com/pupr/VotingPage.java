@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class VotingPage extends AppCompatActivity {
 
     ImageView votingImage;
@@ -26,6 +30,8 @@ public class VotingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting_page);
+
+        Collections.shuffle(User.activeUser.votingQueue); //shuffles the queue to randomize which dogs show up next
 
 
         votingImage = findViewById(R.id.votingImage);
@@ -84,7 +90,7 @@ public class VotingPage extends AppCompatActivity {
         User.activeUser.votedOn.add(User.currentDog); //add this dog to the votedOn list of the current user
         User.currentDog.addScore(score); //add one to the score
         User.printVotedOn(); //debugging method
-        User.activeUser.votingQueue.remove(); //remove dog from queue
+        User.activeUser.votingQueue.remove(0); //remove dog from queue
         serveDog();
         UserSaver.saveUsers("pupr/users.csv"); //Save users
         }
@@ -94,7 +100,7 @@ public class VotingPage extends AppCompatActivity {
         String endOfQueue = "No more dogs left. Please try again later."; //message to be displayed when the queue is empty
 
         if (!User.activeUser.votingQueue.isEmpty()) {
-            User.currentDog = User.activeUser.votingQueue.peek(); //Looks at the first element in the votingQueue for the activeUser
+            User.currentDog = User.activeUser.votingQueue.get(0); //Looks at the first element in the votingQueue for the activeUser
             votingImage.setImageDrawable(User.currentDog.getPicture()); //Loads picture
             votingName.setText(User.currentDog.getDogName()); //load the dog's name
             votingBio.setText(User.currentDog.getBio()); //load the bio
