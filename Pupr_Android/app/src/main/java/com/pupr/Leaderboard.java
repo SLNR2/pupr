@@ -12,44 +12,75 @@ import java.util.Collections;
 
 public class Leaderboard extends AppCompatActivity {
     Button home;
-    ImageView first;
-    ImageView second;
-    ImageView third;
-
-    EditText firstText;
-    EditText secondText;
-    EditText thirdText;
+    ImageView first, second, third, fourth, fifth;
+    EditText firstText, secondText, thirdText, fourthText, fifthText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
 
-        Log.d("Leaderboard", "Before swap");
-        for (int i = 0; i < User.leaderboard.size(); i++)
-            Log.d("Leaderboard", printLeaderboardText(i));
         updateLeaderboard();
 
     //Set pictures
         first = findViewById(R.id.firstPlacePic);
         second = findViewById(R.id.secondPlacePic);
         third = findViewById(R.id.thirdPlacePic);
+        fourth = findViewById(R.id.fourthPlacePic);
+        fifth = findViewById(R.id.fifthPlacePic);
+
 
     //Set Drawables for pictures
-        ImageView[] images = new ImageView[] {first, second, third}; //store ImageViews in an array for easy access
+        ImageView[] images = new ImageView[] {first, second, third, fourth, fifth}; //store ImageViews in an array for easy access
         for (int i = 0; i < images.length; i++)
             images[i].setImageDrawable(User.leaderboard.get(i).getPicture()); //update each image
 
+    //Set text for EditTexts
+        firstText = findViewById(R.id.leaderboardNumberOne);
+        secondText = findViewById(R.id.leaderboardNumberTwo);
+        thirdText = findViewById(R.id.leaderboardNumberThree);
+        fourthText = findViewById(R.id.leaderboardNumberFour);
+        fifthText = findViewById(R.id.leaderboardNumberFive);
 
-    //Set text
-        firstText = findViewById(R.id.firstStats);
-        secondText = findViewById(R.id.secondStats);
-        thirdText = findViewById(R.id.thirdStats);
-
-        EditText[] stats = new EditText[] {firstText, secondText, thirdText};
-        for (int i = 0; i < stats.length; i++) {
-            stats[i].setText(printLeaderboardText(i));
+        EditText[] text = new EditText[] {firstText, secondText, thirdText, fourthText, fifthText};
+        for (int i = 0; i < text.length; i++) {
+            String rankingText = "#" + (i+1) + ", " + User.leaderboard.get(i).getDogName();
+            text[i].setText(rankingText);
         }
+    //set click listeners for pictures
+        first.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v){
+               viewProfile(1);
+           }
+        });
+        second.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                viewProfile(2);
+            }
+        });
+        third.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                viewProfile(3);
+            }
+        });
+
+        fourth.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                viewProfile(4);
+            }
+        });
+
+        fifth.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                viewProfile(5);
+            }
+        });
+
     //Home button
         home = findViewById(R.id.leaderboardHome);
         home.setOnClickListener(new View.OnClickListener() {
@@ -62,15 +93,21 @@ public class Leaderboard extends AppCompatActivity {
         });
     }
 
-//String method that takes an integer argument, used to print out leaderboard information
-    private String printLeaderboardText(int i) {
-            User curr = User.leaderboard.get(i);
-            String average = String.format(java.util.Locale.US, "%.1f", curr.getAverage()); //round average score to 1 decimal
+    private void viewProfile(int i) {
+        User.currentView = User.leaderboard.get(i-1); //set the profile to be viewed
+        Intent viewProfile = new Intent(getBaseContext(), ViewProfile.class);
+        startActivity(viewProfile);
+    }
+
+    //String method that takes an integer argument, used to print out leaderboard information
+    public static String printLeaderboardText(User u) {
+            int ranking = User.leaderboard.indexOf(u);
+            String average = String.format(java.util.Locale.US, "%.1f", u.getAverage()); //round average score to 1 decimal
             return(
-                    "Ranking # " + (i+1) + "\nName: " + curr.getDogName() + "\nOwner: " + curr.getFirstName() + " " + curr.getLastName() + "\n" +
+                    "Ranking # " + (ranking+1) + "\nName: " + u.getDogName() + "\nOwner: " + u.getFirstName() + " " + u.getLastName() + "\n" +
                     "Average Score: " + average + "\n" +
-                    "Total Score: " + (int) curr.getScore() + "\n" +
-                    "Total Votes: " + curr.getRatings());
+                    "Total Score: " + (int) u.getScore() + "\n" +
+                    "Total Votes: " + u.getRatings());
     }
 
 //Bubble sort method to sort the leaderboard from biggest to smallest
@@ -109,6 +146,6 @@ public class Leaderboard extends AppCompatActivity {
         //Print whole leaderboard to check results
         Log.d("Leaderboard", "After swap");
         for (int i = 0; i < User.leaderboard.size(); i++)
-            Log.d("Leaderboard", printLeaderboardText(i));
+            Log.d("Leaderboard", printLeaderboardText(User.leaderboard.get(i)));
     }
 }

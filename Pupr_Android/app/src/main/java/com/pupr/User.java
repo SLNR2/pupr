@@ -1,11 +1,8 @@
 package com.pupr;
 
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import java.util.ArrayList;
-import java.util.Queue;
-import java.util.LinkedList;
 
 public class User {
 
@@ -32,6 +29,8 @@ public class User {
     //static Users to mark current user
     static User activeUser; // defines current user of the session
     static User currentDog; //defines the next Dog for a User to vote on
+
+    static User currentView; //static user to define the current User whose profile is currently being viewed
 
     //update the current user of the session
     static void setActiveUser(User user) {

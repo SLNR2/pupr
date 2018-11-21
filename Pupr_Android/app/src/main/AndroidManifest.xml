@@ -31,8 +31,9 @@
             android:label="Vote For Your Favorite Dogs" />
         <activity
             android:name=".Leaderboard"
-            android:label="Leaderboard" />
-        <activity android:name=".ViewProfile"></activity>
+            android:label="Leaderboard: Tap to View Stats" />
+        <activity android:name=".ViewProfile"
+            android:label="Individual Stats"></activity>
     </application>
 
 </manifest>

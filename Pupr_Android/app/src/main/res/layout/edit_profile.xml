@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="131dp"
+        android:layout_width="500dp"
+        android:layout_height="250dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:orientation="horizontal"
@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/imageToUpload"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@string/upload_a_picture"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,35 +31,36 @@
         android:id="@+id/new_dog_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/what_s_your_dog_s_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
-        android:importantForAutofill="no" />
-
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 
     <EditText
         android:id="@+id/new_dog_bio"
-        android:layout_width="283dp"
-        android:layout_height="152dp"
+        android:layout_width="364dp"
+        android:layout_height="114dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/tell_us_about_your_dog"
         android:inputType="textMultiLine"
-        android:selectAllOnFocus="false"
+        android:selectAllOnFocus="true"
         android:singleLine="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_dog_name" />
 
@@ -68,14 +69,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
         android:layout_marginBottom="8dp"
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_dog_bio"
-        app:layout_constraintVertical_bias="0.662" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/cancelProfileChanges"
@@ -90,10 +91,10 @@
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/submitDog"
-        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_dog_bio"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintVertical_bias="0.952" />
 
 </android.support.constraint.ConstraintLayout>
 
