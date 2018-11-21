@@ -40,11 +40,11 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
 
-    //Used for permissions
+        //Used for permissions
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
         onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
 
-    //Assign buttons
+        //Assign buttons
         signIn = findViewById(R.id.signin_button);
         signUp = findViewById(R.id.signup_button);
         forgotPass = findViewById(R.id.forgot_pass_button);
@@ -139,7 +139,7 @@ public class LoginPage extends AppCompatActivity {
                         uniqueName = false;
                     }
                 }
-            //if any fields are blank, set incomplete to true
+                //if any fields are blank, set incomplete to true
                 if(uname.getText().toString().equals("") || fname.getText().toString().equals("") || lname.getText().toString().equals("") || password.getText().toString().equals("") || confPass.getText().toString().equals("")) {
                     incomplete = true;
                     Toast.makeText(getApplicationContext(), "You must fill out all fields to continue", Toast.LENGTH_LONG).show();
@@ -150,7 +150,7 @@ public class LoginPage extends AppCompatActivity {
 
                         User newUser = new User(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), password.getText().toString());
 
-                    //Path information for a default picture
+                        //Path information for a default picture
                       /*  String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
                         int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
                         Drawable defaultPicture = getResources().getDrawable(imageKey); //turn image into a drawable
@@ -196,7 +196,7 @@ public class LoginPage extends AppCompatActivity {
         }
     }
 
-//Method to read CSV raw file and create default users from it
+    //Method to read CSV raw file and create default users from it
     private void createDefaultUsers() {
         InputStream is = getResources().openRawResource(R.raw.users); //read the raw CSV file
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file
@@ -206,17 +206,17 @@ public class LoginPage extends AppCompatActivity {
         int i = 0; //will be used to increment by userId
         try {
 
-        //Start reading the file
+            //Start reading the file
             while ((line = reader.readLine()) != null) { //read until the end
-            //Add users
-                String[] tokens = line.split(",");  //split by ',' since this is a CSV file
+                //Add users
+                String[] tokens = line.split("@@");  //split by ',' since this is a CSV file
                 User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a defaultpicture user
                 newUser.setDogName(tokens[4]); //set dog name
                 newUser.setBio((tokens[5])); //set dog bio
                 User.userList.add(newUser);
                 Log.d("MyActivity", "Just created: " + newUser.getUserId() + ", " + newUser.getDogName()); //puts userId into the log so we can make sure this method is just called one time
 
-            //Add dogs
+                //Add dogs
                 imagePath = "drawable/img" + i;
                 int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //generate a key for each image corresponding to each user
                 Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
