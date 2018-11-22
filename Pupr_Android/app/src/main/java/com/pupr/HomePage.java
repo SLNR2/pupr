@@ -111,4 +111,7 @@ public class HomePage extends AppCompatActivity {
         });
 
     }
+    //Disable user from hitting back button
+    @Override
+    public void onBackPressed() {}
 }

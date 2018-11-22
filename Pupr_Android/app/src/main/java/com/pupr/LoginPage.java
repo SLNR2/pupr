@@ -215,6 +215,7 @@ public class LoginPage extends AppCompatActivity {
                 newUser.setBio((tokens[5])); //set dog bio
                 User.userList.add(newUser);
                 Log.d("MyActivity", "Just created: " + newUser.getUserId() + ", " + newUser.getDogName()); //puts userId into the log so we can make sure this method is just called one time
+                newUser.setDefaultFalse();
 
                 //Add dogs
                 imagePath = "drawable/img" + i;
@@ -232,4 +233,7 @@ public class LoginPage extends AppCompatActivity {
         }
 
     }
+    //close app if the user hits the back button
+    @Override
+    public void onBackPressed() {System.exit(0);}
 }
