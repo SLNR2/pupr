@@ -51,7 +51,7 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bitmap currentBit = ((BitmapDrawable)imageToUpload.getDrawable()).getBitmap(); //current picture as a Bitmap
-                if (currentBit.equals(defaultBit)){
+                if (currentBit.equals(defaultBit) || User.activeUser.getDefault()){
                     Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
                     Log.d("Image", "equals default, could not cancel");
                 }
@@ -78,11 +78,16 @@ public class EditProfile extends AppCompatActivity {
                                     Bitmap userBit = ((BitmapDrawable)User.activeUser.getPicture()).getBitmap();
 
                                     if(currentBit.equals(defaultBit)){ //default picture was not changed
-                                        Toast.makeText(EditProfile.this, "You must upload a picture of your dog before proceeding", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(EditProfile.this, "You must a picture and submit your profile to continue", Toast.LENGTH_LONG).show();
                                         Log.d("Image", "equals default, could not complete profile submission");
+                                    }
+                                //Must have a dog name and bio to proceed
+                                    else if(nameToUpload.getText().toString().trim().length() == 0 || bioToUpload.getText().toString().trim().length() == 0) {
+                                        Toast.makeText(EditProfile.this, "You must fill in all fields before proceeding", Toast.LENGTH_LONG).show();
                                     }
 
                                     else { //user not using default picture
+                                        User.activeUser.setDefaultFalse(); //update flag
                                         Drawable newPic = imageToUpload.getDrawable(); //set pic on ImageView
                                         savePicture(userBit, newPic, v); //save pic to phone if a new picture was uploaded
 

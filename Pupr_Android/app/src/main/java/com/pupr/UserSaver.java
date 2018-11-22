@@ -7,15 +7,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
-import android.view.View;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedWriter;
 
 
 class UserSaver {
@@ -79,7 +78,6 @@ class UserSaver {
         try {
             fr = new FileReader(file);
             reader = new BufferedReader(fr);
-            int id = 0; //corresponds to userid
             while ((line = reader.readLine()) != null) {
 
                 //Read the file, set the corresponding field to a User attribute
@@ -87,6 +85,7 @@ class UserSaver {
 
                 User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a defaultpicture user
                 User.userList.add(newUser); //add user to userList
+                newUser.setDefaultFalse();
                 //Set more attributes
                 newUser.setTotalScore(Double.parseDouble(tokens[4]));
                 newUser.setRatings(Integer.parseInt(tokens[5]));

@@ -18,6 +18,7 @@ public class User {
     private int numberOfRatings = 0;
     private double averageRating = 0;
     private Drawable pic;
+    private boolean defaultPicture = true; //default value of true because the User will have a default picture initially
 
 
     ArrayList<User> votingQueue = new ArrayList<>(); //Individual voting queue for each user
@@ -59,6 +60,8 @@ public class User {
         this.totalScore = this.totalScore + vote;
         this.averageRating = this.totalScore / this.numberOfRatings;
     }
+
+    void setDefaultFalse() {this.defaultPicture = false;}
 
     //Setter methods used for loading app state from csv
     void setTotalScore(Double totalScore) {
@@ -146,6 +149,7 @@ public class User {
     Drawable getPicture() {
         return this.pic;
     }
+    boolean getDefault() {return this.defaultPicture;}
 
     double getScore() {
         return this.totalScore;
