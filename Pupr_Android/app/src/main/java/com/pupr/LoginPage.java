@@ -232,4 +232,7 @@ public class LoginPage extends AppCompatActivity {
         }
 
     }
+    //close app if the user hits the back button
+    @Override
+    public void onBackPressed() {System.exit(0);}
 }

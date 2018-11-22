@@ -148,4 +148,7 @@ public class Leaderboard extends AppCompatActivity {
         for (int i = 0; i < User.leaderboard.size(); i++)
             Log.d("Leaderboard", printLeaderboardText(User.leaderboard.get(i)));
     }
+    //Disable user from hitting back button
+    @Override
+    public void onBackPressed() {}
 }
