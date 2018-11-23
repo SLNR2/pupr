@@ -110,7 +110,7 @@ class UserSaver {
         }
     }
 
-    private static void loadPictures(int id) {
+    static void loadPictures(int id) {
         User curr = User.userList.get(id);
         Bitmap b = new ImageSaver().load("/pupr/img" + curr.getUserId() + ".png");
         Log.d("UserSaver", "Found image");

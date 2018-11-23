@@ -44,7 +44,7 @@ public class Leaderboard extends AppCompatActivity {
 
         EditText[] text = new EditText[] {firstText, secondText, thirdText, fourthText, fifthText};
         for (int i = 0; i < text.length; i++) {
-            String rankingText = "#" + (i+1) + ", " + User.leaderboard.get(i).getDogName();
+            String rankingText = "#" + (i+1) + " " + User.leaderboard.get(i).getDogName();
             text[i].setText(rankingText);
         }
     //set click listeners for pictures
