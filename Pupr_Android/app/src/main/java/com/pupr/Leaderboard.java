@@ -84,12 +84,8 @@ public class Leaderboard extends AppCompatActivity {
     //Home button
         home = findViewById(R.id.leaderboardHome);
         home.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-                Intent mainPage = new Intent(getBaseContext(), HomePage.class);
-                startActivity(mainPage);
-            }
+            public void onClick(View v) {finish();}
         });
     }
 

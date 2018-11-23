@@ -55,9 +55,9 @@ public class LoginPage extends AppCompatActivity {
         if(!users.exists()) //app has not been run yet
             createDefaultUsers();
         else if(User.userList.size() == 0) //app has been run before but has just been launched
-            UserSaver.loadUsers("pupr/users.csv");
+            UserSaver.loadUsers();
 
-        UserSaver.saveUsers("pupr/users.csv"); //Save users
+        UserSaver.saveUsers(); //Save users
 
 
 
@@ -235,5 +235,8 @@ public class LoginPage extends AppCompatActivity {
     }
     //close app if the user hits the back button
     @Override
-    public void onBackPressed() {System.exit(0);}
+    public void onBackPressed() {
+        UserSaver.saveUsers();
+        finish();
+    }
 }

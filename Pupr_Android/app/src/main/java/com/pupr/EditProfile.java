@@ -56,9 +56,8 @@ public class EditProfile extends AppCompatActivity {
                     Log.d("Image", "equals default, could not cancel");
                 }
                 else {
-                    UserSaver.saveUsers("pupr/users.csv"); //Save users
-                    Intent mainPage = new Intent(getBaseContext(), HomePage.class);
-                    startActivity(mainPage);
+                    UserSaver.saveUsers(); //Save users
+                    finish();
                 }
             }
         });
@@ -110,12 +109,11 @@ public class EditProfile extends AppCompatActivity {
 
                                     Log.d("Userlist", "After adding");
                                     User.printUserList();
-                                            UserSaver.saveUsers("pupr/users.csv"); //Save users
+                                            UserSaver.saveUsers(); //Save users
 
 
                                         //Load the Main Page
-                                        Intent mainPage = new Intent(getBaseContext(), HomePage.class);
-                                        startActivity(mainPage);
+                                       finish();
                                     }
 
                                 }
