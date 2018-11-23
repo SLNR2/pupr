@@ -24,7 +24,7 @@ public class HomePage extends AppCompatActivity {
 
         //Save users
         try {
-            UserSaver.saveUsers("pupr/users.csv");
+            UserSaver.saveUsers();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,11 +101,8 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 User.activeUser.votingQueue.clear(); //clear the active user's voting queue
                 User temp = new User();
-
-
                 User.setActiveUser(temp);
-                Intent loginPage = new Intent(getBaseContext(), LoginPage.class);
-                startActivity(loginPage);
+                finish();
 
             }
         });

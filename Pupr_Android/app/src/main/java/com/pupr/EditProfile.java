@@ -5,16 +5,18 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.IOException;
 
 
 public class EditProfile extends AppCompatActivity {
@@ -56,9 +58,8 @@ public class EditProfile extends AppCompatActivity {
                     Log.d("Image", "equals default, could not cancel");
                 }
                 else {
-                    UserSaver.saveUsers("pupr/users.csv"); //Save users
-                    Intent mainPage = new Intent(getBaseContext(), HomePage.class);
-                    startActivity(mainPage);
+                    UserSaver.saveUsers(); //Save users
+                    finish();
                 }
             }
         });
@@ -88,8 +89,8 @@ public class EditProfile extends AppCompatActivity {
 
                                     else { //user not using default picture
                                         User.activeUser.setDefaultFalse(); //update flag
+                                        savePicture(userBit, currentBit); //save pic to phone if a new picture was uploaded
                                         Drawable newPic = imageToUpload.getDrawable(); //set pic on ImageView
-                                        savePicture(userBit, newPic, v); //save pic to phone if a new picture was uploaded
 
                                         User.activeUser.setPic(newPic); //Set image as an attribute for the user
                                         User.activeUser.setBio(bioToUpload.getText().toString()); //set bio
@@ -110,22 +111,21 @@ public class EditProfile extends AppCompatActivity {
 
                                     Log.d("Userlist", "After adding");
                                     User.printUserList();
-                                            UserSaver.saveUsers("pupr/users.csv"); //Save users
+                                            UserSaver.saveUsers(); //Save users
 
 
                                         //Load the Main Page
-                                        Intent mainPage = new Intent(getBaseContext(), HomePage.class);
-                                        startActivity(mainPage);
+                                      Intent home = new Intent(getBaseContext(), HomePage.class);
+                                      startActivity(home);
                                     }
 
                                 }
         });
     }
 
-    public static void savePicture(Bitmap oldPic, Drawable newPic, View v) {
-        Bitmap bmap = ((BitmapDrawable)newPic).getBitmap();
-        if (!bmap.equals(oldPic)) {
-            new ImageSaver(/*v.getContext()*/).setExternal(true).setDirectoryName("").setFileName("img" + User.activeUser.getUserId() + ".png").save(bmap); //saves the image in /pupr on the internal storage of the android device
+    public static void savePicture(Bitmap oldPic, Bitmap newPic) {
+        if (!newPic.equals(oldPic)) {
+            new ImageSaver().setExternal(true).setDirectoryName("").setFileName("img" + User.activeUser.getUserId() + ".png").save(newPic); //saves the image in /pupr on the internal storage of the android device
             Log.d("Image", "saved");
         }
         else
@@ -136,7 +136,6 @@ public class EditProfile extends AppCompatActivity {
     protected void uploadImage() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI); //Let user select an image from gallery
         startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-
     }
 
     @Override
@@ -144,9 +143,16 @@ public class EditProfile extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) { //check everything is good
                 Uri selectedImage = data.getData(); //select image
-                imageToUpload.setImageURI(selectedImage); //set image and display it
+                try {
+                    Bitmap newBit = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), selectedImage);
+                    Drawable d = new BitmapDrawable(getResources(), newBit);
+                    imageToUpload.setImageDrawable(d); //set image and display it
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
 //Disable user from hitting back button
     @Override
     public void onBackPressed() {}

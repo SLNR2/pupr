@@ -44,7 +44,7 @@ public class Leaderboard extends AppCompatActivity {
 
         EditText[] text = new EditText[] {firstText, secondText, thirdText, fourthText, fifthText};
         for (int i = 0; i < text.length; i++) {
-            String rankingText = "#" + (i+1) + ", " + User.leaderboard.get(i).getDogName();
+            String rankingText = "#" + (i+1) + " " + User.leaderboard.get(i).getDogName();
             text[i].setText(rankingText);
         }
     //set click listeners for pictures
@@ -84,12 +84,8 @@ public class Leaderboard extends AppCompatActivity {
     //Home button
         home = findViewById(R.id.leaderboardHome);
         home.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-                Intent mainPage = new Intent(getBaseContext(), HomePage.class);
-                startActivity(mainPage);
-            }
+            public void onClick(View v) {finish();}
         });
     }
 

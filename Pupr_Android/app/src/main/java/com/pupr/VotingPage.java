@@ -1,6 +1,5 @@
 package com.pupr;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -48,8 +47,7 @@ public class VotingPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent mainPage = new Intent(getBaseContext(), HomePage.class);
-                startActivity(mainPage);
+                finish(); //finishes activity, goes back home
             }
         });
 
@@ -90,7 +88,7 @@ public class VotingPage extends AppCompatActivity {
         User.printVotedOn(); //debugging method
         User.activeUser.votingQueue.remove(0); //remove dog from queue
         serveDog();
-        UserSaver.saveUsers("pupr/users.csv"); //Save users
+        UserSaver.saveUsers(); //Save users
         }
 
 //Serve up next dog from queue
@@ -107,9 +105,8 @@ public class VotingPage extends AppCompatActivity {
         else {
         //Redirect back to main page
             Toast.makeText(getApplicationContext(), endOfQueue, Toast.LENGTH_LONG).show();
-            UserSaver.saveUsers("pupr/users.csv"); //Save users
-            Intent mainPage = new Intent (getBaseContext(), HomePage.class);
-            startActivity(mainPage);
+            UserSaver.saveUsers(); //Save users
+            finish(); //ends this activity
 
         }
     }

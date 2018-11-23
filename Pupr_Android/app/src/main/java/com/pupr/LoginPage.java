@@ -6,15 +6,17 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +28,6 @@ public class LoginPage extends AppCompatActivity {
     //Declare UI elements
     Button signIn;
     Button signUp;
-    Button forgotPass;
     EditText userText;
     EditText passwordText;
 
@@ -47,7 +48,6 @@ public class LoginPage extends AppCompatActivity {
         //Assign buttons
         signIn = findViewById(R.id.signin_button);
         signUp = findViewById(R.id.signup_button);
-        forgotPass = findViewById(R.id.forgot_pass_button);
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
 
@@ -55,9 +55,9 @@ public class LoginPage extends AppCompatActivity {
         if(!users.exists()) //app has not been run yet
             createDefaultUsers();
         else if(User.userList.size() == 0) //app has been run before but has just been launched
-            UserSaver.loadUsers("pupr/users.csv");
+            UserSaver.loadUsers();
 
-        UserSaver.saveUsers("pupr/users.csv"); //Save users
+        UserSaver.saveUsers(); //Save users
 
 
 
@@ -75,14 +75,6 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signUp(); //call method to register
-            }
-        });
-
-        //Forgot password
-        forgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Not implemented for this project", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -114,6 +106,7 @@ public class LoginPage extends AppCompatActivity {
 
     protected void signUp() {
         //Define the EditText boxes and the Register button
+
         setContentView(R.layout.create_account);
         final EditText uname = findViewById(R.id.register_uname);
         final EditText fname = findViewById(R.id.register_fname);
@@ -221,19 +214,31 @@ public class LoginPage extends AppCompatActivity {
                 imagePath = "drawable/img" + i;
                 int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //generate a key for each image corresponding to each user
                 Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
-                User.userList.get(i).setPic(d); //set image as an attribute for each user
                 Bitmap b0 = ((BitmapDrawable) d).getBitmap(); //get Bitmap for drawable
-                new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
+                ImageSaver.rescale(b0);
+                Uri u0 = ImageSaver.getImageUri(getApplicationContext(), b0, i); //convert b0 into a uri
+                try {
+                    b0 = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), u0); //properly orient and reformat b0
+
+                    new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
+                    UserSaver.loadPictures(i); //load properly formatted image from the newly saved bitmap
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 i++; //increment to next user
+
             }
 
         } catch (IOException e) {
             Log.wtf("MyActivity", "Error reading data file on line " + line, e);
             e.printStackTrace();
         }
-
     }
     //close app if the user hits the back button
     @Override
-    public void onBackPressed() {System.exit(0);}
+    public void onBackPressed() {
+        UserSaver.saveUsers();
+        finish();
+        finish();
+    }
 }

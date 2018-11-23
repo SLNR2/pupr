@@ -20,7 +20,8 @@ import java.io.IOException;
 class UserSaver {
 
     private static final String separator = "@@";
-    static void saveUsers(String path) {
+    final static String path = "pupr/users.csv";
+    static void saveUsers() {
         File file = new File(Environment.getExternalStorageDirectory(), path);
 
         BufferedWriter bw;
@@ -69,7 +70,7 @@ class UserSaver {
     }
 
 
-    static void loadUsers(String path) {
+    static void loadUsers() {
         File file = new File(Environment.getExternalStorageDirectory(), path);
         FileReader fr;
         BufferedReader reader = null;
@@ -100,7 +101,7 @@ class UserSaver {
             e.printStackTrace();
         }
         //call method to load votes
-        loadVotes(path);
+        loadVotes();
 
         //call method to load pictures
         for (int i = 0; i < User.userList.size(); i++) {
@@ -109,7 +110,7 @@ class UserSaver {
         }
     }
 
-    private static void loadPictures(int id) {
+    static void loadPictures(int id) {
         User curr = User.userList.get(id);
         Bitmap b = new ImageSaver().load("/pupr/img" + curr.getUserId() + ".png");
         Log.d("UserSaver", "Found image");
@@ -117,7 +118,7 @@ class UserSaver {
         curr.setPic(d);
     }
 
-    private static void loadVotes(String path) {
+    private static void loadVotes() {
         File file = new File(Environment.getExternalStorageDirectory(), path);
         FileReader fr;
         BufferedReader reader = null;
