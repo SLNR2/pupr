@@ -111,4 +111,11 @@
     <string name="back">back</string>
     <string name="fifth_place" />
     <string name="fourth_place" />
+    <string name="confirm_password">Confirm Password</string>
+    <string name="first_name">First Name</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="last_name">Last Name</string>
 </resources>

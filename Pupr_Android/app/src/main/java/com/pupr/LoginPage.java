@@ -74,7 +74,8 @@ public class LoginPage extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUp(); //call method to register
+                Intent register = new Intent(getBaseContext(), SignUp.class);
+                startActivity(register);
             }
         });
     }
@@ -104,73 +105,7 @@ public class LoginPage extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
     }
 
-    protected void signUp() {
-        //Define the EditText boxes and the Register button
 
-        setContentView(R.layout.create_account);
-        final EditText uname = findViewById(R.id.register_uname);
-        final EditText fname = findViewById(R.id.register_fname);
-        final EditText lname = findViewById(R.id.register_lname);
-        final EditText password = findViewById(R.id.register_pass);
-        final EditText confPass = findViewById(R.id.register_conf_pass);
-        Button register = findViewById(R.id.register_button);
-        Button cancel = findViewById(R.id.createAccountCancel);
-
-    //Hitting cancel finishes this activity and goes back to login page
-        cancel.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View v) {finish();}});
-
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                boolean uniqueName = true; //false means that the user does not yet exist
-                boolean incomplete = false; //false means that not all fields have been filled out
-                for (int i = 0; i < User.userList.size(); i++) {
-                    User thisUser = User.userList.get(i);
-                    String user = thisUser.getUsername().toLowerCase(); //pull the username
-
-                    if (uname.getText().toString().toLowerCase().equals(user)) {
-                        Toast.makeText(getApplicationContext(), "This username is already taken", Toast.LENGTH_LONG).show();
-
-                        uniqueName = false;
-                    }
-                }
-                //if any fields are blank, set incomplete to true
-                if(uname.getText().toString().equals("") || fname.getText().toString().equals("") || lname.getText().toString().equals("") || password.getText().toString().equals("") || confPass.getText().toString().equals("")) {
-                    incomplete = true;
-                    Toast.makeText(getApplicationContext(), "You must fill out all fields to continue", Toast.LENGTH_LONG).show();
-                }
-
-                if (uniqueName && !incomplete) {
-                    if (password.getText().toString().equals(confPass.getText().toString())) {
-
-                        User newUser = new User(fname.getText().toString(), lname.getText().toString(), uname.getText().toString(), password.getText().toString());
-
-                        //Path information for a default picture
-                      /*  String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
-                        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
-                        Drawable defaultPicture = getResources().getDrawable(imageKey); //turn image into a drawable
-                        newUser.setPic(defaultPicture);*/
-
-                        newUser.setPic(ImageSaver.setDefaultPic(getApplicationContext()));
-
-                        User.setActiveUser(newUser); //sets the new user to the active user
-                        Intent editProfile = new Intent(LoginPage.this, EditProfile.class);
-                        editProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(editProfile);
-                        finish();
-                    } else
-                        Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
-                }
-            }
-
-        });
-
-
-    }
 
     //Request permissions
     @Override // android recommended class to handle permissions

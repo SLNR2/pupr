@@ -34,6 +34,7 @@
             android:label="Leaderboard: Tap to View Stats" />
         <activity android:name=".ViewProfile"
             android:label="Individual Stats"></activity>
+        <activity android:name=".SignUp" />
     </application>
 
 </manifest>
