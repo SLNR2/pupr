@@ -29,7 +29,7 @@ public class VotingPage extends AppCompatActivity {
         setContentView(R.layout.activity_voting_page);
 
         Collections.shuffle(User.activeUser.votingQueue); //shuffles the queue to randomize which dogs show up next
-
+        Toast.makeText(getApplicationContext(), "Tap to vote. 5 is the highest score.", Toast.LENGTH_LONG).show();
 
         votingImage = findViewById(R.id.votingImage);
         votingName = findViewById(R.id.votingName);

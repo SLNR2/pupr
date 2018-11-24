@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".LoginPage">
+        <activity android:name=".LoginPage"
+            android:label="Login Page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -25,16 +25,18 @@
             android:label="Home" />
         <activity
             android:name=".EditProfile"
-            android:label="Tap The Picture To Change" />
+            android:label="Edit Profile" />
         <activity
             android:name=".VotingPage"
-            android:label="Vote For Your Favorite Dogs" />
+            android:label="Voting" />
         <activity
             android:name=".Leaderboard"
-            android:label="Leaderboard: Tap to View Stats" />
-        <activity android:name=".ViewProfile"
-            android:label="Individual Stats"></activity>
-        <activity android:name=".SignUp" />
+            android:label="Leaderboard" />
+        <activity
+            android:name=".ViewProfile"
+            android:label="Profile"/>
+        <activity android:name=".SignUp"
+            android:label="Sign Up"/>
     </application>
 
 </manifest>

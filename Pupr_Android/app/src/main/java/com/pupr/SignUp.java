@@ -70,6 +70,7 @@ public class SignUp extends AppCompatActivity {
                         newUser.setPic(ImageSaver.setDefaultPic(getApplicationContext()));
 
                         User.setActiveUser(newUser); //sets the new user to the active user
+                    //Clear activity stack and start new activity
                         Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
                         editProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                 | Intent.FLAG_ACTIVITY_CLEAR_TOP);

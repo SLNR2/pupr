@@ -75,6 +75,8 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent register = new Intent(getBaseContext(), SignUp.class);
+                register.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(register);
             }
         });
@@ -99,8 +101,10 @@ public class LoginPage extends AppCompatActivity {
         if (flag) {
             Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
             User.setActiveUser(currUser); //sets active User
-            Intent mainPage = new Intent(getBaseContext(), HomePage.class);
-            startActivity(mainPage);
+            Intent home = new Intent(getBaseContext(), HomePage.class);
+            home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(home);
         } else
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
     }
