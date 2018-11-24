@@ -93,7 +93,7 @@ public class EditProfile extends AppCompatActivity {
                                         Drawable newPic = imageToUpload.getDrawable(); //set pic on ImageView
 
                                         User.activeUser.setPic(newPic); //Set image as an attribute for the user
-                                        User.activeUser.setBio(bioToUpload.getText().toString()); //set bio
+                                        User.activeUser.setBio(bioToUpload.getText().toString().replaceAll("\\n", "")); //set bio
                                         User.activeUser.setDogName(nameToUpload.getText().toString()); //set name
 
                                 //If user has uploaded an image for the first time, add to userList
@@ -116,6 +116,7 @@ public class EditProfile extends AppCompatActivity {
 
                                         //Load the Main Page
                                       Intent home = new Intent(getBaseContext(), HomePage.class);
+                                      finish();
                                       startActivity(home);
                                     }
 

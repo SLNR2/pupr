@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -42,7 +44,7 @@ class ImageSaver {
     static Drawable setDefaultPic(Context context) {
 
         //Path information for a default picture
-        String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
+        String imagePath = "drawable/defaultpicture"; //path for default picture picture, the P part of the pupr logo
         int imageKey = context.getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
         return context.getResources().getDrawable(imageKey); //turn image into a drawable
     }
@@ -63,7 +65,12 @@ class ImageSaver {
     }
 
     static Bitmap rescale(Bitmap bm){
-        return Bitmap.createScaledBitmap(bm, 500, 350, true);
+        return Bitmap.createScaledBitmap(bm, 500, 500, true);
+    }
+
+    static Bitmap rescale(Bitmap bm, int width, int height){
+        return Bitmap.createScaledBitmap(bm, width, height, true);
+
     }
 
     void save(Bitmap bitmapImage) {
@@ -157,31 +164,21 @@ class ImageSaver {
         BitmapFactory.decodeStream(is, null, dbo);
         is.close();
 
-        int rotatedWidth, rotatedHeight;
+        int newWidth, newHeight;
         int orientation = getOrientation(context, photoUri);
 
         if (orientation == 90 || orientation == 270) {
-            rotatedWidth = dbo.outHeight;
-            rotatedHeight = dbo.outWidth;
+            newWidth = dbo.outHeight;
+            newHeight = dbo.outWidth;
         } else {
-            rotatedWidth = dbo.outWidth;
-            rotatedHeight = dbo.outHeight;
+            newWidth = dbo.outWidth;
+            newHeight = dbo.outHeight;
         }
-
-        Bitmap srcBitmap;
+        Log.d("ImageSaver", "Height = " + newHeight);
+        Log.d("ImageSaver", "Width = " + newWidth);
         is = context.getContentResolver().openInputStream(photoUri);
-        if (rotatedWidth > 500 || rotatedHeight > 500) {
-            float widthRatio = ((float) rotatedWidth) / ((float) 500);
-            float heightRatio = ((float) rotatedHeight) / ((float) 500);
-            float maxRatio = Math.max(widthRatio, heightRatio);
+        Bitmap srcBitmap = BitmapFactory.decodeStream(is);
 
-            // Create the bitmap from file
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = (int) maxRatio;
-            srcBitmap = BitmapFactory.decodeStream(is, null, options);
-        } else {
-            srcBitmap = BitmapFactory.decodeStream(is);
-        }
         is.close();
 
         /*
@@ -196,6 +193,25 @@ class ImageSaver {
                     srcBitmap.getHeight(), matrix, true);
         }
 
+        if (newWidth < 2000) {
+            int paddingForWidth = 2000 - newWidth / 2;
+            addPaddingRightForBitmap(srcBitmap, paddingForWidth);
+            addPaddingLeftForBitmap(srcBitmap, paddingForWidth);
+            newWidth = srcBitmap.getWidth();
+        }
+
+        if (newHeight < 1500){
+            int paddingForHeight = 1500 - newHeight / 2;
+            addPaddingTopForBitmap(srcBitmap, paddingForHeight);
+            addPaddingBottomForBitmap(srcBitmap, paddingForHeight);
+            newHeight = srcBitmap.getHeight();
+        }
+
+        Log.d("ImageSaver", "New Height = " + newHeight);
+        Log.d("ImageSaver", "New Width = " + newWidth);
+        rescale(srcBitmap);
+        Log.d("ImageSaver", "Final Height = " + newHeight);
+        Log.d("ImageSaver", "Final Width = " + newWidth);
         return srcBitmap;
     }
 
@@ -205,5 +221,39 @@ class ImageSaver {
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "img" + userid, null);
         return Uri.parse(path);
+    }
+
+//https://stackoverflow.com/questions/6957032/android-padding-left-a-bitmap-with-white-color
+    private static Bitmap addPaddingTopForBitmap(Bitmap bitmap, int paddingTop) {
+        Bitmap outputBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight() + paddingTop, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(outputBitmap);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(bitmap, 0, paddingTop, null);
+        return outputBitmap;
+    }
+
+    private static Bitmap addPaddingBottomForBitmap(Bitmap bitmap, int paddingBottom) {
+        Bitmap outputBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight() + paddingBottom, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(outputBitmap);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        return outputBitmap;
+    }
+
+
+    private static Bitmap addPaddingRightForBitmap(Bitmap bitmap, int paddingRight) {
+        Bitmap outputBitmap = Bitmap.createBitmap(bitmap.getWidth() + paddingRight, bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(outputBitmap);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(bitmap, 0, 0, null);
+        return outputBitmap;
+    }
+
+    private static Bitmap addPaddingLeftForBitmap(Bitmap bitmap, int paddingLeft) {
+        Bitmap outputBitmap = Bitmap.createBitmap(bitmap.getWidth() + paddingLeft, bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(outputBitmap);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(bitmap, paddingLeft, 0, null);
+        return outputBitmap;
     }
 }

@@ -56,7 +56,6 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/tell_us_about_your_dog"
-        android:inputType="textMultiLine"
         android:selectAllOnFocus="true"
         android:singleLine="false"
         app:layout_constraintEnd_toEndOf="parent"
