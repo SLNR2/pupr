@@ -114,7 +114,12 @@ public class LoginPage extends AppCompatActivity {
         final EditText password = findViewById(R.id.register_pass);
         final EditText confPass = findViewById(R.id.register_conf_pass);
         Button register = findViewById(R.id.register_button);
+        Button cancel = findViewById(R.id.createAccountCancel);
 
+    //Hitting cancel finishes this activity and goes back to login page
+        cancel.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v) {finish();}});
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,8 +157,11 @@ public class LoginPage extends AppCompatActivity {
                         newUser.setPic(ImageSaver.setDefaultPic(getApplicationContext()));
 
                         User.setActiveUser(newUser); //sets the new user to the active user
-                        Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
+                        Intent editProfile = new Intent(LoginPage.this, EditProfile.class);
+                        editProfile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(editProfile);
+                        finish();
                     } else
                         Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
                 }
@@ -238,7 +246,6 @@ public class LoginPage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         UserSaver.saveUsers();
-        finish();
         finish();
     }
 }
