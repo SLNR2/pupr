@@ -38,6 +38,8 @@ public class EditProfile extends AppCompatActivity {
         submitProfile = findViewById(R.id.submitDog);
         cancel = findViewById(R.id.cancelProfileChanges);
 
+        Toast.makeText(getApplicationContext(), "Tap the picture to edit.", Toast.LENGTH_SHORT ).show();
+
         //Path information for a default picture\
         Drawable defaultPicture = ImageSaver.setDefaultPic(getApplicationContext()); //turn image into a drawable
         final Bitmap defaultBit = ((BitmapDrawable)defaultPicture).getBitmap(); //default image as a bitmap
@@ -93,7 +95,7 @@ public class EditProfile extends AppCompatActivity {
                                         Drawable newPic = imageToUpload.getDrawable(); //set pic on ImageView
 
                                         User.activeUser.setPic(newPic); //Set image as an attribute for the user
-                                        User.activeUser.setBio(bioToUpload.getText().toString()); //set bio
+                                        User.activeUser.setBio(bioToUpload.getText().toString().replaceAll("\\n", "")); //set bio
                                         User.activeUser.setDogName(nameToUpload.getText().toString()); //set name
 
                                 //If user has uploaded an image for the first time, add to userList
@@ -114,9 +116,11 @@ public class EditProfile extends AppCompatActivity {
                                             UserSaver.saveUsers(); //Save users
 
 
-                                        //Load the Main Page
-                                      Intent home = new Intent(getBaseContext(), HomePage.class);
-                                      startActivity(home);
+                                        //Load the homepage
+                                        Intent home= new Intent(getBaseContext(), HomePage.class);
+                                        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(home);
                                     }
 
                                 }

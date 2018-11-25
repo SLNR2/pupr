@@ -1,19 +1,20 @@
 package com.pupr;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import java.util.Collections;
 
 public class Leaderboard extends AppCompatActivity {
     Button home;
     ImageView first, second, third, fourth, fifth;
-    EditText firstText, secondText, thirdText, fourthText, fifthText;
+    Button firstButton, secondButton, thirdButton, fourthButton, fifthButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +22,10 @@ public class Leaderboard extends AppCompatActivity {
         setContentView(R.layout.activity_leaderboard);
 
         updateLeaderboard();
+        Toast.makeText(getApplicationContext(), "Tap a button to view more information.", Toast.LENGTH_LONG).show();
 
-    //Set pictures
+
+        //Set pictures
         first = findViewById(R.id.firstPlacePic);
         second = findViewById(R.id.secondPlacePic);
         third = findViewById(R.id.thirdPlacePic);
@@ -32,49 +35,47 @@ public class Leaderboard extends AppCompatActivity {
 
     //Set Drawables for pictures
         ImageView[] images = new ImageView[] {first, second, third, fourth, fifth}; //store ImageViews in an array for easy access
-        for (int i = 0; i < images.length; i++)
+        for (int i = 0; i < images.length; i++) {
             images[i].setImageDrawable(User.leaderboard.get(i).getPicture()); //update each image
-
+        }
     //Set text for EditTexts
-        firstText = findViewById(R.id.leaderboardNumberOne);
-        secondText = findViewById(R.id.leaderboardNumberTwo);
-        thirdText = findViewById(R.id.leaderboardNumberThree);
-        fourthText = findViewById(R.id.leaderboardNumberFour);
-        fifthText = findViewById(R.id.leaderboardNumberFive);
+        firstButton = findViewById(R.id.leaderboardNumberOne);
+        secondButton = findViewById(R.id.leaderboardNumberTwo);
+        thirdButton = findViewById(R.id.leaderboardNumberThree);
+        fourthButton = findViewById(R.id.leaderboardNumberFour);
+        fifthButton =  findViewById(R.id.leaderboardNumberFive);
 
-        EditText[] text = new EditText[] {firstText, secondText, thirdText, fourthText, fifthText};
-        for (int i = 0; i < text.length; i++) {
-            String rankingText = "#" + (i+1) + " " + User.leaderboard.get(i).getDogName();
-            text[i].setText(rankingText);
+        Button[] buttons = new Button[] {firstButton, secondButton, thirdButton, fourthButton, fifthButton};
+        for (int i = 0; i < buttons.length; i++) {
+            String buttonText = "#" + (i+1) + " " + User.leaderboard.get(i).getDogName();
+            buttons[i].setText(buttonText);
         }
     //set click listeners for pictures
-        first.setOnClickListener(new View.OnClickListener(){
+        firstButton.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View v){
                viewProfile(1);
            }
         });
-        second.setOnClickListener(new View.OnClickListener(){
+        secondButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 viewProfile(2);
             }
         });
-        third.setOnClickListener(new View.OnClickListener(){
+        thirdButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 viewProfile(3);
             }
         });
-
-        fourth.setOnClickListener(new View.OnClickListener(){
+        fourthButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 viewProfile(4);
             }
         });
-
-        fifth.setOnClickListener(new View.OnClickListener(){
+        fifthButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 viewProfile(5);

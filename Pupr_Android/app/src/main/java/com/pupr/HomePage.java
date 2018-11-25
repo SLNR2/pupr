@@ -66,7 +66,7 @@ public class HomePage extends AppCompatActivity {
 
             //Otherwise, enter voting screen
                 else{
-                    Intent vote = new Intent(getBaseContext(), VotingPage.class);
+                Intent vote = new Intent(getBaseContext(), VotingPage.class);
                     startActivity(vote);
                 }
             }
@@ -78,7 +78,6 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Go to edit profile
-
                 Intent editProfile = new Intent(getBaseContext(), EditProfile.class);
                 startActivity(editProfile);
             }
@@ -102,6 +101,11 @@ public class HomePage extends AppCompatActivity {
                 User.activeUser.votingQueue.clear(); //clear the active user's voting queue
                 User temp = new User();
                 User.setActiveUser(temp);
+                Intent login = new Intent(getBaseContext(), LoginPage.class);
+                login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Toast.makeText(getApplicationContext(), "You have successfully logged out.", Toast.LENGTH_SHORT ).show();
+                startActivity(login);
                 finish();
 
             }

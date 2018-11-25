@@ -42,7 +42,7 @@ class ImageSaver {
     static Drawable setDefaultPic(Context context) {
 
         //Path information for a default picture
-        String imagePath = "drawable/defaultpicture"; //path for defaultpicture picture, the P part of the pupr logo
+        String imagePath = "drawable/defaultpicture"; //path for default picture picture, the P part of the pupr logo
         int imageKey = context.getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //imageKey for the defaultpicture pic
         return context.getResources().getDrawable(imageKey); //turn image into a drawable
     }
@@ -62,16 +62,11 @@ class ImageSaver {
         return this;
     }
 
-    static Bitmap rescale(Bitmap bm){
-        return Bitmap.createScaledBitmap(bm, 500, 350, true);
-    }
-
     void save(Bitmap bitmapImage) {
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(createFile());
-            Bitmap rescaled = rescale(bitmapImage);
-            rescaled.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -167,23 +162,21 @@ class ImageSaver {
             rotatedWidth = dbo.outWidth;
             rotatedHeight = dbo.outHeight;
         }
-
-        Bitmap srcBitmap;
+        Bitmap src;
         is = context.getContentResolver().openInputStream(photoUri);
-        if (rotatedWidth > 500 || rotatedHeight > 500) {
-            float widthRatio = ((float) rotatedWidth) / ((float) 500);
-            float heightRatio = ((float) rotatedHeight) / ((float) 500);
+        if (rotatedWidth > 2000 || rotatedHeight > 2000) {
+            float widthRatio = ((float) rotatedWidth) / ((float) 2000);
+            float heightRatio = ((float) rotatedHeight) / ((float) 2000);
             float maxRatio = Math.max(widthRatio, heightRatio);
-
             // Create the bitmap from file
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = (int) maxRatio;
-            srcBitmap = BitmapFactory.decodeStream(is, null, options);
+            src = BitmapFactory.decodeStream(is, null, options);
+
         } else {
-            srcBitmap = BitmapFactory.decodeStream(is);
+            src = BitmapFactory.decodeStream(is);
         }
         is.close();
-
         /*
          * if the orientation is not 0 (or -1, which means we don't know), we
          * have to do a rotation.
@@ -192,11 +185,13 @@ class ImageSaver {
             Matrix matrix = new Matrix();
             matrix.postRotate(orientation);
 
-            srcBitmap = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(),
-                    srcBitmap.getHeight(), matrix, true);
+            src = Bitmap.createBitmap(src, 0, 0, src.getWidth(),
+                    src.getHeight(), matrix, true);
+            Log.d("ImageSaver", "second width = " + src.getWidth());
+            Log.d("ImageSaver", "second height = " + src.getHeight());
         }
 
-        return srcBitmap;
+        return src;
     }
 
 // https://colinyeoh.wordpress.com/2012/05/18/android-getting-image-uri-from-bitmap/
@@ -206,4 +201,6 @@ class ImageSaver {
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "img" + userid, null);
         return Uri.parse(path);
     }
+
+
 }
