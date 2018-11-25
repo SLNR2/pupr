@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -64,21 +62,11 @@ class ImageSaver {
         return this;
     }
 
-    static Bitmap rescale(Bitmap bm){
-        return Bitmap.createScaledBitmap(bm, 500, 500, true);
-    }
-
-    static Bitmap rescale(Bitmap bm, int width, int height){
-        return Bitmap.createScaledBitmap(bm, width, height, true);
-
-    }
-
     void save(Bitmap bitmapImage) {
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(createFile());
-            Bitmap rescaled = rescale(bitmapImage);
-            rescaled.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,23 +152,31 @@ class ImageSaver {
         BitmapFactory.decodeStream(is, null, dbo);
         is.close();
 
-        int newWidth, newHeight;
+        int rotatedWidth, rotatedHeight;
         int orientation = getOrientation(context, photoUri);
 
         if (orientation == 90 || orientation == 270) {
-            newWidth = dbo.outHeight;
-            newHeight = dbo.outWidth;
+            rotatedWidth = dbo.outHeight;
+            rotatedHeight = dbo.outWidth;
         } else {
-            newWidth = dbo.outWidth;
-            newHeight = dbo.outHeight;
+            rotatedWidth = dbo.outWidth;
+            rotatedHeight = dbo.outHeight;
         }
-        Log.d("ImageSaver", "Height = " + newHeight);
-        Log.d("ImageSaver", "Width = " + newWidth);
+        Bitmap src;
         is = context.getContentResolver().openInputStream(photoUri);
-        Bitmap srcBitmap = BitmapFactory.decodeStream(is);
+        if (rotatedWidth > 2000 || rotatedHeight > 2000) {
+            float widthRatio = ((float) rotatedWidth) / ((float) 2000);
+            float heightRatio = ((float) rotatedHeight) / ((float) 2000);
+            float maxRatio = Math.max(widthRatio, heightRatio);
+            // Create the bitmap from file
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = (int) maxRatio;
+            src = BitmapFactory.decodeStream(is, null, options);
 
+        } else {
+            src = BitmapFactory.decodeStream(is);
+        }
         is.close();
-
         /*
          * if the orientation is not 0 (or -1, which means we don't know), we
          * have to do a rotation.
@@ -189,30 +185,13 @@ class ImageSaver {
             Matrix matrix = new Matrix();
             matrix.postRotate(orientation);
 
-            srcBitmap = Bitmap.createBitmap(srcBitmap, 0, 0, srcBitmap.getWidth(),
-                    srcBitmap.getHeight(), matrix, true);
+            src = Bitmap.createBitmap(src, 0, 0, src.getWidth(),
+                    src.getHeight(), matrix, true);
+            Log.d("ImageSaver", "second width = " + src.getWidth());
+            Log.d("ImageSaver", "second height = " + src.getHeight());
         }
 
-        if (newWidth < 2000) {
-            int paddingForWidth = 2000 - newWidth / 2;
-            addPaddingRightForBitmap(srcBitmap, paddingForWidth);
-            addPaddingLeftForBitmap(srcBitmap, paddingForWidth);
-            newWidth = srcBitmap.getWidth();
-        }
-
-        if (newHeight < 1500){
-            int paddingForHeight = 1500 - newHeight / 2;
-            addPaddingTopForBitmap(srcBitmap, paddingForHeight);
-            addPaddingBottomForBitmap(srcBitmap, paddingForHeight);
-            newHeight = srcBitmap.getHeight();
-        }
-
-        Log.d("ImageSaver", "New Height = " + newHeight);
-        Log.d("ImageSaver", "New Width = " + newWidth);
-        rescale(srcBitmap);
-        Log.d("ImageSaver", "Final Height = " + newHeight);
-        Log.d("ImageSaver", "Final Width = " + newWidth);
-        return srcBitmap;
+        return src;
     }
 
 // https://colinyeoh.wordpress.com/2012/05/18/android-getting-image-uri-from-bitmap/
@@ -223,37 +202,5 @@ class ImageSaver {
         return Uri.parse(path);
     }
 
-//https://stackoverflow.com/questions/6957032/android-padding-left-a-bitmap-with-white-color
-    private static Bitmap addPaddingTopForBitmap(Bitmap bitmap, int paddingTop) {
-        Bitmap outputBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight() + paddingTop, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(outputBitmap);
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(bitmap, 0, paddingTop, null);
-        return outputBitmap;
-    }
 
-    private static Bitmap addPaddingBottomForBitmap(Bitmap bitmap, int paddingBottom) {
-        Bitmap outputBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight() + paddingBottom, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(outputBitmap);
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        return outputBitmap;
-    }
-
-
-    private static Bitmap addPaddingRightForBitmap(Bitmap bitmap, int paddingRight) {
-        Bitmap outputBitmap = Bitmap.createBitmap(bitmap.getWidth() + paddingRight, bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(outputBitmap);
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        return outputBitmap;
-    }
-
-    private static Bitmap addPaddingLeftForBitmap(Bitmap bitmap, int paddingLeft) {
-        Bitmap outputBitmap = Bitmap.createBitmap(bitmap.getWidth() + paddingLeft, bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(outputBitmap);
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(bitmap, paddingLeft, 0, null);
-        return outputBitmap;
-    }
 }

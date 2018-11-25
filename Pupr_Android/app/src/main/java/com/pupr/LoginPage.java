@@ -162,15 +162,14 @@ public class LoginPage extends AppCompatActivity {
                 int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //generate a key for each image corresponding to each user
                 Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
                 Bitmap b0 = ((BitmapDrawable) d).getBitmap(); //get Bitmap for drawable
-                ImageSaver.rescale(b0);
-                Uri u0 = ImageSaver.getImageUri(getApplicationContext(), b0, i); //convert b0 into a uri
-                try {
-                    b0 = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), u0); //properly orient and reformat b0
+               Uri u0 = ImageSaver.getImageUri(getApplicationContext(), b0, i); //convert b0 into a uri
+               try {
+                  b0 = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), u0); //properly orient and reformat b0
 
                     new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
                     UserSaver.loadPictures(i); //load properly formatted image from the newly saved bitmap
-                } catch (IOException e) {
-                    e.printStackTrace();
+               } catch (IOException e) {
+                   e.printStackTrace();
                 }
                 i++; //increment to next user
 

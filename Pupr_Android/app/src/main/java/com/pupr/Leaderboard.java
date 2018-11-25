@@ -35,9 +35,9 @@ public class Leaderboard extends AppCompatActivity {
 
     //Set Drawables for pictures
         ImageView[] images = new ImageView[] {first, second, third, fourth, fifth}; //store ImageViews in an array for easy access
-        for (int i = 0; i < images.length; i++)
+        for (int i = 0; i < images.length; i++) {
             images[i].setImageDrawable(User.leaderboard.get(i).getPicture()); //update each image
-
+        }
     //Set text for EditTexts
         firstButton = findViewById(R.id.leaderboardNumberOne);
         secondButton = findViewById(R.id.leaderboardNumberTwo);

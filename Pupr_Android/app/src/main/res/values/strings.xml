@@ -118,4 +118,10 @@
     <string name="register">Register</string>
     <string name="sign_up">Sign Up</string>
     <string name="last_name">Last Name</string>
+    <string name="_1st_place" />
+    <string name="_2nd_place" />
+    <string name="_3rd_place" />
+    <string name="_4th_place" />
+    <string name="_5th_place" />
+    <string name="string_fifth_place">+@string/fifth_place</string>
 </resources>
