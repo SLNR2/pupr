@@ -33,8 +33,8 @@ public class LoginPage extends AppCompatActivity {
     EditText passwordText;
 
     //Used for granting permissions -- do not delete
-    private int requestCode = 0;
-    private int grantResults[] = {100};
+    private int requestCode;
+    private int grantResults[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,35 +47,31 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View v) {
             //Request permission to write to external storage
             ActivityCompat.requestPermissions(LoginPage.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
-            onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
             }
 
         });
 
     }
 
-    //Request permissions
-    @Override // android recommended class to handle permissions
+    @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[],  int[] grantResults) {
-        Log.d("requestCode", "" + requestCode);
 
-        switch (requestCode) {
-
-            case 0: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults != null && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     Log.d("permission", "granted");
-
+                    setContentView(R.layout.login_screen);
                     runLoginPage(); //regular functionality of login page
-                } else {
+                }
+
+                else {
                     //close app if permission denied
                     Toast.makeText(getApplicationContext(), "Write External permission is required to run this app.", Toast.LENGTH_LONG).show();
                 }
-            }
+
         }
-    }
+
 
 
     private void runLoginPage() {
@@ -147,6 +143,7 @@ public class LoginPage extends AppCompatActivity {
 
     //Method to read CSV raw file and create default users from it
     private void createDefaultUsers() {
+        Toast.makeText(getApplicationContext(), "Initializing...", Toast.LENGTH_LONG).show();
         InputStream is = getResources().openRawResource(R.raw.users); //read the raw CSV file
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file
         String line = ""; //used to iterate the CSV file
