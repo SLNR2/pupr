@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -31,6 +32,9 @@ public class LoginPage extends AppCompatActivity {
     Button signUp;
     EditText userText;
     EditText passwordText;
+    EditText welcomeText;
+    ImageView logo;
+    Button reset;
 
     //Used for granting permissions -- do not delete
     private int requestCode;
@@ -40,6 +44,22 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_page);
+
+        //Put logo on the Main Page
+        logo = findViewById(R.id.splashLogo);
+        String imagePath = "drawable/pupr";
+        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr");
+        Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
+        logo.setImageDrawable(d);
+
+
+
+        //Set a welcome message
+        welcomeText = findViewById(R.id.welcomeText);
+        String welcome = "Welcome to Pupr! \nIf this is your first time, press \"Begin\" to start!\nPlease note: the app will take a few moments to initialize." +
+                "\nIf you would like to reset the application, please click \"Reset\"\nEnjoy!";
+        welcomeText.setText(welcome);
+
         begin = findViewById(R.id.begin);
         begin.setOnClickListener(new View.OnClickListener(){
 
