@@ -30,29 +30,36 @@ public class LoginPage extends AppCompatActivity {
     Button begin;
     Button signIn;
     Button signUp;
+    Button reset;
+    Button resetConfirm;
+    Button resetCancel;
     EditText userText;
     EditText passwordText;
     EditText welcomeText;
+    EditText resetText;
     ImageView logo;
-    Button reset;
+    ImageView resetLogo;
 
     //Used for granting permissions -- do not delete
     private int requestCode;
     private int grantResults[];
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        splashPage();
+    }
+
+    private void splashPage() {
         setContentView(R.layout.splash_page);
+        String imagePath = "drawable/pupr";
+        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr");
+        Drawable logoDrawable = getResources().getDrawable(imageKey); //turn image into a drawable
 
         //Put logo on the Main Page
         logo = findViewById(R.id.splashLogo);
-        String imagePath = "drawable/pupr";
-        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr");
-        Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
-        logo.setImageDrawable(d);
-
-
+        logo.setImageDrawable(logoDrawable);
 
         //Set a welcome message
         welcomeText = findViewById(R.id.welcomeText);
@@ -60,17 +67,64 @@ public class LoginPage extends AppCompatActivity {
                 "\nIf you would like to reset the application, please click \"Reset\"\nEnjoy!";
         welcomeText.setText(welcome);
 
+        //Begin button
         begin = findViewById(R.id.begin);
         begin.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-            //Request permission to write to external storage
-            ActivityCompat.requestPermissions(LoginPage.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+                //Request permission to write to external storage
+                ActivityCompat.requestPermissions(LoginPage.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
             }
 
         });
 
+        //Reset button
+        reset = findViewById(R.id.reset);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPage();
+            }
+        });
+
+    }
+
+    private void resetPage() {
+        setContentView(R.layout.reset_confirm);
+        resetLogo = findViewById(R.id.resetLogo);
+
+        String imagePath = "drawable/pupr";
+        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr");
+        Drawable logoDrawable = getResources().getDrawable(imageKey); //turn image into a drawable
+        resetLogo.setImageDrawable(logoDrawable);
+
+    //Display a warning message
+        resetText = findViewById(R.id.resetText);
+        String reset = "Warning! You are about to reset the application data, including any votes you have cast and any profiles you have edited or created!\n" +
+                "Note that the app will take a few moments to reinitialize. Please be patient.\n\n" +
+                "Are you sure you wish to proceed?";
+        resetText.setText(reset);
+
+    //Go back!!!
+        resetCancel = findViewById(R.id.resetCancel);
+        resetCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                splashPage(); //go back to splash pae
+            }
+        });
+
+    //Full steam ahead - let's reset!
+        resetConfirm = findViewById(R.id.resetConfirm);
+        resetConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User.resetApp();
+                createDefaultUsers();
+                splashPage();
+            }
+        });
     }
 
     @Override
@@ -162,7 +216,7 @@ public class LoginPage extends AppCompatActivity {
 
 
     //Method to read CSV raw file and create default users from it
-    private void createDefaultUsers() {
+    protected void createDefaultUsers() {
         Toast.makeText(getApplicationContext(), "Initializing...", Toast.LENGTH_LONG).show();
         InputStream is = getResources().openRawResource(R.raw.users); //read the raw CSV file
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file

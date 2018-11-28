@@ -180,4 +180,16 @@ public class User {
         }
 
     }
+
+     static void resetApp() {
+        leaderboard.clear();
+        while (!userList.isEmpty()){
+            userList.get(0).votingQueue.clear(); //clear queue
+            userList.get(0).votedOn.clear(); //clear voted on
+            userList.remove(0); //remove user
+
+        }
+        userList.clear();
+        nextUser = 0;
+    }
 }
