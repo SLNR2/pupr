@@ -24,7 +24,7 @@
             android:label="Home" />
         <activity
             android:name=".EditProfile"
-            android:label="Edit Profile" />
+            android:label="Tap the picture to change it" />
         <activity
             android:name=".VotingPage"
             android:label="Voting" />

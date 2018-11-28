@@ -26,39 +26,73 @@ import java.nio.charset.Charset;
 
 public class LoginPage extends AppCompatActivity {
     //Declare UI elements
+    Button begin;
     Button signIn;
     Button signUp;
     EditText userText;
     EditText passwordText;
 
     //Used for granting permissions -- do not delete
-    private int requestCode;
-    private int grantResults[];
-
+    private int requestCode = 0;
+    private int grantResults[] = {100};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_screen);
+        setContentView(R.layout.splash_page);
+        begin = findViewById(R.id.begin);
+        begin.setOnClickListener(new View.OnClickListener(){
 
-        //Used for permissions
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
-        onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
+            @Override
+            public void onClick(View v) {
+            //Request permission to write to external storage
+            ActivityCompat.requestPermissions(LoginPage.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+            onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
+            }
 
+        });
+
+    }
+
+    //Request permissions
+    @Override // android recommended class to handle permissions
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[],  int[] grantResults) {
+        Log.d("requestCode", "" + requestCode);
+
+        switch (requestCode) {
+
+            case 0: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults != null && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Log.d("permission", "granted");
+
+                    runLoginPage(); //regular functionality of login page
+                } else {
+                    //close app if permission denied
+                    Toast.makeText(getApplicationContext(), "Write External permission is required to run this app.", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+
+    private void runLoginPage() {
         //Assign buttons
+        setContentView(R.layout.login_screen);
         signIn = findViewById(R.id.signin_button);
         signUp = findViewById(R.id.signup_button);
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
 
         File users = new File(Environment.getExternalStorageDirectory(), "pupr/users.csv");
-        if(!users.exists()) //app has not been run yet
+        if (!users.exists()) //app has not been run yet
             createDefaultUsers();
-        else if(User.userList.size() == 0) //app has been run before but has just been launched
+        else if (User.userList.size() == 0) //app has been launched previously
             UserSaver.loadUsers();
 
         UserSaver.saveUsers(); //Save users
-
 
 
         //Sign in
@@ -81,6 +115,7 @@ public class LoginPage extends AppCompatActivity {
             }
         });
     }
+
 
     protected void signIn() {
 
@@ -109,32 +144,6 @@ public class LoginPage extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
     }
 
-
-
-    //Request permissions
-    @Override // android recommended class to handle permissions
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Log.d("permission", "granted");
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.uujm
-                    Toast.makeText(LoginPage.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
-
-                    //app cannot function without this permission for now so close it...
-                    onDestroy();
-                }
-            }
-        }
-    }
 
     //Method to read CSV raw file and create default users from it
     private void createDefaultUsers() {

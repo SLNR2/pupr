@@ -38,7 +38,7 @@ public class EditProfile extends AppCompatActivity {
         submitProfile = findViewById(R.id.submitDog);
         cancel = findViewById(R.id.cancelProfileChanges);
 
-        Toast.makeText(getApplicationContext(), "Tap the picture to edit.", Toast.LENGTH_SHORT ).show();
+        Toast.makeText(getApplicationContext(), "Tap the picture to edit.", Toast.LENGTH_LONG).show();
 
         //Path information for a default picture\
         Drawable defaultPicture = ImageSaver.setDefaultPic(getApplicationContext()); //turn image into a drawable
