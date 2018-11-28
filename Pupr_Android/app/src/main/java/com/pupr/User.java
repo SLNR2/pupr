@@ -190,6 +190,6 @@ public class User {
 
         }
         userList.clear();
-        nextUser = 0;
+        nextUser = 7;
     }
 }

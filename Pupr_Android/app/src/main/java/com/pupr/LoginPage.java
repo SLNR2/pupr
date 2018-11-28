@@ -135,7 +135,6 @@ public class LoginPage extends AppCompatActivity {
                 if (grantResults != null && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     Log.d("permission", "granted");
-                    setContentView(R.layout.login_screen);
                     runLoginPage(); //regular functionality of login page
                 }
 
