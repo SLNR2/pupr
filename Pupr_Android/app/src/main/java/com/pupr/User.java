@@ -189,7 +189,7 @@ public class User {
             userList.remove(0); //remove user
 
         }
-        userList.clear();
-        nextUser = 7;
+        userList = new ArrayList<>();
+        nextUser = 0;
     }
 }

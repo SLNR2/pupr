@@ -122,6 +122,7 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View v) {
                 User.resetApp();
                 createDefaultUsers();
+                UserSaver.saveUsers();
                 splashPage();
             }
         });
@@ -203,7 +204,6 @@ public class LoginPage extends AppCompatActivity {
         }
 
         if (flag) {
-            Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
             User.setActiveUser(currUser); //sets active User
             Intent home = new Intent(getBaseContext(), HomePage.class);
             home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
@@ -216,7 +216,6 @@ public class LoginPage extends AppCompatActivity {
 
     //Method to read CSV raw file and create default users from it
     protected void createDefaultUsers() {
-        Toast.makeText(getApplicationContext(), "Initializing...", Toast.LENGTH_LONG).show();
         InputStream is = getResources().openRawResource(R.raw.users); //read the raw CSV file
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file
         String line = ""; //used to iterate the CSV file
@@ -225,14 +224,14 @@ public class LoginPage extends AppCompatActivity {
         int i = 0; //will be used to increment by userId
         try {
 
-            //Start reading the file
+        //Start reading the file
             while ((line = reader.readLine()) != null) { //read until the end
                 //Add users
                 String[] tokens = line.split("@@");  //split by ',' since this is a CSV file
                 User newUser = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //reads the data and saves the information as a defaultpicture user
                 newUser.setDogName(tokens[4]); //set dog name
                 newUser.setBio((tokens[5])); //set dog bio
-                User.userList.add(newUser);
+                User.userList.add(i, newUser);
                 Log.d("MyActivity", "Just created: " + newUser.getUserId() + ", " + newUser.getDogName()); //puts userId into the log so we can make sure this method is just called one time
                 newUser.setDefaultFalse();
 

@@ -20,7 +20,7 @@ import java.io.IOException;
 class UserSaver {
 
     private static final String separator = "@@";
-    final static String path = "pupr/users.csv";
+    private final static String path = "pupr/users.csv";
     static void saveUsers() {
         File file = new File(Environment.getExternalStorageDirectory(), path);
 
