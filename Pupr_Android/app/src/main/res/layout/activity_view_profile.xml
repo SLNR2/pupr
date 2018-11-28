@@ -16,7 +16,6 @@
         android:layout_marginBottom="20dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:selectAllOnFocus="false"
         android:singleLine="false"
         android:focusable="false"
         app:layout_constraintBottom_toTopOf="@+id/viewProfileBack"

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -26,10 +27,18 @@ import java.nio.charset.Charset;
 
 public class LoginPage extends AppCompatActivity {
     //Declare UI elements
+    Button begin;
     Button signIn;
     Button signUp;
+    Button reset;
+    Button resetConfirm;
+    Button resetCancel;
     EditText userText;
     EditText passwordText;
+    EditText welcomeText;
+    EditText resetText;
+    ImageView logo;
+    ImageView resetLogo;
 
     //Used for granting permissions -- do not delete
     private int requestCode;
@@ -39,26 +48,120 @@ public class LoginPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_screen);
+        splashPage();
+    }
 
-        //Used for permissions
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
-        onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
+    private void splashPage() {
+        setContentView(R.layout.splash_page);
+        String imagePath = "drawable/pupr";
+        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr");
+        Drawable logoDrawable = getResources().getDrawable(imageKey); //turn image into a drawable
 
+        //Put logo on the Main Page
+        logo = findViewById(R.id.splashLogo);
+        logo.setImageDrawable(logoDrawable);
+
+        //Set a welcome message
+        welcomeText = findViewById(R.id.welcomeText);
+        String welcome = "Welcome to Pupr! \nIf this is your first time, press \"Begin\" to start!\nPlease note: the app will take a few moments to initialize." +
+                "\nIf you would like to reset the application, please click \"Reset\"\nEnjoy!";
+        welcomeText.setText(welcome);
+
+        //Begin button
+        begin = findViewById(R.id.begin);
+        begin.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                //Request permission to write to external storage
+                ActivityCompat.requestPermissions(LoginPage.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+            }
+
+        });
+
+        //Reset button
+        reset = findViewById(R.id.reset);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPage();
+            }
+        });
+
+    }
+
+    private void resetPage() {
+        setContentView(R.layout.reset_confirm);
+        resetLogo = findViewById(R.id.resetLogo);
+
+        String imagePath = "drawable/pupr";
+        int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr");
+        Drawable logoDrawable = getResources().getDrawable(imageKey); //turn image into a drawable
+        resetLogo.setImageDrawable(logoDrawable);
+
+    //Display a warning message
+        resetText = findViewById(R.id.resetText);
+        String reset = "Warning! You are about to reset the application data, including any votes you have cast and any profiles you have edited or created!\n" +
+                "Note that the app will take a few moments to reinitialize. Please be patient.\n\n" +
+                "Are you sure you wish to proceed?";
+        resetText.setText(reset);
+
+    //Go back!!!
+        resetCancel = findViewById(R.id.resetCancel);
+        resetCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                splashPage(); //go back to splash pae
+            }
+        });
+
+    //Full steam ahead - let's reset!
+        resetConfirm = findViewById(R.id.resetConfirm);
+        resetConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User.resetApp();
+                createDefaultUsers();
+                splashPage();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[],  int[] grantResults) {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults != null && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Log.d("permission", "granted");
+                    runLoginPage(); //regular functionality of login page
+                }
+
+                else {
+                    //close app if permission denied
+                    Toast.makeText(getApplicationContext(), "Write External permission is required to run this app.", Toast.LENGTH_LONG).show();
+                }
+
+        }
+
+
+
+    private void runLoginPage() {
         //Assign buttons
+        setContentView(R.layout.login_screen);
         signIn = findViewById(R.id.signin_button);
         signUp = findViewById(R.id.signup_button);
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
 
         File users = new File(Environment.getExternalStorageDirectory(), "pupr/users.csv");
-        if(!users.exists()) //app has not been run yet
+        if (!users.exists()) //app has not been run yet
             createDefaultUsers();
-        else if(User.userList.size() == 0) //app has been run before but has just been launched
+        else if (User.userList.size() == 0) //app has been launched previously
             UserSaver.loadUsers();
 
         UserSaver.saveUsers(); //Save users
-
 
 
         //Sign in
@@ -81,6 +184,7 @@ public class LoginPage extends AppCompatActivity {
             }
         });
     }
+
 
     protected void signIn() {
 
@@ -110,34 +214,9 @@ public class LoginPage extends AppCompatActivity {
     }
 
 
-
-    //Request permissions
-    @Override // android recommended class to handle permissions
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Log.d("permission", "granted");
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.uujm
-                    Toast.makeText(LoginPage.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
-
-                    //app cannot function without this permission for now so close it...
-                    onDestroy();
-                }
-            }
-        }
-    }
-
     //Method to read CSV raw file and create default users from it
-    private void createDefaultUsers() {
+    protected void createDefaultUsers() {
+        Toast.makeText(getApplicationContext(), "Initializing...", Toast.LENGTH_LONG).show();
         InputStream is = getResources().openRawResource(R.raw.users); //read the raw CSV file
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file
         String line = ""; //used to iterate the CSV file
