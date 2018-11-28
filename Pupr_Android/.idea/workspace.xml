@@ -18,22 +18,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2322b896-8f57-4f19-afb3-fe0cf95c371e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/reset_confirm.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2322b896-8f57-4f19-afb3-fe0cf95c371e" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +67,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginPage.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoginPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
@@ -106,10 +91,10 @@
       </file>
       <file leaf-file-name="reset_confirm.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reset_confirm.xml">
-          <provider editor-type-id="android-designer2">
+          <provider selected="true" editor-type-id="android-designer2">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
+          <provider editor-type-id="text-editor">
             <state relative-caret-position="352">
               <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
               <folding>
@@ -128,7 +113,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="splash_page.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="splash_page.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml">
           <provider selected="true" editor-type-id="android-designer2">
             <state />
@@ -2760,10 +2745,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_view_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/reset_confirm.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/reset_confirm.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml" />
       </list>
     </option>
   </component>
@@ -2928,7 +2913,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="ExportApk.ApkPath" value="C:\Users\SLNR\Documents\Git\pupr" />
+    <property name="ExportApk.ApkPath" value="C:\Users\SLNR\Documents\Git\pupr\Pupr_APK" />
     <property name="ExportApk.BuildType" value="release" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.SignV2" value="true" />
@@ -2937,7 +2922,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="5e1b5825" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Pupr_APK" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -3174,7 +3159,7 @@
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5063593" side_tool="true" weight="0.2933194" />
       <window_info anchor="right" id="Preview" order="7" weight="0.32980332" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.4936407" visible="true" weight="0.2933194" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4936407" weight="0.2933194" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32985386" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49960256" weight="0.32881" />
       <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.49920508" weight="0.33298537" />
@@ -3182,7 +3167,7 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="1" />
       <window_info content_ui="combo" id="Project" order="7" sideWeight="0.5064935" visible="true" weight="0.18958664" />
-      <window_info anchor="bottom" id="Build" order="13" sideWeight="0.49324325" weight="0.24739039" />
+      <window_info active="true" anchor="bottom" id="Build" order="13" sideWeight="0.49324325" visible="true" weight="0.24739039" />
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" weight="0.3298887" />
@@ -3560,43 +3545,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="25" column="50" selection-start-line="1" selection-end-line="25" selection-end-column="50" />
-          <folding>
-            <element signature="e#764#779#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="954">
-          <caret line="128" selection-start-line="128" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
           <caret line="192" column="21" selection-start-line="192" selection-start-column="21" selection-end-line="192" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reset_confirm.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-          <folding>
-            <element signature="e#1498#1514#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3616,6 +3568,39 @@
             <element signature="e#5873#5874#0" expanded="true" />
             <element signature="e#5930#6288#0" expanded="true" />
             <element signature="e#6287#6288#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="954">
+          <caret line="128" selection-start-line="128" selection-end-line="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reset_confirm.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
+          <folding>
+            <element signature="e#1498#1514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="25" column="50" selection-start-line="1" selection-end-line="25" selection-end-column="50" />
+          <folding>
+            <element signature="e#764#779#0" expanded="true" />
           </folding>
         </state>
       </provider>
