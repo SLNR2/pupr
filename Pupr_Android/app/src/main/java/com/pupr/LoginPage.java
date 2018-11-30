@@ -156,7 +156,7 @@ public class LoginPage extends AppCompatActivity {
         userText = findViewById(R.id.login_uname);
         passwordText = findViewById(R.id.login_pass);
 
-        File users = new File(Environment.getExternalStorageDirectory(), "pupr/users.csv");
+        File users = new File(Environment.getExternalStorageDirectory(), "/pupr/users.csv");
         if (!users.exists()) //app has not been run yet
             createDefaultUsers();
         else if (User.userList.size() == 0) //app has been launched previously
@@ -220,6 +220,7 @@ public class LoginPage extends AppCompatActivity {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8"))); //reader for the CSV file
         String line = ""; //used to iterate the CSV file
         String imagePath; //will be used to locate the drawable file that I put into the project folder
+        String savePath; //where the new image will be saved to
         View v = new View(getBaseContext()); //need this View for saving the Bitmap
         int i = 0; //will be used to increment by userId
         try {
@@ -233,18 +234,27 @@ public class LoginPage extends AppCompatActivity {
                 newUser.setBio((tokens[5])); //set dog bio
                 User.userList.add(i, newUser);
                 Log.d("MyActivity", "Just created: " + newUser.getUserId() + ", " + newUser.getDogName()); //puts userId into the log so we can make sure this method is just called one time
-                newUser.setDefaultFalse();
+                newUser.setDefaultFalse(); //flag the user as already having a picture uploaded
 
-                //Add dogs
-                imagePath = "drawable/img" + i;
+            //Add dog images
+                imagePath = "drawable/img" + i; //retrieve path from apk resources
+                savePath = "/storage/emulated/0/pupr/img" + i + ".png"; //define where to save the image on the device
+
+            //Create path for image file
+            /*  File savedImage = new File(Environment.getExternalStorageDirectory(), savePath);
+                if(!savedImage.exists())
+                    savedImage.mkdirs(); //create the file if not yet created
+*/
                 int imageKey = getResources().getIdentifier(imagePath, "drawable", "com.pupr"); //generate a key for each image corresponding to each user
                 Drawable d = getResources().getDrawable(imageKey); //turn image into a drawable
                 Bitmap b0 = ((BitmapDrawable) d).getBitmap(); //get Bitmap for drawable
-               Uri u0 = ImageSaver.getImageUri(getApplicationContext(), b0, i); //convert b0 into a uri
-               try {
-                  b0 = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), u0); //properly orient and reformat b0
 
-                    new ImageSaver(v.getContext()).setExternal(true).setDirectoryName("").setFileName("img" + i + ".png").save(b0); //save Bitmap to device
+                new ImageSaver(v.getContext()).setExternal(true).setFileName("img" + i + ".png").save(b0); //save Bitmap to device
+                Uri u0 = ImageSaver.getImageUri(getApplicationContext(), b0, i); //convert b0 into a uri
+
+                try {
+                  b0 = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), u0, savePath); //properly orient and reformat b0
+                   new ImageSaver(v.getContext()).setExternal(true).setFileName("img" + i + ".png").save(b0); //save new Bitmap to device
                     UserSaver.loadPictures(i); //load properly formatted image from the newly saved bitmap
                } catch (IOException e) {
                    e.printStackTrace();

@@ -40,9 +40,10 @@ public class EditProfile extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Tap the picture to edit.", Toast.LENGTH_LONG).show();
 
-        //Path information for a default picture\
+        //Path information for a default picture
         Drawable defaultPicture = ImageSaver.setDefaultPic(getApplicationContext()); //turn image into a drawable
         final Bitmap defaultBit = ((BitmapDrawable)defaultPicture).getBitmap(); //default image as a bitmap
+
 
     //Load current information and picture for the user
         nameToUpload.setText(User.activeUser.getDogName());
@@ -129,7 +130,7 @@ public class EditProfile extends AppCompatActivity {
 
     public static void savePicture(Bitmap oldPic, Bitmap newPic) {
         if (!newPic.equals(oldPic)) {
-            new ImageSaver().setExternal(true).setDirectoryName("").setFileName("img" + User.activeUser.getUserId() + ".png").save(newPic); //saves the image in /pupr on the internal storage of the android device
+            new ImageSaver().setExternal(true).setFileName("img" + User.activeUser.getUserId() + ".png").save(newPic); //saves the image in /pupr on the internal storage of the android device
             Log.d("Image", "saved");
         }
         else
@@ -148,7 +149,8 @@ public class EditProfile extends AppCompatActivity {
             if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) { //check everything is good
                 Uri selectedImage = data.getData(); //select image
                 try {
-                    Bitmap newBit = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), selectedImage);
+                    final String path = "/pupr/img" + User.activeUser.getUserId() + ".png";
+                    Bitmap newBit = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), selectedImage, path);
                     Drawable d = new BitmapDrawable(getResources(), newBit);
                     imageToUpload.setImageDrawable(d); //set image and display it
                 } catch (IOException e) {

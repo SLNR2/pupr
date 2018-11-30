@@ -11,7 +11,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" line="244" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" line="255" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -29,9 +29,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/VotingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/VotingPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/ImageSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/ImageSaver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,8 +60,8 @@
       <file leaf-file-name="LoginPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="158" column="91" selection-start-line="158" selection-start-column="8" selection-end-line="158" selection-end-column="91" />
+            <state relative-caret-position="143">
+              <caret line="240" column="37" selection-start-line="240" selection-start-column="37" selection-end-line="240" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,53 +69,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/java/util/ArrayList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9438">
-              <caret line="465" column="19" selection-start-line="465" selection-start-column="19" selection-end-line="465" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reset_confirm.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/reset_confirm.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="splash_page.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="25" column="50" selection-start-line="1" selection-end-line="25" selection-end-column="50" />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="108" column="112" selection-start-line="108" selection-start-column="112" selection-end-line="108" selection-end-column="112" />
+            <state relative-caret-position="227">
+              <caret line="64" column="24" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageSaver.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ImageSaver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/ImageSaver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="83" column="56" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="56" />
+            <state relative-caret-position="363">
+              <caret line="181" column="42" lean-forward="true" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
+              <folding>
+                <element signature="e#964#965#0" expanded="true" />
+                <element signature="e#1002#1003#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContentResolver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/content/ContentResolver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="503">
+              <caret line="707" column="38" selection-start-line="707" selection-start-column="38" selection-end-line="707" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Context.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/content/Context.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="459" column="54" selection-start-line="459" selection-start-column="36" selection-end-line="459" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MediaStore.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/provider/MediaStore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="835" column="39" selection-start-line="835" selection-start-column="39" selection-end-line="835" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -123,8 +121,8 @@
       <file leaf-file-name="EditProfile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="56" column="112" selection-start-line="56" selection-start-column="112" selection-end-line="56" selection-end-column="112" />
+            <state relative-caret-position="624">
+              <caret line="158" column="13" selection-start-line="158" selection-start-column="13" selection-end-line="158" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -132,8 +130,8 @@
       <file leaf-file-name="UserSaver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/UserSaver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-212">
-              <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
+            <state relative-caret-position="57">
+              <caret line="114" selection-start-line="114" selection-end-line="114" />
             </state>
           </provider>
         </entry>
@@ -147,11 +145,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VotingPage.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="VotingPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/VotingPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="198">
+              <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -169,36 +167,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get</find>
-      <find>r.get</find>
-      <find>R.</find>
-      <find>findview</find>
-      <find>setonclick</find>
-      <find>setOncl</find>
-      <find>set</find>
-      <find>onrequest</find>
-      <find>requestcode</find>
-      <find>write external</find>
-      <find>permission:</find>
-      <find>layout</find>
-      <find>drawable</find>
-      <find>jpeg</find>
-      <find>ArrayList</find>
-      <find>resetConfirm</find>
-      <find>nextUser</find>
-      <find>setcontentview</find>
-      <find>userid</find>
-      <find>createdefa</find>
-      <find>redirecting</find>
-      <find>createde</find>
-      <find>resetApp</find>
-      <find>users</find>
-      <find>deleteDirec</find>
-      <find>delete</find>
-      <find>File</find>
-      <find>getexternal</find>
       <find>makequeue</find>
       <find>Pictures</find>
+      <find>getexternal</find>
+      <find>album</find>
+      <find>cre</find>
+      <find>found i</find>
+      <find>found im</find>
+      <find>found image</find>
+      <find>setDirectory</find>
+      <find>setdefaultfalse</find>
+      <find>setdirectory</find>
+      <find>oriented</find>
+      <find>setfile</find>
+      <find>directory</find>
+      <find>loadpictures</find>
+      <find>imagesaver</find>
+      <find>load</find>
+      <find>new File</find>
+      <find>save</find>
+      <find>createF</find>
+      <find>createFile</find>
+      <find>setd</find>
+      <find>pupr</find>
+      <find>getcontent</find>
+      <find>getcontentresolver</find>
+      <find>getOrient</find>
+      <find>photoUri</find>
+      <find>getcorrec</find>
+      <find>uploadIma</find>
+      <find>path</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -2737,18 +2735,18 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/Leaderboard.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_voting_page.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/ImageSaver.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_view_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/reset_confirm.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/splash_page.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/UserSaver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/VotingPage.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/HomePage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/UserSaver.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/ImageSaver.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java" />
       </list>
     </option>
   </component>
@@ -2927,9 +2925,8 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\SLNR\Documents\Git\pupr\Pupr_Android\app\src\main\res\layout" />
-      <recent name="C:\Users\SLNR\Documents\Git\pupr\Pupr_Android\app\src\main\res\raw" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.pupr" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.pupr" />
@@ -2937,8 +2934,9 @@
     <key name="android.template.parentActivityClass">
       <recent name="" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.pupr" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\SLNR\Documents\Git\pupr\Pupr_Android\app\src\main\res\layout" />
+      <recent name="C:\Users\SLNR\Documents\Git\pupr\Pupr_Android\app\src\main\res\raw" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -3150,6 +3148,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="12" weight="0.32985386" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32985386" />
@@ -3157,16 +3156,17 @@
       <window_info id="Image Layers" order="6" />
       <window_info id="Build Variants" order="2" sideWeight="0.4935065" side_tool="true" weight="0.28696343" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5071542" side_tool="true" weight="0.24739039" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49394855" weight="0.2933194" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5063593" side_tool="true" weight="0.29227558" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.4936407" visible="true" weight="0.2933194" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32985386" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49960256" weight="0.32881" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="10" sideWeight="0.49920508" visible="true" weight="0.33298537" />
+      <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.49920508" weight="0.33298537" />
       <window_info id="Captures" order="3" sideWeight="0.5084746" weight="0.24962178" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="1" />
       <window_info content_ui="combo" id="Project" order="7" sideWeight="0.5064935" visible="true" weight="0.18958664" />
       <window_info anchor="bottom" id="Build" order="13" sideWeight="0.49284577" weight="0.24739039" />
+      <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49602544" weight="0.2453027" />
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="9" side_tool="true" weight="0.3298887" />
@@ -3182,7 +3182,6 @@
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49960256" weight="0.2453027" />
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -3231,46 +3230,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/content/res/Resources.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="183" column="28" selection-start-line="183" selection-start-column="28" selection-end-line="183" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/java/io/BufferedReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-40">
-          <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="271" column="18" selection-start-line="271" selection-start-column="18" selection-end-line="271" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/java/io/FileInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-172">
-          <caret line="141" column="11" selection-start-line="141" selection-start-column="11" selection-end-line="141" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/java/util/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11066">
-          <caret line="543" column="7" selection-start-line="542" selection-start-column="63" selection-end-line="543" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/android/arch/core/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/raw/users.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -3297,24 +3256,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/graphics/Bitmap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11764">
-          <caret line="749" column="36" selection-start-line="749" selection-start-column="36" selection-end-line="749" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46053">
           <caret line="2770" column="18" selection-start-line="2770" selection-start-column="18" selection-end-line="2770" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/provider/MediaStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="835" column="39" selection-start-line="835" selection-start-column="39" selection-end-line="835" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -3511,37 +3456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="56" column="112" selection-start-line="56" selection-start-column="112" selection-end-line="56" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/ImageSaver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="83" column="56" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="158" column="91" selection-start-line="158" selection-start-column="8" selection-end-line="158" selection-end-column="91" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="108" column="112" selection-start-line="108" selection-start-column="112" selection-end-line="108" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/HomePage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="814">
@@ -3549,17 +3463,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/UserSaver.java">
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/os/Environment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-212">
-          <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
+        <state relative-caret-position="209">
+          <caret line="89" column="22" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/java/io/ByteArrayOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="66" column="36" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+          <folding>
+            <element signature="e#2173#2174#0" expanded="true" />
+            <element signature="e#2197#2198#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/graphics/Bitmap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="1338" column="9" selection-start-line="1338" selection-start-column="9" selection-end-line="1338" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/VotingPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="198">
+          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/net/Uri.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+          <folding>
+            <element signature="e#15633#15634#0" expanded="true" />
+            <element signature="e#15680#15681#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/UserSaver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/provider/BaseColumns.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/provider/MediaStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="835" column="39" selection-start-line="835" selection-start-column="39" selection-end-line="835" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/content/Context.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="459" column="54" selection-start-line="459" selection-start-column="36" selection-end-line="459" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/content/ContentResolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="707" column="38" selection-start-line="707" selection-start-column="38" selection-end-line="707" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="64" column="24" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/EditProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="158" column="13" selection-start-line="158" selection-start-column="13" selection-end-line="158" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/LoginPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="240" column="37" selection-start-line="240" selection-start-column="37" selection-end-line="240" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pupr/ImageSaver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="181" column="42" lean-forward="true" selection-start-line="181" selection-start-column="42" selection-end-line="181" selection-end-column="42" />
+          <folding>
+            <element signature="e#964#965#0" expanded="true" />
+            <element signature="e#1002#1003#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

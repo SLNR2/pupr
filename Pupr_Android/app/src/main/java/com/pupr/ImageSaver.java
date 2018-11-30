@@ -1,14 +1,13 @@
 package com.pupr;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -27,7 +26,7 @@ import java.io.InputStream;
  */
 class ImageSaver {
 
-    private String directoryName = "pupr";
+    private static final String directoryName = "pupr";
     private String fileName = "image.png";
     private Context context;
     private boolean external;
@@ -57,11 +56,6 @@ class ImageSaver {
         return this;
     }
 
-    ImageSaver setDirectoryName(String directoryName) {
-        this.directoryName = directoryName;
-        return this;
-    }
-
     void save(Bitmap bitmapImage) {
         FileOutputStream fileOutputStream = null;
         try {
@@ -81,18 +75,19 @@ class ImageSaver {
         }
     }
 
-    @NonNull //File f = new File(Environment.getExternalStorageDirectory(), path);
+    //Creates pupr directory on your phone
+    @NonNull
     private File createFile() {
         File directory;
         if(external){
-            directory = getAlbumStorageDir(directoryName);
+            directory = new File(Environment.getExternalStorageDirectory(), directoryName);
             if(!directory.exists())
-                directory.mkdir();
+                directory.mkdirs();
         }
         else {
             directory = context.getDir(directoryName, Context.MODE_PRIVATE);
             if(!directory.exists())
-                directory.mkdir();
+                directory.mkdirs();
         }
 
         if(!directory.exists() && !directory.mkdirs()){
@@ -100,11 +95,6 @@ class ImageSaver {
         }
 
         return new File(directory, fileName);
-    }
-
-    private File getAlbumStorageDir(String albumName) {
-        return new File(Environment.getExternalStoragePublicDirectory(
-                "/pupr"), albumName);
     }
 
     Bitmap load(String path) {
@@ -133,8 +123,7 @@ class ImageSaver {
     https://stackoverflow.com/questions/3647993/android-bitmaps-loaded-from-gallery-are-rotated-in-imageview/8914291#8914291
 
 */
-    private static int getOrientation(Context context, Uri photoUri) {
-        /* it's on the external media. */
+  /*  private static int getOrientation(Context context, Uri photoUri) {
         Cursor cursor = context.getContentResolver().query(photoUri,
                 new String[] { MediaStore.Images.ImageColumns.ORIENTATION }, null, null, null);
 
@@ -145,7 +134,37 @@ class ImageSaver {
         cursor.moveToFirst();
         return cursor.getInt(0);
     }
-    static Bitmap getCorrectlyOrientedImage(Context context, Uri photoUri) throws IOException {
+    */
+// https://stackoverflow.com/questions/21085105/get-orientation-of-image-from-mediastore-images-media-data
+    private static int getOrientation(String filepath) {// YOUR MEDIA PATH AS STRING
+        int degree = 0;
+        ExifInterface exif = null;
+        try {
+            exif = new ExifInterface(filepath);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        if (exif != null) {
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
+            if (orientation != -1) {
+                switch (orientation) {
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                        degree = 90;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_180:
+                        degree = 180;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_270:
+                        degree = 270;
+                        break;
+                }
+
+            }
+        }
+        return degree;
+    }
+
+    static Bitmap getCorrectlyOrientedImage(Context context, Uri photoUri, String path) throws IOException {
         InputStream is = context.getContentResolver().openInputStream(photoUri);
         BitmapFactory.Options dbo = new BitmapFactory.Options();
         dbo.inJustDecodeBounds = true;
@@ -153,7 +172,7 @@ class ImageSaver {
         is.close();
 
         int rotatedWidth, rotatedHeight;
-        int orientation = getOrientation(context, photoUri);
+        int orientation = getOrientation(path);
 
         if (orientation == 90 || orientation == 270) {
             rotatedWidth = dbo.outHeight;
@@ -194,13 +213,15 @@ class ImageSaver {
         return src;
     }
 
-// https://colinyeoh.wordpress.com/2012/05/18/android-getting-image-uri-from-bitmap/
-    static Uri getImageUri(Context inContext, Bitmap inImage, int userid) {
+// adapted from https://colinyeoh.wordpress.com/2012/05/18/android-getting-image-uri-from-bitmap/
+static Uri getImageUri(Context inContext, Bitmap inImage, int userid) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "img" + userid, null);
-        return Uri.parse(path);
-    }
+       // String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "img" + userid, null);
+        //File image= Environment.getExternalStorageDirectory().toString() + "/pupr/img" + userid;
 
+    File image = new File(Environment.getExternalStorageDirectory(), directoryName + "/img" + userid + ".png");
+        return Uri.fromFile(image);
+    }
 
 }
