@@ -150,7 +150,7 @@ public class EditProfile extends AppCompatActivity {
                 Uri selectedImage = data.getData(); //select image
                 try {
                     final String path = "/pupr/img" + User.activeUser.getUserId() + ".png";
-                    Bitmap newBit = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), selectedImage, path);
+                    Bitmap newBit = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), selectedImage, path, "Uploaded");
                     Drawable d = new BitmapDrawable(getResources(), newBit);
                     imageToUpload.setImageDrawable(d); //set image and display it
                 } catch (IOException e) {

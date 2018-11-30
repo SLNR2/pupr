@@ -250,10 +250,10 @@ public class LoginPage extends AppCompatActivity {
                 Bitmap b0 = ((BitmapDrawable) d).getBitmap(); //get Bitmap for drawable
 
                 new ImageSaver(v.getContext()).setExternal(true).setFileName("img" + i + ".png").save(b0); //save Bitmap to device
-                Uri u0 = ImageSaver.getImageUri(getApplicationContext(), b0, i); //convert b0 into a uri
+                Uri u0 = ImageSaver.getImageUri(b0, i); //convert b0 into a uri
 
                 try {
-                  b0 = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), u0, savePath); //properly orient and reformat b0
+                  b0 = ImageSaver.getCorrectlyOrientedImage(getApplicationContext(), u0, savePath, "Default"); //properly orient and reformat b0
                    new ImageSaver(v.getContext()).setExternal(true).setFileName("img" + i + ".png").save(b0); //save new Bitmap to device
                     UserSaver.loadPictures(i); //load properly formatted image from the newly saved bitmap
                } catch (IOException e) {
