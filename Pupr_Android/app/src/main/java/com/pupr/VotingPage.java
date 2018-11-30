@@ -2,6 +2,7 @@ package com.pupr;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,8 +29,17 @@ public class VotingPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting_page);
 
-        Collections.shuffle(User.activeUser.votingQueue); //shuffles the queue to randomize which dogs show up next
         Toast.makeText(getApplicationContext(), "Tap to vote. 5 is the highest score.", Toast.LENGTH_LONG).show();
+
+        //shuffle queue
+        Collections.shuffle(User.activeUser.votingQueue); //shuffles the queue to randomize which dogs show up next
+
+        //print queue to log
+        for (int i = 0; i < User.activeUser.votingQueue.size(); i ++)
+            Log.d("Voting Queue", "Dog in Queue at " + i + ": " + User.activeUser.votingQueue.get(i).getDogName());
+
+        Log.d("Voting Queue", "Queue size: " + User.activeUser.votingQueue.size());
+
 
         votingImage = findViewById(R.id.votingImage);
         votingName = findViewById(R.id.votingName);

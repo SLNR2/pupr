@@ -2,6 +2,7 @@ package com.pupr;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 public class User {
@@ -106,9 +107,6 @@ public class User {
 
             if (!hit) {
                 votingQueue.add(userList.get(i)); //add user @ i to queue if that user has not been voted on yet
-
-                Log.d("New element in Queue", "" + userList.get(i).getDogName());
-                Log.d("Queue size", "" + User.activeUser.votingQueue.size());
             }
         }
     }
