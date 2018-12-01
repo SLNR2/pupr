@@ -110,10 +110,7 @@ public class Leaderboard extends AppCompatActivity {
 //Bubble sort method to sort the leaderboard from biggest to smallest
     private void updateLeaderboard() {
         for (int i = 0; i < User.userList.size(); i++) {
-            Log.d("Leaderboard", "i = " + i);
-            Log.d("Leaderboard", "Size of userList is " + User.userList.size());
             for (int j = User.userList.size() - 1; j > i; j--) {
-                Log.d("Leaderboard", "j = " + j);
                 User current = User.leaderboard.get(j);
                 User previous = User.leaderboard.get(j - 1);
 
